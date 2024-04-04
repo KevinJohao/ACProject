@@ -3,22 +3,13 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '296d4211b8e4b0e066633cf0c5e7c7d645ccbcf2',
+        'reference' => 'dc2bd83076fa0c4d4e9f57308703835ae0c82c3f',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
-        'almasaeed2010/adminlte' => array(
-            'pretty_version' => 'v3.2.0',
-            'version' => '3.2.0.0',
-            'reference' => 'bd4d9c72931f1dd28601b6bfb387554a381ad540',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../almasaeed2010/adminlte',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
         'brick/math' => array(
             'pretty_version' => '0.11.0',
             'version' => '0.11.0.0',
@@ -373,15 +364,6 @@
                 0 => 'v10.46.0',
             ),
         ),
-        'jeroennoten/laravel-adminlte' => array(
-            'pretty_version' => 'v3.9.5',
-            'version' => '3.9.5.0',
-            'reference' => '21b94f6d7716ebde46849fcd77ec33c1565794ec',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../jeroennoten/laravel-adminlte',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
         'kodova/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -400,7 +382,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '296d4211b8e4b0e066633cf0c5e7c7d645ccbcf2',
+            'reference' => 'dc2bd83076fa0c4d4e9f57308703835ae0c82c3f',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
