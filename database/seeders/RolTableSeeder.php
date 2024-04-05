@@ -20,12 +20,12 @@ class RolTableSeeder extends Seeder
     
         Rol::create([
             'name' => 'cliente',
-            'description' => 'Tiene acceso a la info del cliente',
+            'description' => 'Tiene acceso a la info como cliente',
         ]);
     
         Rol::create([
             'name' => 'empleado',
-            'description' => 'Tiene acceso a la info del empleado',
+            'description' => 'Tiene acceso a la info como empleado',
         ]);
     }
 }

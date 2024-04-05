@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('vsm');
             $table->date('next_review');
-            $table->boolean(true);
+            $table->boolean('status')->default(true);
 
             //FK
             $table->unsignedBigInteger('project_id')->unsigned()->nullable();
