@@ -21,6 +21,9 @@ return new class extends Migration
             $table->unsignedBigInteger('assignment_id')->unsigned()->nullable();
             $table->foreign('assignment_id')->references('id')->on('assignments');
 
+            $table->unsignedBigInteger('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
+
             $table->timestamps();
         });
     }

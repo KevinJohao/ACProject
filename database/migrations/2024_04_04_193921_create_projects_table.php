@@ -15,18 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('place');
-            $table->string('vsm');
             $table->date('start_date');
             $table->date('due_date');
             $table->decimal('total_value', 8, 2);
             $table->boolean('status')->default(true);
 
             //FK
-            $table->unsignedBigInteger('client_id')->unsigned()->nullable();
-            $table->foreign('client_id')->references('id')->on('clients');
-
-            $table->unsignedBigInteger('employee_id')->unsigned()->nullable();
-            $table->foreign('employee_id')->references('id')->on('employees');
+            $table->unsignedBigInteger('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamps();
         });

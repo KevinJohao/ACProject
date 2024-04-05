@@ -19,11 +19,11 @@ return new class extends Migration
             $table->unsignedBigInteger('process_id')->unsigned()->nullable();
             $table->foreign('process_id')->references('id')->on('processes');
 
-            $table->unsignedBigInteger('employee_id')->unsigned()->nullable();
-            $table->foreign('employee_id')->references('id')->on('employees');
-
             $table->unsignedBigInteger('activity_id')->unsigned()->nullable();
             $table->foreign('activity_id')->references('id')->on('activities');
+
+            $table->unsignedBigInteger('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamps();
         });

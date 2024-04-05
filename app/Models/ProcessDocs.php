@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class ProcessDocs extends Model
 {
     use HasFactory;
+    //$processDocs -> $process
+    public function process()
+    {
+        return $this->belongsTo(Process::class);
+    }
+
+    //$processDocs -> $typeDocs
+    public function typeDocs()
+    {
+        return $this->belongsTo(TypeDocs::class);
+    }
 }

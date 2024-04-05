@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('processes', function (Blueprint $table) {
             $table->id();
-            $table->decimal('value', 8, 2);
+            $table->string('vsm');
+            $table->date('next_review');
+            $table->boolean(true);
 
             //FK
             $table->unsignedBigInteger('project_id')->unsigned()->nullable();
