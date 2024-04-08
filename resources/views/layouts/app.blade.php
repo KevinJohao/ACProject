@@ -33,7 +33,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url('/') }}">Pedidos Online</a>
+                <a class="navbar-brand" href="{{ url('/') }}">Arquitectura y Construcción Otavalo</a>
             </div>
 
             <div class="collapse navbar-collapse" id="navigation-example">
@@ -49,9 +49,9 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                @if (auth()->user()->admin)
+                                @if (auth()->user()->rol_id==1)
                                     <li>
-                                        <a href="{{ url('/admin/products') }}">Gestionar productos</a>
+                                        <a href="{{ url('/admin/products') }}">Gestionar proyectos</a>
                                     </li>
                                 @endif
                                 <li>

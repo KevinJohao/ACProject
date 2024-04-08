@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Listado de productos')
+@section('title', 'Listado de proyectos')
 
 @section('body-class', 'product -page')
 
@@ -12,39 +12,43 @@
     <div class="main main-raised">
         <div class="container">
             <div class="section text-center">
-                <h2 class="title">Listado de productos disponibles</h2>
+                <h2 class="title">Listado de proyectos</h2>
 
                 <div class="team">
                     <div class="row">
-                        <a href="{{ url('/admin/products/create') }}" class="btn btn-primary btn-round">Nuevo producto</a>
+                        <a href="{{ url('/admin/projects/create') }}" class="btn btn-primary btn-round">Nuevo proyecto</a>
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th>Nombre</th>
-                                    <th class="col-md-4">Descripción</th>
-                                    <th>Categoría</th>
-                                    <th class="text-right">Precio</th>
+                                    <th >Nombre</th>
+                                    <th>Cliente</th>
+                                    <th>Lugar</th>
+                                    <th class="col-xs-2 text-center" >Fecha inicio</th>
+                                    <th class="col-xs-2 text-center">Fecha entrega</th>
+                                    <th class="col-xs-1 text-right">Precio</th>
                                     <th class="text-right">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($products as $product)
+                                @foreach ($projects as $project)
                                     <tr>
-                                        <td class="text-center">{{ $product->id }}</td>
-                                        <td>{{ $product->name }}</td>
-                                        <td>{{ $product->description }}</td>
-                                        <td>{{ $product->category ? $product->category->name : 'General' }}</td>
-                                        <td class="text-right">&dollar; {{ $product->price }}</td>
+                                        <td class="text-center">{{ $project->id }}</td>
+                                        <td class="text-left">{{ $project->name }}</td>
+                                        <td class="text-left">{{ $project->user ? $project->user->name : 'sin nombre' }}</td>
+                                        <td class="text-left">{{ $project->place }}</td>
+                                        <td>{{ $project->start_date }}</td>
+                                        <td>{{ $project->due_date }}</td>
+                                        <td class="text-right">&dollar; {{ $project->total_value }}</td>
                                         <td class="td-actions text-right">
-                                            <form method="post" action="{{ url('/admin/products/' . $product->id) }}">
+                                            <form method="post" action="{{ url('/admin/projects/' . $project->id) }}">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
-                                                <a type="button" rel="tooltip" title="Ver producto"
+                                                <a type="button" rel="tooltip" title="Ver proyecto"
                                                     class="btn btn-info btn-simple btn-xs">
                                                     <i class="fa fa-info"></i>
                                                 </a>
-                                                <a href="{{ url('/admin/products/' . $product->id . '/edit') }}"
+                                                <a href="{{ url('/admin/projects/' . $project->id . '/edit') }}"
                                                     type="button" rel="tooltip" title="Editar producto"
                                                     class="btn btn-success btn-simple btn-xs">
                                                     <i class="fa fa-edit"></i>
@@ -60,7 +64,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $products->links() }}
+                        {{ $projects->links() }}
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'App Shop | Dashboard')
+@section('title', 'A&C Otavalo | Dashboard')
 
 @section('body-class', 'product -page')
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Bienvenido a App Shop')
+@section('title', 'A&C Otavalo')
 
 @section('body-class', 'landing-page')
 
