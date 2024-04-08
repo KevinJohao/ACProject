@@ -54,7 +54,7 @@ class ProjectTableSeeder extends Seeder
             ]);
         }
 
-        // Crear trámites aleatorios
+        // Create random processes
         foreach (range(1, 50) as $index) {
             \App\Models\Process::create([
                 'project_id' => \App\Models\Project::all()->random()->id,
@@ -65,7 +65,7 @@ class ProjectTableSeeder extends Seeder
             ]);
         }
 
-        // Crear asignaciones aleatorias
+        // Create random assignments
         foreach (range(1, 50) as $index) {
             \App\Models\Assignment::create([
                 'process_id' => \App\Models\Process::all()->random()->id,
@@ -75,7 +75,7 @@ class ProjectTableSeeder extends Seeder
             ]);
         }
 
-        // Crear seguimientos aleatorios
+        // Create random assignments
         foreach (range(1, 50) as $index) {
             \App\Models\Tracking::create([
                 'assignment_id' => \App\Models\Assignment::all()->random()->id,
