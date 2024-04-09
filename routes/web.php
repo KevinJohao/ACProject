@@ -6,11 +6,13 @@ Route::get('/', 'App\Http\Controllers\TestController@welcome');
 
 Auth::routes();
 
+//Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboardAdmin']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-    // Rutas del admin proyecto base
+    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboardAdmin']);
 
+    // Rutas del admin proyecto base
     Route::get('/products', [App\Http\Controllers\ProductController::class, 'index']); //listado
     Route::get('/products/create', [App\Http\Controllers\ProductController::class, 'create']); //formulario
     Route::post('/products', [App\Http\Controllers\ProductController::class, 'store']); //registrar

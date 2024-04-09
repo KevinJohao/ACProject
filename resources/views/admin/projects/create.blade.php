@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Listado de productos')
+@section('title', 'Listado de proyectos')
 
 @section('body-class', 'product -page')
 
@@ -12,7 +12,7 @@
     <div class="main main-raised">
         <div class="container">
             <div class="section">
-                <h2 class="title text-center">Registrar nuevo producto</h2>
+                <h2 class="title text-center">Crear nuevo proyecto</h2>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -22,31 +22,45 @@
                         </ul>
                     </div>
                 @endif
-                <form method="post" action="{{ url('/admin/products') }}">
+                <form method="post" action="{{ url('/admin/projects') }}">
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
-                                <label class="control-label">Nombre del producto</label>
+                                <label class="control-label">Nombre del proyecto</label>
                                 <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
-                                <label class="control-label">Precio del producto</label>
-                                <input type="number" class="form-control" name="price" value="{{ old('price') }}">
+                                <label class="control-label">Lugar</label>
+                                <input type="text" class="form-control" name="place" value="{{ old('place') }}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Fecha de inicio</label>
+                                <input type="date" class="form-control" name="start_date" value="{{ old('start_date') }}"
+                                    onfocus="(this.type='date')" onblur="(this.type='text')">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Fecha de entrega</label>
+                                <input type="date" class="form-control" name="due_date" value="{{ old('due_date') }}"
+                                    onfocus="(this.type='date')" onblur="(this.type='text')">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Valor total</label>
+                                <input type="number" class="form-control" name="total_value"
+                                    value="{{ old('total_value') }}">
                             </div>
                         </div>
                     </div>
-                    <div class="form-group label-floating">
-                        <label class="control-label">Descripción corta</label>
-                        <input type="text" class="form-control" name="description" value="{{ old('description') }}">
-                    </div>
-                    <textarea class="form-control" placeholder="Descripción extensa" rows="5" name="long_description">
-                        {{ old('long_description') }}
-                    </textarea>
-                    <button class="btn btn-primary">Registrar producto</button>
-                    <a href="{{ url('/admin/products') }}" class="btn btn-default">Cancelar</a>
+                    <button class="btn btn-primary">Registrar proyecto</button>
+                    <a href="{{ url('/admin/projects') }}" class="btn btn-default">Cancelar</a>
                 </form>
             </div>
         </div>

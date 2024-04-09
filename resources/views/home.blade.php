@@ -23,7 +23,7 @@
                     <li>
                         <a href="#dashboard" role="tab" data-toggle="tab">
                             <i class="material-icons">dashboard</i>
-                            Carrito de compras
+                            Carrito de compras :D
                         </a>
                     </li>
                     <li>

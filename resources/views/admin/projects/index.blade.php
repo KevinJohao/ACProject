@@ -21,10 +21,10 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th >Nombre</th>
+                                    <th>Nombre</th>
                                     <th>Cliente</th>
                                     <th>Lugar</th>
-                                    <th class="col-xs-2 text-center" >Fecha inicio</th>
+                                    <th class="col-xs-2 text-center">Fecha inicio</th>
                                     <th class="col-xs-2 text-center">Fecha entrega</th>
                                     <th class="col-xs-1 text-right">Precio</th>
                                     <th class="text-right">Opciones</th>
@@ -35,7 +35,8 @@
                                     <tr>
                                         <td class="text-center">{{ $project->id }}</td>
                                         <td class="text-left">{{ $project->name }}</td>
-                                        <td class="text-left">{{ $project->user ? $project->user->name : 'sin nombre' }}</td>
+                                        <td class="text-left">{{ $project->user ? $project->user->name : 'sin nombre' }}
+                                        </td>
                                         <td class="text-left">{{ $project->place }}</td>
                                         <td>{{ $project->start_date }}</td>
                                         <td>{{ $project->due_date }}</td>
@@ -54,8 +55,7 @@
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 <button type="submit" rel="tooltip" title="Eliminar"
-                                                    class="btn btn-danger
-                                        btn-simple btn-xs">
+                                                    class="btn btn-danger btn-simple btn-xs">
                                                     <i class="fa fa-times"></i>
                                                 </button>
                                             </form>

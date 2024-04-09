@@ -9,7 +9,8 @@ class TestController extends Controller
 {
     public function welcome()
     {
-        $products = Product::all();
-        return view('welcome')->with(compact('products'));
+        //$products = Product::all();
+        //return view('auth.welcome')->with(compact('products'));
+        return view('auth.login');
     }
 }

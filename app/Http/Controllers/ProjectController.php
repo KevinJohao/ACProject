@@ -38,14 +38,14 @@ class ProjectController extends Controller
             'name.min' => 'El nombre debe tener un mínimo de 3 caracteres',
             'name.required' => 'Es necesario ingresar el nombre',
             'name.min' => 'El nombre debe tener un mínimo de 3 caracteres',
-            'price.required' => 'Es necesario ingresar un precio',
-            'price.numeric' => 'El precio debe ser mayor numerico',
-            'price.min' => 'El precio debe ser mayor a 0 ',
+            'total_value.required' => 'Es necesario ingresar un precio',
+            'total_value.numeric' => 'El precio debe ser mayor numerico',
+            'total_value.min' => 'El precio debe ser mayor a 0 ',
         ];
         $rules = [
-            'name' => 'required|min3',
-            'place' => 'required|min3',
-            'price' => 'required|numeric|min:0'
+            'name' => 'required|min:3',
+            'place' => 'required|min:3',
+            'total_value' => 'required|numeric|min:0'
         ];
 
         $this->validate($request, $rules, $messages);
@@ -89,14 +89,14 @@ class ProjectController extends Controller
             'name.min' => 'El nombre debe tener un mínimo de 3 caracteres',
             'name.required' => 'Es necesario ingresar el nombre',
             'name.min' => 'El nombre debe tener un mínimo de 3 caracteres',
-            'price.required' => 'Es necesario ingresar un precio',
-            'price.numeric' => 'El precio debe ser mayor numerico',
-            'price.min' => 'El precio debe ser mayor a 0 ',
+            'total_value.required' => 'Es necesario ingresar un precio',
+            'total_value.numeric' => 'El precio debe ser mayor numerico',
+            'total_value.min' => 'El precio debe ser mayor a 0 ',
         ];
         $rules = [
-            'name' => 'required|min3',
-            'place' => 'required|min3',
-            'price' => 'required|numeric|min:0'
+            'name' => 'required|min:3',
+            'place' => 'required|min:3',
+            'total_value' => 'required|numeric|min:0'
         ];
 
         $this->validate($request, $rules, $messages);

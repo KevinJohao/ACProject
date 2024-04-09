@@ -18,6 +18,6 @@ class AdminMiddleware
         if (!auth()->check()) {
             return redirect('/login');
         }
-        return auth()->user()->rol_id == 1 ? $next($request) : redirect('/');
+        return auth()->user()->rol_id == 1 ? $next($request) : redirect('/login');
     }
 }

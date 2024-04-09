@@ -49,9 +49,9 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                @if (auth()->user()->rol_id==1)
+                                @if (auth()->user()->rol_id == 1)
                                     <li>
-                                        <a href="{{ url('/admin/products') }}">Gestionar proyectos</a>
+                                        <a href="{{ url('/admin/projects') }}">Gestionar proyectos</a>
                                     </li>
                                 @endif
                                 <li>
