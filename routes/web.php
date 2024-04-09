@@ -23,6 +23,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
     // Rutas del admin
     Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index']); //listado
+    Route::get('/projects/{id}/show', [App\Http\Controllers\ProjectController::class, 'show']); //show
     Route::get('/projects/create', [App\Http\Controllers\ProjectController::class, 'create']); //formulario
     Route::post('/projects', [App\Http\Controllers\ProjectController::class, 'store']); //registrar
     Route::get('/projects/{id}/edit', [App\Http\Controllers\ProjectController::class, 'edit']); //form de edicion

@@ -34,6 +34,13 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
+                                <label class="control-label">Cliente</label>
+                                <input type="text" class="form-control" name="client"
+                                    value="{{ old('client', $project->user->name) }}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
                                 <label class="control-label">Lugar</label>
                                 <input type="text" class="form-control" name="place"
                                     value="{{ old('place', $project->place) }}">
@@ -59,7 +66,7 @@
                             <div class="form-group label-floating">
                                 <label class="control-label">Valor total</label>
                                 <input type="number" step="0.01" class="form-control" name="total_value"
-                                    value="{{ old('total_value', $project->price) }}">
+                                    value="{{ old('total_value', $project->total_value) }}">
                             </div>
                         </div>
                     </div>

@@ -66,6 +66,8 @@ class ProjectController extends Controller
     public function show(string $id)
     {
         //
+        $project = Project::find($id);
+        return view('admin.projects.show')->with(compact('project'));
     }
 
     /**
@@ -74,7 +76,7 @@ class ProjectController extends Controller
     public function edit(string $id)
     {
         //formulario de edicion
-        $project = Product::find($id);
+        $project = Project::find($id);
         return view('admin.projects.edit')->with(compact('project'));
     }
 

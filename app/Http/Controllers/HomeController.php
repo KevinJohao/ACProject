@@ -26,13 +26,4 @@ class HomeController extends Controller
         //return view('home');
         return view('admin.dashboard');
     }
-
-    protected function dashboardAdmin()
-    {
-        if (auth()->user()->rol_id == 1) {
-            return view('admin.dashboard');
-        }
-
-        return view('/');
-    }
 }

@@ -20,18 +20,42 @@
                 @endif
 
                 <ul class="nav nav-pills nav-pills-primary" role="tablist">
-                    <li>
-                        <a href="#dashboard" role="tab" data-toggle="tab">
-                            <i class="material-icons">dashboard</i>
-                            Carrito de compras :D
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#tasks" role="tab" data-toggle="tab">
-                            <i class="material-icons">list</i>
-                            Pedidos realizados
-                        </a>
-                    </li>
+                    @if (auth()->user()->rol_id == 1)
+                        <li>
+                            <a href="#dashboardee" role="tab" data-toggle="tab">
+                                <i class="material-icons">dashboard</i>
+                                Proyectos - Admin
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tasks" role="tab" data-toggle="tab">
+                                <i class="material-icons">list</i>
+                                Seguimiento - Admin
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth()->user()->rol_id == 3)
+                        <li>
+                            <a href="#dashboard" role="tab" data-toggle="tab">
+                                <i class="material-icons">dashboard</i>
+                                Proyectos - Empleado
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tasks" role="tab" data-toggle="tab">
+                                <i class="material-icons">list</i>
+                                Seguimiento - Empleado
+                            </a>
+                        </li>
+                    @endif
+                    @if (auth()->user()->rol_id == 2)
+                        <li>
+                            <a href="#tasks" role="tab" data-toggle="tab">
+                                <i class="material-icons">list</i>
+                                Seguimiento - Cliente
+                            </a>
+                        </li>
+                    @endif
                 </ul>
 
             </div>
