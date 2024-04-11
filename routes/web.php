@@ -9,6 +9,7 @@ Auth::routes();
 //Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboardAdmin']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+/*
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboardAdmin']);
 
@@ -29,4 +30,29 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/projects/{id}/edit', [App\Http\Controllers\ProjectController::class, 'edit']); //form de edicion
     Route::post('/projects/{id}/edit', [App\Http\Controllers\ProjectController::class, 'update']); //actualizar
     Route::delete('/projects/{id}', [App\Http\Controllers\ProjectController::class, 'destroy']); //form eliminar
+});
+*/
+
+Route::middleware(['auth'])->group(function () {
+    //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    // ROL: ADMIN
+    Route::middleware(['check.rol:admin'])->prefix('admin')->group(function () {
+        Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboardAdmin']);
+
+        // Rutas del admin
+        Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index']); //listado
+        Route::get('/projects/{id}/show', [App\Http\Controllers\ProjectController::class, 'show']); //show
+        Route::get('/projects/create', [App\Http\Controllers\ProjectController::class, 'create']); //formulario
+        Route::post('/projects', [App\Http\Controllers\ProjectController::class, 'store']); //registrar
+        Route::get('/projects/{id}/edit', [App\Http\Controllers\ProjectController::class, 'edit']); //form de edicion
+        Route::post('/projects/{id}/edit', [App\Http\Controllers\ProjectController::class, 'update']); //actualizar
+        Route::delete('/projects/{id}', [App\Http\Controllers\ProjectController::class, 'destroy']); //form eliminar
+    });
+
+    // ROL: EMPLEADO
+    Route::middleware(['check.rol:empleado'])->prefix('empleado')->group(function(){
+        
+        Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index']); // listado
+    });
 });
