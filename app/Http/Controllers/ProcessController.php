@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Process;
+use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 
 class ProcessController extends Controller
@@ -33,7 +34,8 @@ class ProcessController extends Controller
      */
     public function create()
     {
-        //
+        //Formulario de registro
+        return view('admin.processes.create');
     }
 
     /**
@@ -41,7 +43,29 @@ class ProcessController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Validar
+        $messages = [
+            'vsm.required' => 'Es necesario ingresar el vsm',
+            'vsm.min' => 'El vsm debe tener un mínimo de 3 caracteres',
+            'next_review.required' => 'Es necesario ingresar una fecha para la próxima revisión',
+            'process_value.required' => 'Es necesario ingresar un valor',
+            'process_value.numeric' => 'El valor debe ser mayor numerico',
+            'process_value.min' => 'El valor debe ser mayor a 0 ',
+        ];
+        $rules = [
+            'vsm' => 'required|min:3',
+            //'next_review' => ['required, new AfterOneWeek'],
+            'next_review' => 'required',
+            'process_value' => 'required|numeric|min:0'
+        ];
+
+        $this->validate($request, $rules, $messages);
+        $process = new Process();
+        $process->vsm = $request->input('vsm');
+        $process->next_review = $request->input('next_review');
+        $process->process_value = $request->input('process_value');
+
+        return redirect('/admin/processes');
     }
 
     /**
@@ -50,6 +74,8 @@ class ProcessController extends Controller
     public function show(string $id)
     {
         //
+        $process = Process::find($id);
+        return view('admin.processes.show')->with(compact('process'));
     }
 
     /**
@@ -58,6 +84,8 @@ class ProcessController extends Controller
     public function edit(string $id)
     {
         //
+        $process = Process::find($id);
+        return view('admin.processes.edit')->with(compact('process'));
     }
 
     /**
@@ -65,7 +93,29 @@ class ProcessController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //Validar
+        $messages = [
+            'vsm.required' => 'Es necesario ingresar el vsm',
+            'vsm.min' => 'El vsm debe tener un mínimo de 3 caracteres',
+            'next_review.required' => 'Es necesario ingresar una fecha para la próxima revisión',
+            'process_value.required' => 'Es necesario ingresar un valor',
+            'process_value.numeric' => 'El valor debe ser mayor numerico',
+            'process_value.min' => 'El valor debe ser mayor a 0 ',
+        ];
+        $rules = [
+            'vsm' => 'required|min:3',
+            //'next_review' => ['required, new AfterOneWeek'],
+            'next_review' => 'required',
+            'process_value' => 'required|numeric|min:0'
+        ];
+
+        $this->validate($request, $rules, $messages);
+        $process = Process::find($id);
+        $process->vsm = $request->input('vsm');
+        $process->next_review = $request->input('next_review');
+        $process->process_value = $request->input('process_value');
+
+        return redirect('/admin/processes');
     }
 
     /**
