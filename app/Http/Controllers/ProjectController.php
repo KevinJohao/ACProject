@@ -80,9 +80,16 @@ class ProjectController extends Controller
      */
     public function show(string $id)
     {
-        //
         $project = Project::find($id);
-        return view('admin.projects.show')->with(compact('project'));
+        // Direccionar al index de cada tipo de usuario
+        if (auth()->user()->rol_id == 1) {
+            return view('admin.projects.show')->with(compact('project'));
+        }
+        
+        if (auth()->user()->rol_id == 3) {
+            return view('employee.projects.show')->with(compact('project'));
+        }
+        
     }
 
     /**

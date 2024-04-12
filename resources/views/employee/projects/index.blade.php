@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Proyectos asignados')
+@section('title', 'Proyectos Asignados')
 
 @section('body-class', 'product -page')
 
@@ -16,12 +16,11 @@
 
                 <div class="team">
                     <div class="row">
-                        <a href="{{ url('/admin/projects/create') }}" class="btn btn-primary btn-round">Nuevo proyecto</a>
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th>Nombre</th>
+                                    <th>Nombre del proyecto</th>
                                     <th>Cliente</th>
                                     <th>Lugar</th>
                                     <th class="col-xs-2 text-center">Fecha inicio</th>
@@ -46,21 +45,11 @@
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
 
-                                                <a href="{{ url('/admin/projects/' . $project->id . '/show') }}"
+                                                <a href="{{ url('/empleado/projects/' . $project->id . '/show') }}"
                                                     type="button" rel="tooltip" title="Ver proyecto"
                                                     class="btn btn-info btn-simple btn-xs">
-                                                    <i class="fa fa-info"></i>
+                                                    <i class="fa fa-eye"></i>
                                                 </a>
-
-                                                <a href="{{ url('/admin/projects/' . $project->id . '/edit') }}"
-                                                    type="button" rel="tooltip" title="Editar producto"
-                                                    class="btn btn-success btn-simple btn-xs">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <button type="submit" rel="tooltip" title="Eliminar"
-                                                    class="btn btn-danger btn-simple btn-xs">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
                                             </form>
                                         </td>
                                     </tr>
