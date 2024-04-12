@@ -24,6 +24,9 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
 
+            $table->unsignedBigInteger('task_status_id')->unsigned()->nullable();
+            $table->foreign('task_status_id')->references('id')->on('task_statuses');
+
             $table->timestamps();
         });
     }

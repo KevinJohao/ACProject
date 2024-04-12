@@ -12,10 +12,21 @@ class ProjectTableSeeder extends Seeder
      */
     public function run(): void
     {
+        \App\Models\TaskStatus::create([
+            'name' => 'En proceso',
+            'description' => 'La actividad está en proceso',
+        ]);
+
+        \App\Models\TaskStatus::create([
+            'name' => 'Finalizado',
+            'description' => 'La actividad se finalizó',
+        ]);
+
         // Crear proyectos aleatorios
         foreach (range(1, 50) as $index) {
             \App\Models\Project::create([
                 'user_id' => \App\Models\User::all()->random()->id,
+                'task_status_id' => \App\Models\TaskStatus::all()->random()->id,
                 'name' => fake()->name(),
                 'place' => fake()->city(),
                 'start_date' => fake()->dateTimeBetween($startDate = 'now', $endDate = '+1 week')->format('Y-m-d'),
@@ -26,8 +37,8 @@ class ProjectTableSeeder extends Seeder
         }
 
         // Crear actividades aleatorias
-        foreach (range(1, 50) as $index) {
-            \App\Models\Activity::create([
+        foreach (range(1, 10) as $index) {
+            \App\Models\TypeActivity::create([
                 'name' => fake()->words($nb = 2, $asText = true),
                 'description' => fake()->sentence(10),
                 'status' => true
@@ -59,6 +70,7 @@ class ProjectTableSeeder extends Seeder
             \App\Models\Process::create([
                 'project_id' => \App\Models\Project::all()->random()->id,
                 'type_process_id' => \App\Models\TypeProcess::all()->random()->id,
+                'task_status_id' => \App\Models\TaskStatus::all()->random()->id,
                 'vsm' => 'vsm',
                 'next_review' => fake()->dateTimeBetween($startDate = 'now', $endDate = '+1 week')->format('Y-m-d'),
                 'process_value' => fake()->randomFloat(2, 5, 150),
@@ -68,10 +80,11 @@ class ProjectTableSeeder extends Seeder
 
         // Create random assignments
         foreach (range(1, 50) as $index) {
-            \App\Models\Assignment::create([
+            \App\Models\Activity::create([
                 'process_id' => \App\Models\Process::all()->random()->id,
-                'activity_id' => \App\Models\Activity::all()->random()->id,
+                'type_activity_id' => \App\Models\TypeActivity::all()->random()->id,
                 'user_id' => \App\Models\User::all()->random()->id,
+                'task_status_id' => \App\Models\TaskStatus::all()->random()->id,
                 'status' => true
             ]);
         }
@@ -79,7 +92,8 @@ class ProjectTableSeeder extends Seeder
         // Create random assignments
         foreach (range(1, 50) as $index) {
             \App\Models\Tracking::create([
-                'assignment_id' => \App\Models\Assignment::all()->random()->id,
+                'activity_id' => \App\Models\Activity::all()->random()->id,
+                'task_status_id' => \App\Models\TaskStatus::all()->random()->id,
                 'user_id' => \App\Models\User::all()->random()->id,
                 'date' => fake()->dateTimeBetween($startDate = 'now', $endDate = '+1 week')->format('Y-m-d'),
                 'observation' => fake()->sentence(10),

@@ -9,10 +9,15 @@ class Tracking extends Model
 {
     use HasFactory;
 
-    public function assignment()
+    public function activity()
     {
-        //$tracking->$assignment
-        return $this->belongsTo(Assignment::class);
+        //$tracking->$activity
+        return $this->belongsTo(Activity::class);
+    }
+
+    public function taskStatus()
+    {
+        return $this->belongsTo(TaskStatus::class);
     }
 
     public function user()
