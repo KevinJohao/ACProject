@@ -16,11 +16,11 @@ class CheckRole
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
         // verificar si el usuario está autenticado
-        /*
+        
         if (!auth()->check()) {
             return redirect('/login');
         }
-        */
+        
         // verificar si el usuario tiene el rol permitido
         foreach ($roles as $role) {
             if (auth()->user()->name === $role) {
