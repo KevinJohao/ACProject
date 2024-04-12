@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Listado de proyectos')
+@section('title', 'Listado de trámites')
 
 @section('body-class', 'product -page')
 
@@ -12,17 +12,17 @@
     <div class="main main-raised">
         <div class="container">
             <div class="section text-center">
-                <h2 class="title">Listado de proyectos</h2>
+                <h2 class="title">Listado de trámites</h2>
 
                 <div class="team">
                     <div class="row">
-                        <a href="{{ url('/admin/projects/create') }}" class="btn btn-primary btn-round">Nuevo proyecto</a>
+                        <a href="{{ url('/admin/projects/create') }}" class="btn btn-primary btn-round">Nuevo trámite</a>
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th>Nombre del proyecto</th>
-                                    <th>Cliente</th>
+                                    <th>VSM</th>
+                                    <th>Próxima revisión</th>
                                     <th>Lugar del proyecto</th>
                                     <th class="col-xs-2 text-center">Fecha inicio</th>
                                     <th class="col-xs-2 text-center">Fecha entrega</th>

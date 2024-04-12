@@ -23,7 +23,7 @@ class CheckRole
         
         // verificar si el usuario tiene el rol permitido
         foreach ($roles as $role) {
-            if (auth()->user()->name === $role) {
+            if (auth()->user()->rol_id == $role) {
                 return $next($request);
             }
         }

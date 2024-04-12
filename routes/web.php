@@ -37,7 +37,7 @@ Route::middleware(['auth'])->group(function () {
     //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     // ROL: ADMIN
-    Route::middleware(['check.rol:admin'])->prefix('admin')->group(function () {
+    Route::middleware(['check.rol:1'])->prefix('admin')->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboardAdmin']);
 
         // Rutas del admin
@@ -48,10 +48,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/projects/{id}/edit', [App\Http\Controllers\ProjectController::class, 'edit']); //form de edicion
         Route::post('/projects/{id}/edit', [App\Http\Controllers\ProjectController::class, 'update']); //actualizar
         Route::delete('/projects/{id}', [App\Http\Controllers\ProjectController::class, 'destroy']); //form eliminar
+
+        Route::get('/processes', [App\Http\Controllers\ProcessController::class, 'index']); //listado
     });
 
     // ROL: EMPLEADO
-    Route::middleware(['check.rol:empleado'])->prefix('empleado')->group(function(){
+    Route::middleware(['check.rol:3'])->prefix('empleado')->group(function(){
         
         Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index']); // listado
     });
