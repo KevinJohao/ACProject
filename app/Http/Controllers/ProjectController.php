@@ -47,8 +47,10 @@ class ProjectController extends Controller
         $messages = [
             'name.required' => 'Es necesario ingresar el nombre',
             'name.min' => 'El nombre debe tener un mínimo de 3 caracteres',
-            'name.required' => 'Es necesario ingresar el nombre',
-            'name.min' => 'El nombre debe tener un mínimo de 3 caracteres',
+            'place.required' => 'Es necesario ingresar el lugar',
+            'place.min' => 'El lugar debe tener un mínimo de 3 caracteres',
+            'start_date.required' => 'Es necesario ingresar una fecha de inicio',
+            'due_date.required' => 'Es necesario ingresar una fecha de entrega',
             'total_value.required' => 'Es necesario ingresar un precio',
             'total_value.numeric' => 'El precio debe ser mayor numerico',
             'total_value.min' => 'El precio debe ser mayor a 0 ',
@@ -56,6 +58,8 @@ class ProjectController extends Controller
         $rules = [
             'name' => 'required|min:3',
             'place' => 'required|min:3',
+            'start_date' => 'required',
+            'due_date' => 'required',
             'total_value' => 'required|numeric|min:0'
         ];
 
@@ -68,7 +72,7 @@ class ProjectController extends Controller
         $project->total_value = $request->input('total_value');
         // $project->status = $request->input('status');
 
-        return redirect(('/admin/projects'));
+        return redirect('/admin/projects');
     }
 
     /**

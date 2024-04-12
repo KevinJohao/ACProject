@@ -61,6 +61,7 @@ class ProjectTableSeeder extends Seeder
                 'type_process_id' => \App\Models\TypeProcess::all()->random()->id,
                 'vsm' => 'vsm',
                 'next_review' => fake()->dateTimeBetween($startDate = 'now', $endDate = '+1 week')->format('Y-m-d'),
+                'process_value' => fake()->randomFloat(2, 5, 150),
                 'status' => true
             ]);
         }
