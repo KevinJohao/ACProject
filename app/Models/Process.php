@@ -15,16 +15,21 @@ class Process extends Model
         return $this->belongsTo(Project::class);
     }
 
+    public function taskStatus()
+    {
+        return $this->belongsTo(TaskStatus::class);
+    }
+
     //$process -> $typeProcess
     public function typeProcess()
     {
         return $this->belongsTo(TypeProcess::class);
     }
 
-    //$process -> $assignments
-    public function assignments()
+    //$process -> $activities
+    public function activities()
     {
-        return $this->hasMany(Assignment::class);
+        return $this->hasMany(Activity::class);
     }
 
     //$process -> $processDocs

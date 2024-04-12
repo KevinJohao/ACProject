@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('assignments', function (Blueprint $table) {
+        Schema::create('activities', function (Blueprint $table) {
             $table->id();
             $table->boolean('status')->default(true);
 
@@ -19,11 +19,14 @@ return new class extends Migration
             $table->unsignedBigInteger('process_id')->unsigned()->nullable();
             $table->foreign('process_id')->references('id')->on('processes');
 
-            $table->unsignedBigInteger('activity_id')->unsigned()->nullable();
-            $table->foreign('activity_id')->references('id')->on('activities');
+            $table->unsignedBigInteger('type_activity_id')->unsigned()->nullable();
+            $table->foreign('type_activity_id')->references('id')->on('type_activities');
 
             $table->unsignedBigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
+
+            $table->unsignedBigInteger('task_status_id')->unsigned()->nullable();
+            $table->foreign('task_status_id')->references('id')->on('task_statuses');
 
             $table->timestamps();
         });
@@ -34,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('assignments');
+        Schema::dropIfExists('activities');
     }
 };

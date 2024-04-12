@@ -17,15 +17,57 @@
                 <div class="team">
                     <div class="row">
                         <a href="{{ url('/admin/processes/create') }}" class="btn btn-primary btn-round">Nuevo trámite</a>
-                        
-                        
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th>Tipo de trámite</th>
+                                    <th>VSM</th>
+                                    <th class="col-xs-2 text-center">Próxima revisión</th>
+                                    <th class="col-xs-2 text-center">Valor del trámite</th>
+                                    <th class="text-center">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($projects as $project)
+                                    <tr>
+                                        <td class="text-center">{{ $project->id }}</td>
+                                        <td class="text-left">{{ $project->processes->type_process->name }}</td>
+                                        <td class="text-left">{{ $project->processes->vsm }}</td>
+                                        <td>{{ $project->processes->next_review }}</td>
+                                        <td class="text-right">&dollar; {{ $project->processes->process_value }}</td>
+                                        <td class="td-actions text-right">
+                                            <form method="post" action="{{ url('/admin/processes/' . $project->id) }}">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
+
+                                                <a href="{{ url('/admin/processes/' . $project->id . '/show') }}"
+                                                    type="button" rel="tooltip" title="Ver proyecto"
+                                                    class="btn btn-info btn-simple btn-xs">
+                                                    <i class="fa fa-info"></i>
+                                                </a>
+
+                                                <a href="{{ url('/admin/processes/' . $project->id . '/edit') }}"
+                                                    type="button" rel="tooltip" title="Editar producto"
+                                                    class="btn btn-success btn-simple btn-xs">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <button type="submit" rel="tooltip" title="Eliminar"
+                                                    class="btn btn-danger btn-simple btn-xs">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        {{ $projects->links() }}
                     </div>
                 </div>
 
             </div>
         </div>
-
     </div>
-
     @include('includes.footer')
 @endsection

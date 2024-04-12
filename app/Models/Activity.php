@@ -8,8 +8,31 @@ use Illuminate\Database\Eloquent\Model;
 class Activity extends Model
 {
     use HasFactory;
-    public function activities()
+    public function process()
     {
-        return $this->hasMany(Activity::class);
+        //$Activity->$process
+        return $this->belongsTo(Process::class);
+    }
+
+    public function typeActivity()
+    {
+        //$typeActivity->$typeactivity
+        return $this->belongsTo(TypeActivity::class);
+    }
+
+    public function taskStatus()
+    {
+        return $this->belongsTo(TaskStatus::class);
+    }
+
+    public function user()
+    {
+        //$Activity->$user
+        return $this->belongsTo(User::class);
+    }
+
+    public function trackings()
+    {
+        return $this->hasMany(Tracking::class);
     }
 }

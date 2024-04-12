@@ -25,6 +25,9 @@ return new class extends Migration
             $table->unsignedBigInteger('type_process_id')->unsigned()->nullable();
             $table->foreign('type_process_id')->references('id')->on('type_processes');
 
+            $table->unsignedBigInteger('task_status_id')->unsigned()->nullable();
+            $table->foreign('task_status_id')->references('id')->on('task_statuses');
+
             $table->timestamps();
         });
     }
