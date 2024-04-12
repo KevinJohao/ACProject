@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('vsm');
             $table->date('next_review');
+            $table->decimal('process_value', 8, 2);
             $table->boolean('status')->default(true);
 
             //FK

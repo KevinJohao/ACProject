@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Proyecto')
+@section('title', 'Listado de proyectos')
 
 @section('body-class', 'product -page')
 
@@ -12,41 +12,47 @@
     <div class="main main-raised">
         <div class="container">
             <div class="section text-center">
-                <h2 class="title">Información del proyecto "{{ $process->name }}"</h2>
+                <h2 class="title">Listado de proyectos</h2>
 
                 <div class="team">
                     <div class="row">
-                        <a href="{{ url('/admin/processes/create') }}" class="btn btn-primary btn-round">Nuevo trámite</a>
+                        <a href="{{ url('/admin/projects/create') }}" class="btn btn-primary btn-round">Nuevo proyecto</a>
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th>Tipo de trámite</th>
-                                    <th>VSM</th>
-                                    <th class="col-xs-2 text-center">Próxima revisión</th>
+                                    <th>Nombre</th>
+                                    <th>Cliente</th>
+                                    <th>Lugar</th>
+                                    <th class="col-xs-2 text-center">Fecha inicio</th>
+                                    <th class="col-xs-2 text-center">Fecha entrega</th>
+                                    <th class="col-xs-1 text-right">Precio</th>
                                     <th class="text-center">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($processes as $process)
+                                @foreach ($projects as $project)
                                     <tr>
-                                        <td class="text-center">{{ $process->id }}</td>
-                                        <td class="text-left">{{ $process->type_process->name }}</td>
-                                        <td class="text-left">{{ $process->type_process->vsm }}</td>
-                                        <td>{{ $process->type_process->next_review }}</td>
-                                        <td class="text-right">&dollar; {{ $process->total_value }}</td>
+                                        <td class="text-center">{{ $project->id }}</td>
+                                        <td class="text-left">{{ $project->name }}</td>
+                                        <td class="text-left">{{ $project->user ? $project->user->name : 'sin nombre' }}
+                                        </td>
+                                        <td class="text-left">{{ $project->place }}</td>
+                                        <td>{{ $project->start_date }}</td>
+                                        <td>{{ $project->due_date }}</td>
+                                        <td class="text-right">&dollar; {{ $project->total_value }}</td>
                                         <td class="td-actions text-right">
-                                            <form method="post" action="{{ url('/admin/processes/' . $process->id) }}">
+                                            <form method="post" action="{{ url('/admin/projects/' . $project->id) }}">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
 
-                                                <a href="{{ url('/admin/processes/' . $process->id . '/show') }}"
+                                                <a href="{{ url('/admin/projects/' . $project->id . '/show') }}"
                                                     type="button" rel="tooltip" title="Ver proyecto"
                                                     class="btn btn-info btn-simple btn-xs">
                                                     <i class="fa fa-info"></i>
                                                 </a>
 
-                                                <a href="{{ url('/admin/processes/' . $process->id . '/edit') }}"
+                                                <a href="{{ url('/admin/projects/' . $project->id . '/edit') }}"
                                                     type="button" rel="tooltip" title="Editar producto"
                                                     class="btn btn-success btn-simple btn-xs">
                                                     <i class="fa fa-edit"></i>
@@ -61,10 +67,9 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $processes->links() }}
+                        {{ $projects->links() }}
                     </div>
                 </div>
-
             </div>
         </div>
 
