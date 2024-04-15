@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Process;
+use App\Models\Project;
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 
@@ -35,6 +36,10 @@ class ProcessController extends Controller
     public function create()
     {
         //Formulario de registro
+
+        $project = Project::find($id);
+        $processes = $project->processes; // Asume que tienes una relación 'processes' en tu modelo Project
+
         return view('admin.processes.create');
     }
 
@@ -68,14 +73,11 @@ class ProcessController extends Controller
         return redirect('/admin/processes');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
-        $process = Process::find($id);
-        return view('admin.processes.show')->with(compact('process'));
+        $project = Project::find($id);
+        $processes = $project->processes; // Asume que tienes una relación 'processes' en tu modelo Project
+        return view('admin.projects.show')->with(compact('processes'));
     }
 
     /**

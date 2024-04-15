@@ -69,10 +69,10 @@ class User extends Authenticatable
         return $this->hasMany(Project::class);
     }
 
-    public function assignments()
+    public function activities()
     {
-        //$user->$assignments
-        return $this->hasMany(Assignment::class);
+        //$user->$activities
+        return $this->hasMany(Activity::class);
     }
 
     public function trackings()
