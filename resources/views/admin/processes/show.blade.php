@@ -29,7 +29,7 @@
                             <tbody>
                                 @foreach ($processes as $process)
                                     <tr>
-                                        <td class="text-left">{{ $process->typeProcess->typeDocs }}</td>
+                                        <td class="text-left">{{ $process->typeProcess->typeDocs->name }}</td>
                                         <td class="text-left">{{ $process->typeProcess->vsm }}</td>
                                         <td>{{ $process->typeProcess->next_review }}</td>
                                         <td class="td-actions text-right">
