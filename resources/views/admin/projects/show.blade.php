@@ -47,13 +47,13 @@
                                                 {{ method_field('DELETE') }}
 
                                                 <a href="{{ url('/admin/processes/' . $process->id . '/show') }}"
-                                                    type="button" rel="tooltip" title="Ver proyecto"
+                                                    type="button" rel="tooltip" title="Ver trámite"
                                                     class="btn btn-info btn-simple btn-xs">
                                                     <i class="fa fa-info"></i>
                                                 </a>
 
                                                 <a href="{{ url('/admin/processes/' . $process->id . '/edit') }}"
-                                                    type="button" rel="tooltip" title="Editar producto"
+                                                    type="button" rel="tooltip" title="Editar trámite"
                                                     class="btn btn-success btn-simple btn-xs">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
@@ -67,6 +67,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        {{ $processes->links() }}
                     </div>
                 </div>
 

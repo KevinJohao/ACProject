@@ -50,7 +50,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/projects/{id}', [App\Http\Controllers\ProjectController::class, 'destroy']); //form eliminar
 
         Route::get('/processes', [App\Http\Controllers\ProcessController::class, 'index']); //listado
-        //Route::get('/processes/{id}/show', [App\Http\Controllers\ProcessController::class, 'show']); //show
+        Route::get('/processes/{id}/show', [App\Http\Controllers\ProcessController::class, 'showProcesses']); //show
         Route::get('/processes/create', [App\Http\Controllers\ProcessController::class, 'create']); //formulario
         Route::post('/processes', [App\Http\Controllers\ProcessController::class, 'store']); //registrar
         Route::get('/processes/{id}/edit', [App\Http\Controllers\ProcessController::class, 'edit']); //form de edicion

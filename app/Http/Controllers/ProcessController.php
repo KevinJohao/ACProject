@@ -37,8 +37,8 @@ class ProcessController extends Controller
     {
         //Formulario de registro
 
-        $project = Project::find($id);
-        $processes = $project->processes; // Asume que tienes una relación 'processes' en tu modelo Project
+        // $project = Project::find($id);
+        // $processes = $project->processes; // Asume que tienes una relación 'processes' en tu modelo Project
 
         return view('admin.processes.create');
     }
@@ -75,9 +75,16 @@ class ProcessController extends Controller
 
     public function show(string $id)
     {
-        $project = Project::find($id);
-        $processes = $project->processes; // Asume que tienes una relación 'processes' en tu modelo Project
+        // Asume que tienes una relación 'processes' en tu modelo Project
+        $processes = Project::find($id)->processes()->paginate(10);
         return view('admin.projects.show')->with(compact('processes'));
+    }
+
+    public function showProcesses(string $id)
+    {
+        // Asume que tienes una relación 'typeProcess' en tu modelo Process
+        $processes = Project::find($id)->processes()->paginate(10);
+        return view('admin.processes.show')->with(compact('processes'));
     }
 
     /**
