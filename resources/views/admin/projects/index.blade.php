@@ -20,7 +20,6 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th class="text-center">#</th>
                                     <th>Nombre del proyecto</th>
                                     <th>Cliente</th>
                                     <th>Lugar del proyecto</th>
@@ -33,7 +32,6 @@
                             <tbody>
                                 @foreach ($projects as $project)
                                     <tr>
-                                        <td class="text-center">{{ $project->id }}</td>
                                         <td class="text-left">{{ $project->name }}</td>
                                         <td class="text-left">{{ $project->user ? $project->user->name : 'sin nombre' }}
                                         </td>
@@ -53,7 +51,7 @@
                                                 </a>
 
                                                 <a href="{{ url('/admin/projects/' . $project->id . '/edit') }}"
-                                                    type="button" rel="tooltip" title="Editar producto"
+                                                    type="button" rel="tooltip" title="Editar proyecto"
                                                     class="btn btn-success btn-simple btn-xs">
                                                     <i class="fa fa-edit"></i>
                                                 </a>

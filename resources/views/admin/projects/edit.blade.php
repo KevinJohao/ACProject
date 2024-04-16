@@ -35,10 +35,15 @@
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
                                 <label class="control-label">Cliente</label>
-                                <input type="text" class="form-control" name="client"
-                                    value="{{ old('client', $project->user->name) }}">
+                                <select class="form-control" name="client">
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}" {{ $user->id == $client_id ? 'selected' : '' }}>
+                                            {{ $user->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
+
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
                                 <label class="control-label">Lugar</label>

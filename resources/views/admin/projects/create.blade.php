@@ -33,10 +33,16 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
-                                <label class="control-label">Cliente</label>
-                                <input type="text" class="form-control" name="client" value="{{ old('client') }}">
+                                <select class="form-control" name="client">
+                                    <option value="">Selecciona un cliente</option> <!-- Opción vacía -->
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
+
+
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
                                 <label class="control-label">Lugar</label>
@@ -45,14 +51,14 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
-                                <label class="control-label">Fecha de inicio</label>
+                                <label>Fecha de inicio</label>
                                 <input type="date" class="form-control" name="start_date" value="{{ old('start_date') }}"
                                     onfocus="(this.type='date')" onblur="(this.type='text')">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
-                                <label class="control-label">Fecha de entrega</label>
+                                <label>Fecha de entrega</label>
                                 <input type="date" class="form-control" name="due_date" value="{{ old('due_date') }}"
                                     onfocus="(this.type='date')" onblur="(this.type='text')">
                             </div>

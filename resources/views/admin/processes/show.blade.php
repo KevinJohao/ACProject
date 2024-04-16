@@ -21,40 +21,46 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Nombre del Documento</th>
-                                    <th class="col-xs-2 text-center">Descripción</th>
-                                    <th class="text-center">Opciones</th>
+                                    <th class="col-xs-3 text-center">Nombre del Documento</th>
+                                    <th class="col-xs-3 text-center">Descripción del Documento</th>
+                                    <th class="col-xs-3 text-center">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($processes as $process)
-                                    <tr>
-                                        <td class="text-left">{{ $process->typeProcess->typeDocs->name }}</td>
-                                        <td class="text-left">{{ $process->typeProcess->vsm }}</td>
-                                        <td>{{ $process->typeProcess->next_review }}</td>
-                                        <td class="td-actions text-right">
-                                            <form method="post" action="{{ url('/admin/projects/' . $process->id) }}">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
+                                    @foreach ($process->typeProcess->typeDocs as $docs)
+                                        <tr>
+                                            <td class="col-xs-3 text-left">{{ $docs->name }}</td>
+                                            <td class="col-xs-3 text-left">{{ $docs->description }}</td>
+                                            <td class="td-actions text-right">
+                                                <form class="text-center" method="post" action="{{ url('/admin/projects/' . $docs->id) }}">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('DELETE') }}
 
-                                                <a href="{{ url('/admin/projects/' . $process->id . '/show') }}"
-                                                    type="button" rel="tooltip" title="Ver proyecto"
-                                                    class="btn btn-info btn-simple btn-xs">
-                                                    <i class="fa fa-info"></i>
-                                                </a>
+                                                    <a href="{{ url('/admin/projects/' . $docs->id . '/show') }}"
+                                                        type="button" rel="tooltip" title="Ver proyecto"
+                                                        class="btn btn-info btn-simple btn-xs">
+                                                        <i class="fa fa-info"></i>
+                                                    </a>
 
-                                                <a href="{{ url('/admin/projects/' . $process->id . '/edit') }}"
-                                                    type="button" rel="tooltip" title="Editar producto"
-                                                    class="btn btn-success btn-simple btn-xs">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <button type="submit" rel="tooltip" title="Eliminar"
-                                                    class="btn btn-danger btn-simple btn-xs">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                                    <a href="{{ url('/admin/projects/' . $docs->id . '/edit') }}"
+                                                        type="button" rel="tooltip" title="Editar producto"
+                                                        class="btn btn-success btn-simple btn-xs">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    <a href="{{ url('/admin/projects/' . $docs->id . '/edit') }}"
+                                                        type="button" rel="tooltip" title="Editar producto"
+                                                        class="btn btn-success btn-simple btn-xs">
+                                                        <i class="fa fa-upload"></i>
+                                                    </a>
+                                                    <button type="submit" rel="tooltip" title="Eliminar"
+                                                        class="btn btn-danger btn-simple btn-xs">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 @endforeach
                             </tbody>
                         </table>

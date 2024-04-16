@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -17,13 +18,13 @@ class ProjectController extends Controller
 
         // Direccionar al index de cada tipo de usuario
         if (auth()->user()->rol_id == 1) {
-            $projects = Project::paginate(10);
+            $projects = Project::orderBy('created_at', 'desc')->paginate(10);
             return view('admin.projects.index')->with(compact('projects'));
         }
 
         if (auth()->user()->rol_id == 3) {
             //Filtrar los proyectos por el ID del usuario logeado
-            $projects = Project::where('user_id', $userId)->paginate(10);
+            $projects = Project::where('user_id', $userId)->orderBy('created_at', 'desc')->paginate(10);
             return view('employee.projects.index')->with(compact('projects'));
         }
     }
@@ -33,8 +34,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        $users = User::all();
         //Formulario de registro
-        return view('admin.projects.create');
+        return view('admin.projects.create')->with(compact('users'));;
     }
 
     /**
@@ -70,6 +72,8 @@ class ProjectController extends Controller
         $project->due_date = $request->input('due_date');
         $project->total_value = $request->input('total_value');
         // $project->status = $request->input('status');
+        $project->save(); //Insert
+
 
         return redirect('/admin/projects');
     }
@@ -84,11 +88,10 @@ class ProjectController extends Controller
         if (auth()->user()->rol_id == 1) {
             return view('admin.projects.show')->with(compact('project'));
         }
-        
+
         if (auth()->user()->rol_id == 3) {
             return view('employee.projects.show')->with(compact('project'));
         }
-        
     }
 
     /**
@@ -96,9 +99,11 @@ class ProjectController extends Controller
      */
     public function edit(string $id)
     {
+        $users = User::all();
         //formulario de edicion
         $project = Project::find($id);
-        return view('admin.projects.edit')->with(compact('project'));
+        $client_id = $project->user_id; // Se obtiene el id del cliente actual
+        return view('admin.projects.edit')->with(compact('project', 'users', 'client_id'));
     }
 
     /**
@@ -129,6 +134,8 @@ class ProjectController extends Controller
         $project->start_date = $request->input('start_date');
         $project->due_date = $request->input('due_date');
         $project->total_value = $request->input('total_value');
+        $project->user_id = $request->input('client');
+        $project->save();
         // $project->status = $request->input('status');
 
         return redirect(('/admin/projects'));
