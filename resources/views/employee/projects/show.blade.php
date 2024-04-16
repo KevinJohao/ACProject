@@ -12,8 +12,12 @@
     <div class="main main-raised">
         <div class="container">
             <div class="section text-center">
-                <h2 class="title">Información del proyecto "{{ $project->name }}"</h2>
-
+                <h2 class="title">PROYECTO "{{ $project->name }}"</h2>
+                    <div class="card card-frame">
+                        <div class="card-body">
+                            Información del proyecto
+                        </div> 
+                    </div>
             </div>
         </div>
 

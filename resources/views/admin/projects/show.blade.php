@@ -12,7 +12,10 @@
     <div class="main main-raised">
         <div class="container">
             <div class="section text-center">
-                <h2 class="title">Información del proyecto "{{ $project->name }}"</h2>
+
+                @foreach ($processes as $process)
+                    <h2 class="title">Información del proyecto "{{ $process->project->name }}"</h2>
+                @endforeach
 
                 <div class="team">
                     <div class="row">
@@ -25,29 +28,31 @@
                                     <th>VSM</th>
                                     <th class="col-xs-2 text-center">Próxima revisión</th>
                                     <th class="col-xs-2 text-center">Valor del trámite</th>
+                                    <th class="col-xs-2 text-center">Estado</th>
                                     <th class="text-center">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($projects as $project)
+                                @foreach ($processes as $process)
                                     <tr>
-                                        <td class="text-center">{{ $project->id }}</td>
-                                        <td class="text-left">{{ $project->processes->type_process->name }}</td>
-                                        <td class="text-left">{{ $project->processes->vsm }}</td>
-                                        <td>{{ $project->processes->next_review }}</td>
-                                        <td class="text-right">&dollar; {{ $project->processes->process_value }}</td>
+                                        <td class="text-center">{{ $process->id }}</td>
+                                        <td class="text-left">{{ $process->typeProcess->name }}</td>
+                                        <td class="text-left">{{ $process->vsm }}</td>
+                                        <td>{{ $process->next_review }}</td>
+                                        <td class="text-center">&dollar; {{ $process->process_value }}</td>
+                                        <td class="text-center">{{ $process->taskStatus->name }}</td>
                                         <td class="td-actions text-right">
-                                            <form method="post" action="{{ url('/admin/processes/' . $project->id) }}">
+                                            <form method="post" action="{{ url('/admin/processes/' . $process->id) }}">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
 
-                                                <a href="{{ url('/admin/processes/' . $project->id . '/show') }}"
+                                                <a href="{{ url('/admin/processes/' . $process->id . '/show') }}"
                                                     type="button" rel="tooltip" title="Ver proyecto"
                                                     class="btn btn-info btn-simple btn-xs">
                                                     <i class="fa fa-info"></i>
                                                 </a>
 
-                                                <a href="{{ url('/admin/processes/' . $project->id . '/edit') }}"
+                                                <a href="{{ url('/admin/processes/' . $process->id . '/edit') }}"
                                                     type="button" rel="tooltip" title="Editar producto"
                                                     class="btn btn-success btn-simple btn-xs">
                                                     <i class="fa fa-edit"></i>
@@ -62,7 +67,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $projects->links() }}
                     </div>
                 </div>
 
