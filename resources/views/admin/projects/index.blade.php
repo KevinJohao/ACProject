@@ -65,7 +65,10 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $projects->links() }}
+                        <div class="row">
+                            {{ $projects->links() }}
+                        </div>
+
                     </div>
                 </div>
             </div>

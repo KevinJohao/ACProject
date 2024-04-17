@@ -19,7 +19,7 @@ class ProjectController extends Controller
         // Direccionar al index de cada tipo de usuario
         if (auth()->user()->rol_id == 1) {
             $projects = Project::orderBy('created_at', 'desc')->paginate(10);
-            return view('admin.projects.index')->with(compact('projects'));
+            return view('admin.dashboard')->with(compact('projects'));
         }
 
         if (auth()->user()->rol_id == 3) {

@@ -22,7 +22,7 @@
                 <ul class="nav nav-pills nav-pills-primary" role="tablist">
                     @if (auth()->user()->rol_id == 1)
                         <li>
-                            <a href="#dashboardee" role="tab" data-toggle="tab">
+                            <a href="#dashboarde" role="tab" data-toggle="tab">
                                 <i class="material-icons">dashboard</i>
                                 Proyectos - Admin
                             </a>
