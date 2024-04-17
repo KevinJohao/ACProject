@@ -26,6 +26,7 @@
                                     <th class="col-xs-2 text-center">Fecha inicio</th>
                                     <th class="col-xs-2 text-center">Fecha entrega</th>
                                     <th class="col-xs-1 text-right">Precio</th>
+                                    <th class="col-xs-1 text-center">Estado</th>
                                     <th class="text-center">Opciones</th>
                                 </tr>
                             </thead>
@@ -40,6 +41,7 @@
                                         <td>{{ $project->start_date }}</td>
                                         <td>{{ $project->due_date }}</td>
                                         <td class="text-right">&dollar; {{ $project->total_value }}</td>
+                                        <td class="text-center">{{$project->TaskStatus->name}}</td>
                                         <td class="td-actions text-right">
                                             <form method="post" action="{{ url('/admin/projects/' . $project->id) }}">
                                                 {{ csrf_field() }}
