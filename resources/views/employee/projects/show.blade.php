@@ -13,9 +13,7 @@
         <div class="container">
             <div class="section text-center">
 
-                @foreach ($processes as $process)
-                    <h2 class="title">Información del proyecto "{{ $process->project->name }}"</h2>
-                @endforeach
+                    <h2 class="title">Información del proyecto "{{ $project->name }}"</h2>
 
                 <div class="team">
                     <div class="row">

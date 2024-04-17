@@ -100,7 +100,7 @@ class ProcessController extends Controller
 
             // Obtener los procesos asociados con el proyecto
             $processes = $project->processes()->paginate(10);
-            return view('employee.projects.show')->with(compact('processes'));
+            return view('employee.projects.show')->with(compact('project','processes'));
         }
         
     }
@@ -120,7 +120,7 @@ class ProcessController extends Controller
                                 ->firstOrFail();
             //Obtener las actividades asociados al trámite
             $activities = $process->activities()->paginate(10);
-            return view('employee.activities.index')->with(compact('activities'));
+            return view('employee.activities.index')->with(compact('process','activities'));
         }
 
     }

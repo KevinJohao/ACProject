@@ -42,7 +42,7 @@ class ActivityController extends Controller
                                 ->firstOrFail();
         //Obtener las actividades asociados al trámite
         $activities = $process->activities()->paginate(10);
-        return view('employee.activities.index')->with(compact('activities'));
+        return view('employee.activities.index')->with(compact('process','activities'));
     }
 
     /**

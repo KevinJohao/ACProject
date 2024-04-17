@@ -13,9 +13,7 @@
         <div class="container">
             <div class="section text-center">
 
-                @foreach ($activities as $activity)
-                    <h2 class="title">Información del trámite "{{ $activity->process->name }}"</h2>
-                @endforeach
+                    <h2 class="title">Información del trámite "{{ $process->TypeProcess->name}}"</h2>
 
                 <div class="team">
                     <div class="row">
