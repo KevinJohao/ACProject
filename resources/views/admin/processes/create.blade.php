@@ -55,8 +55,7 @@
                         </div>
                     </div>
                     <button class="btn btn-primary">Registrar trámite</button>
-                    <a href="{{ url('/admin/projects/' . $processes->project->id . '/show') }}"
-                        class="btn btn-default">Cancelar</a>
+                    <a href="{{ url('/admin/projects/') }}" class="btn btn-default">Cancelar</a>
                 </form>
             </div>
         </div>

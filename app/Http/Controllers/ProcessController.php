@@ -36,11 +36,8 @@ class ProcessController extends Controller
     public function create()
     {
         //Formulario de registro
-
-        // $project = Project::find($id);
-        // $processes = $project->processes; // Asume que tienes una relación 'processes' en tu modelo Project
-
-        return view('admin.processes.create');
+        $processes = Process::all();
+        return view('admin.processes.create')->with(compact('processes'));
     }
 
     /**
@@ -69,6 +66,10 @@ class ProcessController extends Controller
         $process->vsm = $request->input('vsm');
         $process->next_review = $request->input('next_review');
         $process->process_value = $request->input('process_value');
+        $process->project_id = $request->input('project_id');
+        $process->type_process_id = $request->input('type_process_id');
+        $process->task_status_id = $request->input('task_status_id');
+        $process->save();
 
         return redirect('/admin/processes');
     }
