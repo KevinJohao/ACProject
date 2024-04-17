@@ -62,6 +62,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['check.rol:3'])->prefix('empleado')->group(function () {
 
         Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index']); // listado
-        Route::get('/projects/{id}/show', [App\Http\Controllers\ProjectController::class, 'show']); //show
+        Route::get('/projects/{id}/show', [App\Http\Controllers\ProcessController::class, 'show']); //show
+        Route::get('/processes/{id}/show', [App\Http\Controllers\ProcessController::class, 'showProcesses']);
     });
 });

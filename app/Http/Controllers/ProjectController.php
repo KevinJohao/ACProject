@@ -17,13 +17,16 @@ class ProjectController extends Controller
 
         // Direccionar al index de cada tipo de usuario
         if (auth()->user()->rol_id == 1) {
-            $projects = Project::paginate(10);
+            $projects = Project::where('status', true)
+                                ->paginate(10);
             return view('admin.projects.index')->with(compact('projects'));
         }
 
         if (auth()->user()->rol_id == 3) {
             //Filtrar los proyectos por el ID del usuario logeado
-            $projects = Project::where('user_id', $userId)->paginate(10);
+            $projects = Project::where('user_id', $userId)
+                                ->where('status', true)
+                                ->paginate(10);
             return view('employee.projects.index')->with(compact('projects'));
         }
     }
