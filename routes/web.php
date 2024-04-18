@@ -10,8 +10,8 @@ Auth::routes();
 //Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'index']);
 
 Route::middleware(['auth'])->group(function () {
-    
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+    Route::get('home', [App\Http\Controllers\HomeController::class, 'index']);
+
     // ROL: ADMIN
     Route::middleware(['check.rol:1'])->prefix('admin')->group(function () {
         // Rutas del admin

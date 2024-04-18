@@ -11,53 +11,55 @@
 
     <div class="main main-raised">
         <div class="container">
-            <div class="section">
-                <h2 class="title text-center">Dashboard</h2>
-                @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                @endif
+            <div class="nav-align-center">
+                <div class="section">
+                    <h2 class="title text-center">Dashboard</h2>
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
-                <ul class="nav nav-pills nav-pills-primary" role="tablist">
-                    @if (auth()->user()->rol_id == 1)
-                        <li>
-                            <a href="#dashboarde" role="tab" data-toggle="tab">
-                                <i class="material-icons">dashboard</i>
-                                Proyectos - Admin
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#tasks" role="tab" data-toggle="tab">
-                                <i class="material-icons">list</i>
-                                Seguimiento - Admin
-                            </a>
-                        </li>
-                    @endif
-                    @if (auth()->user()->rol_id == 3)
-                        <li>
-                            <a href="#dashboard" role="tab" data-toggle="tab">
-                                <i class="material-icons">dashboard</i>
-                                Proyectos - Empleado
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#tasks" role="tab" data-toggle="tab">
-                                <i class="material-icons">list</i>
-                                Seguimiento - Empleado
-                            </a>
-                        </li>
-                    @endif
-                    @if (auth()->user()->rol_id == 2)
-                        <li>
-                            <a href="#tasks" role="tab" data-toggle="tab">
-                                <i class="material-icons">list</i>
-                                Seguimiento - Cliente
-                            </a>
-                        </li>
-                    @endif
-                </ul>
+                    <ul class="nav nav-pills nav-pills-primary" role="tablist">
+                        @if (auth()->user()->rol_id == 1)
+                            <li>
+                                <a href="{{ url('/admin/projects') }}" role="tab">
+                                    <i class="material-icons">dashboard</i>
+                                    Proyectos - Admin
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#tasks" role="tab">
+                                    <i class="material-icons">list</i>
+                                    Seguimiento - Admin
+                                </a>
+                            </li>
+                        @endif
+                        @if (auth()->user()->rol_id == 3)
+                            <li>
+                                <a href="#dashboard" role="tab">
+                                    <i class="material-icons">dashboard</i>
+                                    Proyectos - Empleado
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#tasks" role="tab">
+                                    <i class="material-icons">list</i>
+                                    Seguimiento - Empleado
+                                </a>
+                            </li>
+                        @endif
+                        @if (auth()->user()->rol_id == 2)
+                            <li>
+                                <a href="#tasks" role="tab">
+                                    <i class="material-icons">list</i>
+                                    Seguimiento - Cliente
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
 
+                </div>
             </div>
         </div>
     </div>

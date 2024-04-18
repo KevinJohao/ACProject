@@ -35,7 +35,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url('/') }}">Arquitectura y Construcción Otavalo</a>
+                <a class="navbar-brand" href="{{ url('/home') }}">Arquitectura y Construcción Otavalo</a>
             </div>
 
             <div class="collapse navbar-collapse" id="navigation-example">
