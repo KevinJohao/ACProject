@@ -42,6 +42,12 @@ class ActivityController extends Controller
      */
     public function show(string $id)
     {
+        $process = Process::where('id', $id)
+            ->where('status', true)
+            ->firstOrFail();
+        //Obtener las actividades asociados al trámite
+        $activities = $process->activities()->paginate(10);
+        return view('employee.activities.index')->with(compact('process', 'activities'));
     }
 
     /**

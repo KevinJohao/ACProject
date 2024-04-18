@@ -101,7 +101,7 @@ class ProcessController extends Controller
 
             // Obtener los procesos asociados con el proyecto
             $processes = $project->processes()->paginate(10);
-            return view('employee.projects.show')->with(compact('processes'));
+            return view('employee.projects.show')->with(compact('project', 'processes'));
         }
     }
 
@@ -112,6 +112,15 @@ class ProcessController extends Controller
         if (auth()->user()->rol_id == 1) {
             $processes = Project::find($id)->processes()->paginate(10);
             return view('admin.processes.show')->with(compact('processes'));
+        }
+
+        if (auth()->user()->rol_id == 3) {
+            $process = Process::where('id', $id)
+                ->where('status', true)
+                ->firstOrFail();
+            //Obtener las actividades asociados al trámite
+            $activities = $process->activities()->paginate(10);
+            return view('employee.activities.index')->with(compact('process', 'activities'));
         }
     }
 
