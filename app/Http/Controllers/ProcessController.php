@@ -12,15 +12,15 @@ class ProcessController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $id)
     {
         // Obtener el ID del usuario logeado
         $userId = auth()->id();
 
-        // Direccionar al index de cada tipo de usuario
         if (auth()->user()->rol_id == 1) {
-            $processes = Process::paginate(10);
-            return view('admin.processes.index')->with(compact('processes'));
+            // Asume que tienes una relación 'processes' en tu modelo Project
+            $processes = Project::find($id)->processes()->paginate(10);
+            return view('admin.projects.show')->with(compact('processes'));
         }
 
         if (auth()->user()->rol_id == 2) {
@@ -95,15 +95,14 @@ class ProcessController extends Controller
         if (auth()->user()->rol_id == 3) {
             // Obtener el proyecto que cumple con las condiciones
             $project = Project::where('id', $id)
-                                ->where('user_id', $userId)
-                                ->where('status', true)
-                                ->firstOrFail();
+                ->where('user_id', $userId)
+                ->where('status', true)
+                ->firstOrFail();
 
             // Obtener los procesos asociados con el proyecto
             $processes = $project->processes()->paginate(10);
             return view('employee.projects.show')->with(compact('processes'));
         }
-        
     }
 
     public function showProcesses(string $id)
@@ -112,18 +111,8 @@ class ProcessController extends Controller
         // Asume que tienes una relación 'typeProcess' en tu modelo Process
         if (auth()->user()->rol_id == 1) {
             $processes = Project::find($id)->processes()->paginate(10);
-            return view('admin.processes.show')->with(compact('processes'));    
+            return view('admin.processes.show')->with(compact('processes'));
         }
-
-        if (auth()->user()->rol_id == 3) {
-            $process = Process::where('id', $id)
-                                ->where('status', true)
-                                ->firstOrFail();
-            //Obtener las actividades asociados al trámite
-            $activities = $process->activities()->paginate(10);
-            return view('employee.activities.index')->with(compact('activities'));
-        }
-
     }
 
     /**

@@ -26,25 +26,7 @@
                                     <li class="active">
                                         <a href="#studio" role="tab" data-toggle="tab">
                                             <i class="material-icons">handyman</i>
-                                            Proyectos
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#work" role="tab" data-toggle="tab">
-                                            <i class="material-icons">person</i>
-                                            Usuarios
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#shows" role="tab" data-toggle="tab">
-                                            <i class="material-icons">assignment</i>
-                                            Trámites
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#shows" role="tab" data-toggle="tab">
-                                            <i class="material-icons">topic</i>
-                                            Documentos
+                                            Proyectoooos
                                         </a>
                                     </li>
                                 </ul>
@@ -89,7 +71,7 @@
                                                                         action="{{ url('/admin/projects/' . $project->id) }}">
                                                                         {{ csrf_field() }}
                                                                         {{ method_field('DELETE') }}
-                                                                        <a href="{{ url('/admin/processes/' . $project->id . '/show') }}"
+                                                                        <a href="{{ url('/admin/projects/' . $project->id . '/show') }}"
                                                                             type="button" rel="tooltip"
                                                                             title="Ver proyecto"
                                                                             class="btn btn-info btn-simple btn-xs">

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('type_docs', function (Blueprint $table) {
             $table->id();
+           //Eliminar nombre
             $table->string('name');
             $table->string('description');
             $table->boolean('status')->default(true);
