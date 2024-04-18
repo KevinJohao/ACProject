@@ -63,21 +63,15 @@ class User extends Authenticatable
      * Projects que hace referencia a la tabla User. 
      * */
 
-    public function projects()
+
+
+    public function employee()
     {
-        //$user->$projects
-        return $this->hasMany(Project::class);
+        return $this->hasOne(Employee::class);
     }
 
-    public function activities()
+    public function client()
     {
-        //$user->$activities
-        return $this->hasMany(Activity::class);
-    }
-
-    public function trackings()
-    {
-        //$user->$trackings
-        return $this->hasMany(Tracking::class);
+        return $this->hasOne(Client::class);
     }
 }

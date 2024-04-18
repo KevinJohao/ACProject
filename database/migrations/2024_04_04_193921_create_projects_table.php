@@ -21,8 +21,11 @@ return new class extends Migration
             $table->boolean('status')->default(true);
 
             //FK
-            $table->unsignedBigInteger('user_id')->unsigned()->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('employee_id')->unsigned()->nullable();
+            $table->foreign('employee_id')->references('user_id')->on('employees');
+
+            $table->unsignedBigInteger('client_id')->unsigned()->nullable();
+            $table->foreign('client_id')->references('user_id')->on('clients');
 
             $table->unsignedBigInteger('task_status_id')->unsigned()->nullable();
             $table->foreign('task_status_id')->references('id')->on('task_statuses');

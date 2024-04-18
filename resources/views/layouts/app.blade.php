@@ -19,6 +19,8 @@
     <!-- CSS Files -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/material-kit.css') }}" rel="stylesheet" />
+    <link rel="icon" href="{{ asset('img/logo.ico') }}" type="image/x-icon" />
+
 
 </head>
 

@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('process_docs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->decimal('value', 7, 2);
             $table->string('url');
             $table->boolean('status')->default(true);

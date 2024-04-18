@@ -21,8 +21,8 @@ return new class extends Migration
             $table->unsignedBigInteger('activity_id')->unsigned()->nullable();
             $table->foreign('activity_id')->references('id')->on('activities');
 
-            $table->unsignedBigInteger('user_id')->unsigned()->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('employee_id')->unsigned()->nullable();
+            $table->foreign('employee_id')->references('user_id')->on('employees');
 
             $table->unsignedBigInteger('task_status_id')->unsigned()->nullable();
             $table->foreign('task_status_id')->references('id')->on('task_statuses');
