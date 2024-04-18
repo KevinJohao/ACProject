@@ -24,36 +24,42 @@
                         @if (auth()->user()->rol_id == 1)
                             <li>
                                 <a href="{{ url('/admin/projects') }}" role="tab">
-                                    <i class="material-icons">dashboard</i>
-                                    Proyectos - Admin
+                                    <i class="material-icons">handyman</i>
+                                    Proyectos
                                 </a>
                             </li>
                             <li>
                                 <a href="#tasks" role="tab">
-                                    <i class="material-icons">list</i>
-                                    Seguimiento - Admin
+                                    <i class="material-icons">person</i>
+                                    Usuarios
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/admin/projects') }}" role="tab">
+                                    <i class="material-icons">assignment</i>
+                                    Trámites
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#tasks" role="tab">
+                                    <i class="material-icons">topic</i>
+                                    Documentos
                                 </a>
                             </li>
                         @endif
                         @if (auth()->user()->rol_id == 3)
                             <li>
                                 <a href="#dashboard" role="tab">
-                                    <i class="material-icons">dashboard</i>
-                                    Proyectos - Empleado
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#tasks" role="tab">
-                                    <i class="material-icons">list</i>
-                                    Seguimiento - Empleado
+                                    <i class="material-icons">handyman</i>
+                                    Proyectos
                                 </a>
                             </li>
                         @endif
                         @if (auth()->user()->rol_id == 2)
                             <li>
-                                <a href="#tasks" role="tab">
-                                    <i class="material-icons">list</i>
-                                    Seguimiento - Cliente
+                                <a href="#dashboard" role="tab">
+                                    <i class="material-icons">handyman</i>
+                                    Proyectos
                                 </a>
                             </li>
                         @endif
