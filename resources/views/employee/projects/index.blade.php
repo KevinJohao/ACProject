@@ -35,7 +35,7 @@
                                     <tr>
                                         <td class="text-center">{{ $project->id }}</td>
                                         <td class="text-left">{{ $project->name }}</td>
-                                        <td class="text-left">{{ $project->user ? $project->user->name : 'sin nombre' }}
+                                        <td class="text-left">{{ $project->client->user->name}}
                                         </td>
                                         <td class="text-left">{{ $project->place }}</td>
                                         <td>{{ $project->start_date }}</td>

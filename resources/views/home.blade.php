@@ -49,7 +49,7 @@
                         @endif
                         @if (auth()->user()->rol_id == 3)
                             <li>
-                                <a href="#dashboard" role="tab">
+                                <a href="{{url('/empleado/projects')}}" role="tab">
                                     <i class="material-icons">handyman</i>
                                     Proyectos
                                 </a>

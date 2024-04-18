@@ -30,7 +30,8 @@ class ProjectController extends Controller
 
         if (auth()->user()->rol_id == 3) {
             //Filtrar los proyectos por el ID del usuario logeado
-            $projects = Project::where('user_id', $userId)
+            
+            $projects = Project::where('employee_id', $userId)
                 ->where('status', true)->orderBy('created_at', 'desc')->paginate(10);
             return view('employee.projects.index')->with(compact('projects'));
         }
