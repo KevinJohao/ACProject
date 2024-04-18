@@ -61,6 +61,7 @@
                                                         <tr>
                                                             <th>Nombre del proyecto</th>
                                                             <th>Cliente</th>
+                                                            <th>Encargado</th>
                                                             <th>Lugar del proyecto</th>
                                                             <th class="col-xs-2 text-center">Fecha inicio
                                                             </th>
@@ -73,13 +74,14 @@
                                                     <tbody>
                                                         @foreach ($projects as $project)
                                                             <tr>
-                                                                <td class="text-left">{{ $project->name }}
+                                                                <td class="text-left">{{ $project->name }}</td>
+                                                                <td class="text-left">
+                                                                    {{ $project->user ? $project->client->name : 'sin nombre' }}
                                                                 </td>
                                                                 <td class="text-left">
-                                                                    {{ $project->user ? $project->user->name : 'sin nombre' }}
+                                                                    {{ $project->user ? $project->employee->name : 'sin nombre' }}
                                                                 </td>
-                                                                <td class="text-left">{{ $project->place }}
-                                                                </td>
+                                                                <td class="text-left">{{ $project->place }}</td>
                                                                 <td>{{ $project->start_date }}</td>
                                                                 <td>{{ $project->due_date }}</td>
                                                                 <td class="text-right">&dollar;
