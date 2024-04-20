@@ -25,7 +25,8 @@ class ProjectTableSeeder extends Seeder
         // Crear proyectos aleatorios
         foreach (range(1, 50) as $index) {
             \App\Models\Project::create([
-                'user_id' => \App\Models\User::all()->random()->id,
+                'employee_id' => \App\Models\Employee::all()->random()->id,
+                'client_id' => \App\Models\Client::all()->random()->id,
                 'task_status_id' => \App\Models\TaskStatus::all()->random()->id,
                 'name' => fake()->name(),
                 'place' => fake()->city(),
@@ -83,7 +84,7 @@ class ProjectTableSeeder extends Seeder
             \App\Models\Activity::create([
                 'process_id' => \App\Models\Process::all()->random()->id,
                 'type_activity_id' => \App\Models\TypeActivity::all()->random()->id,
-                'user_id' => \App\Models\User::all()->random()->id,
+                'employee_id' => \App\Models\Employee::all()->random()->id,
                 'task_status_id' => \App\Models\TaskStatus::all()->random()->id,
                 'status' => true
             ]);
@@ -94,7 +95,7 @@ class ProjectTableSeeder extends Seeder
             \App\Models\Tracking::create([
                 'activity_id' => \App\Models\Activity::all()->random()->id,
                 'task_status_id' => \App\Models\TaskStatus::all()->random()->id,
-                'user_id' => \App\Models\User::all()->random()->id,
+                'employee_id' => \App\Models\Employee::all()->random()->id,
                 'date' => fake()->dateTimeBetween($startDate = 'now', $endDate = '+1 week')->format('Y-m-d'),
                 'observation' => fake()->sentence(10),
                 'status' => true
@@ -106,7 +107,6 @@ class ProjectTableSeeder extends Seeder
             \App\Models\ProcessDocs::create([
                 'process_id' => \App\Models\Process::all()->random()->id,
                 'type_docs_id' => \App\Models\TypeDocs::all()->random()->id,
-                'name' => fake()->name(),
                 'value' => fake()->randomFloat(2, 5, 150),
                 'url' => fake()->imageUrl(250, 250),
                 'status' => true
