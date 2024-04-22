@@ -35,15 +35,29 @@
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
                                 <label class="control-label">Cliente</label>
-                                <select class="form-control" name="client">
-                                    @foreach ($users as $user)
-                                        <option value="{{ $user->id }}" {{ $user->id == $client_id ? 'selected' : '' }}>
-                                            {{ $user->name }}</option>
+                                <select class="form-control" name="client_id">
+                                    @foreach ($clients as $client)
+                                        <option value="{{ $client->id }}"
+                                            @if ($client->id == $project->client_id) selected @endif>
+                                            {{ $client->user->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Encargado</label>
+                                <select class="form-control" name="employee_id">
+                                    @foreach ($employees as $employee)
+                                        <option value="{{ $employee->id }}"
+                                            @if ($employee->id == $project->employee_id) selected @endif>
+                                            {{ $employee->user->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
                                 <label class="control-label">Lugar</label>
@@ -72,6 +86,19 @@
                                 <label class="control-label">Valor total</label>
                                 <input type="number" step="0.01" class="form-control" name="total_value"
                                     value="{{ old('total_value', $project->total_value) }}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Estado</label>
+                                <select class="form-control" name="task_status_id">
+                                    @foreach ($task_statuses as $task_status)
+                                        <option value="{{ $task_status->id }}"
+                                            @if ($task_status->id == $project->task_status_id) selected @endif>
+                                            {{ $task_status->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>

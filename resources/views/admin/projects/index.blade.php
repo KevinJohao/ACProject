@@ -22,24 +22,28 @@
                                 <tr>
                                     <th>Nombre del proyecto</th>
                                     <th>Cliente</th>
+                                    <th>Encargado</th>
                                     <th>Lugar del proyecto</th>
-                                    <th class="col-xs-2 text-center">Fecha inicio</th>
-                                    <th class="col-xs-2 text-center">Fecha entrega</th>
-                                    <th class="col-xs-1 text-right">Precio</th>
+                                    <th class="col-xs-1 text-center">Fecha inicio</th>
+                                    <th class="col-xs-1 text-center">Fecha entrega</th>
+                                    <th class="col-xs-1 text-center">Precio</th>
+                                    <th class="col-xs-1 text-center">Estado</th>
                                     <th class="text-center">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- 
                                 @foreach ($projects as $project)
                                     <tr>
                                         <td class="text-left">{{ $project->name }}</td>
-                                        <td class="text-left">{{ $project->user ? $project->user->name : 'sin nombre' }}
+                                        <td class="text-left">{{ $project->client->user->name }}
+                                        </td>
+                                        <td class="text-left">{{ $project->employee->user->name }}
                                         </td>
                                         <td class="text-left">{{ $project->place }}</td>
                                         <td>{{ $project->start_date }}</td>
                                         <td>{{ $project->due_date }}</td>
-                                        <td class="text-right">&dollar; {{ $project->total_value }}</td>
+                                        <td class="text-center">&dollar; {{ $project->total_value }}</td>
+                                        <td class="text-center">{{ $project->TaskStatus->name }}</td>
                                         <td class="td-actions text-right">
                                             <form method="post" action="{{ url('/admin/projects/' . $project->id) }}">
                                                 {{ csrf_field() }}
@@ -48,7 +52,7 @@
                                                 <a href="{{ url('/admin/projects/' . $project->id . '/show') }}"
                                                     type="button" rel="tooltip" title="Ver proyecto"
                                                     class="btn btn-info btn-simple btn-xs">
-                                                    <i class="fa fa-info"></i>
+                                                    <i class="fa fa-eye"></i>
                                                 </a>
 
                                                 <a href="{{ url('/admin/projects/' . $project->id . '/edit') }}"
@@ -64,7 +68,6 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                                -->
                             </tbody>
                         </table>
                         <div class="row">

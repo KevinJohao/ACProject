@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
+use App\Models\Employee;
 use App\Models\Project;
+use App\Models\TaskStatus;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -25,8 +28,8 @@ class ProjectController extends Controller
                 $projects = Project::where('status', true)
                     ->orderBy('created_at', 'desc')->paginate(10);
 
-                if (view()->exists('admin.dashboard')) {
-                    return view('admin.dashboard')->with(compact('projects'));
+                if (view()->exists('admin.projects.index')) {
+                    return view('admin.projects.index')->with(compact('projects'));
                 }
 
                 return view('admin.projects.index')->with(compact('projects'));
@@ -107,10 +110,11 @@ class ProjectController extends Controller
     public function edit(string $id)
     {
         $users = User::all();
-        //formulario de edicion
+        $clients = Client::all();
+        $employees = Employee::all();
         $project = Project::find($id);
-        $client_id = $project->user_id; // Se obtiene el id del cliente actual
-        return view('admin.projects.edit')->with(compact('project', 'users', 'client_id'));
+        $task_statuses = TaskStatus::all();
+        return view('admin.projects.edit')->with(compact('task_statuses', 'project', 'users', 'employees', 'clients'));
     }
 
     /**
@@ -141,11 +145,13 @@ class ProjectController extends Controller
         $project->start_date = $request->input('start_date');
         $project->due_date = $request->input('due_date');
         $project->total_value = $request->input('total_value');
-        $project->user_id = $request->input('client');
+        $project->employee_id = $request->input('employee_id');
+        $project->client_id = $request->input('client_id');
+        $project->task_status_id = $request->input('task_status_id');
         $project->save();
         // $project->status = $request->input('status');
 
-        return redirect(('/admin/projects'));
+        return redirect('/admin/projects');
     }
 
     /**
