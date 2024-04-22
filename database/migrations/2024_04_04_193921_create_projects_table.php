@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('place');
             $table->date('start_date');
             $table->date('due_date');
-            $table->decimal('total_value', 8, 2);
+            $table->decimal('total_value', 8, 2)->nullable();
             $table->boolean('status')->default(true);
 
             //FK

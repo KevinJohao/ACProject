@@ -14,21 +14,23 @@ Route::middleware(['auth'])->group(function () {
 
     // ROL: ADMIN
     Route::middleware(['check.rol:1'])->prefix('admin')->group(function () {
-        // Rutas del admin
+        //Projects
         Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index']); //listado
-        //Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard'); //dashboard
         Route::get('/processes/{id}/show', [App\Http\Controllers\ProcessController::class, 'index']); //show
         Route::get('/projects/create', [App\Http\Controllers\ProjectController::class, 'create']); //formulario
         Route::post('/projects', [App\Http\Controllers\ProjectController::class, 'store']); //registrar
         Route::get('/projects/{id}/edit', [App\Http\Controllers\ProjectController::class, 'edit']); //form de edicion
         Route::post('/projects/{id}/edit', [App\Http\Controllers\ProjectController::class, 'update']); //actualizar
         Route::delete('/projects/{id}', [App\Http\Controllers\ProjectController::class, 'destroy']); //form eliminar
-
+        //Processes
         Route::get('/processes/create', [App\Http\Controllers\ProcessController::class, 'create']); //formulario
         Route::post('/processes', [App\Http\Controllers\ProcessController::class, 'store']); //registrar
         Route::get('/processes/{id}/edit', [App\Http\Controllers\ProcessController::class, 'edit']); //form de edicion
         Route::post('/processes/{id}/edit', [App\Http\Controllers\ProcessController::class, 'update']); //actualizar
         Route::delete('/processes/{id}', [App\Http\Controllers\ProcessController::class, 'destroy']); //form eliminar
+        //Clients
+        Route::get('/clients', [App\Http\Controllers\ClientController::class, 'index']); //listado
+
     });
 
     // ROL: EMPLEADO

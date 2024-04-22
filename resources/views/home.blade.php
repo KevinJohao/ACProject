@@ -31,7 +31,13 @@
                             <li>
                                 <a href="#tasks" role="tab">
                                     <i class="material-icons">person</i>
-                                    Usuarios
+                                    Clientes
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#tasks" role="tab">
+                                    <i class="material-icons">person</i>
+                                    Empleados
                                 </a>
                             </li>
                             <li>

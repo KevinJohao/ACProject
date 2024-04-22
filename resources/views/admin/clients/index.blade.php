@@ -12,7 +12,7 @@
     <div class="main main-raised">
         <div class="container">
             <div class="section text-center">
-                <h2 class="title">Listado de proyectos</h2>
+                <h2 class="title">Listado de usu</h2>
 
                 <div class="team">
                     <div class="row">

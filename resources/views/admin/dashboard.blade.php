@@ -26,7 +26,7 @@
                                     <li class="active">
                                         <a href="#studio" role="tab" data-toggle="tab">
                                             <i class="material-icons">handyman</i>
-                                            Proyectos
+                                            Proyectooooooos
                                         </a>
                                     </li>
                                     <li>

@@ -63,8 +63,6 @@ class User extends Authenticatable
      * Projects que hace referencia a la tabla User. 
      * */
 
-
-
     public function employee()
     {
         return $this->hasOne(Employee::class);
