@@ -72,4 +72,20 @@ class User extends Authenticatable
     {
         return $this->hasOne(Client::class);
     }
+
+    public function isAdmin()
+    {
+        return $this->rol_id === 1;
+    }
+
+    public function isClient()
+    {
+        return $this->rol_id === 2;
+    }
+
+    public function isEmployee()
+    {
+        return $this->rol_id === 3;
+    }
+
 }

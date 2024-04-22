@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreign('type_activity_id')->references('id')->on('type_activities');
 
             $table->unsignedBigInteger('employee_id')->unsigned()->nullable();
-            $table->foreign('employee_id')->references('user_id')->on('employees');
+            $table->foreign('employee_id')->references('id')->on('employees');
 
             $table->unsignedBigInteger('task_status_id')->unsigned()->nullable();
             $table->foreign('task_status_id')->references('id')->on('task_statuses');

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'App\Http\Controllers\TestController@welcome');
@@ -38,7 +39,7 @@ Route::middleware(['auth'])->group(function () {
 
         // Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index']); //dashboard
         Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index']); // listado
-        Route::get('/projects/{id}/show', [App\Http\Controllers\ProcessController::class, 'show']); //show
+        Route::get('/projects/{id}/show', [App\Http\Controllers\ProcessController::class, 'index']); //show
         Route::get('/processes/{id}/show', [App\Http\Controllers\ActivityController::class, 'index']);
     });
 });

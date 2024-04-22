@@ -15,22 +15,30 @@ class ProcessController extends Controller
     public function index(string $id)
     {
         // Obtener el ID del usuario logeado
-        $userId = auth()->id();
+        /** @var \App\Models\User $user **/
+        $user = auth()->user();
 
+        /*** Direccionar al view show del proyecto de cada tipo de usuario ***/
+        // Admin
         if (auth()->user()->rol_id == 1) {
             // Asume que tienes una relación 'processes' en tu modelo Project
             $processes = Project::find($id)->processes()->paginate(10);
             return view('admin.projects.show')->with(compact('processes'));
         }
 
-        if (auth()->user()->rol_id == 2) {
-            # code...
-        }
+        // Empleado
+        if ($user->isEmployee()) {
 
-        if (auth()->user()->rol_id == 3) {
-            //Filtrar los proyectos por el ID del usuario logeado
-            $processes = Process::where('user_id', $userId)->paginate(10);
-            return view('employee.processes.index')->with(compact('processes'));
+            $project = Project::where('id',$id)
+                                ->where('status', true)
+                                ->firstOrFail();
+
+            $processes = $project->processes()
+                                ->where('status', true)
+                                ->paginate(10);
+
+            return view('employee.projects.show')->with(compact('project','processes'));
+
         }
     }
 

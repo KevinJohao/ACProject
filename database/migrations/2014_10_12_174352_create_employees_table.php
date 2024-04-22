@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('employees', function (Blueprint $table) {
-            // Esto creará un campo 'user_id' que será la clave primaria
-            $table->unsignedBigInteger('user_id')->primary();
-            // Esto establecerá 'user_id' como clave foránea que hace referencia al 'id' en la tabla 'users'
+            $table->id();
+            $table->unsignedBigInteger('user_id')->unique();
             $table->foreign('user_id')->references('id')->on('users');
             $table->boolean('status')->default(true);
             $table->timestamps();

@@ -13,22 +13,35 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        // Obtener el ID del usuario logeado
-        $userId = auth()->id();
+        if (auth()->check()) {
+            /** @var \App\Models\User $user **/
 
-        // Direccionar al index de cada tipo de usuario
-        if (auth()->user()->rol_id == 1) {
-            $projects = Project::where('status', true)
-                ->orderBy('created_at', 'desc')->paginate(10);
+            // Obtener el ID del usuario logeado
+            $user = auth()->user();
 
-            return view('admin.projects.index')->with(compact('projects'));
-        }
+            /*** Direccionar al view index de cada tipo de usuario ***/
+            // Admin
+            if (auth()->user()->rol_id == 1) {
+                $projects = Project::where('status', true)
+                    ->orderBy('created_at', 'desc')->paginate(10);
 
-        if (auth()->user()->rol_id == 3) {
-            //Filtrar los proyectos por el ID del usuario logeado
-            $projects = Project::where('user_id', $userId)
-                ->where('status', true)->orderBy('created_at', 'desc')->paginate(10);
-            return view('employee.projects.index')->with(compact('projects'));
+                if (view()->exists('admin.dashboard')) {
+                    return view('admin.dashboard')->with(compact('projects'));
+                }
+
+                return view('admin.projects.index')->with(compact('projects'));
+            }
+
+            // Empleado
+            if ($user->isEmployee()) {
+                //Filtrar los proyectos por el empleado logeado
+                $projects = $user->employee->projects()
+                    ->where('status', true)
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(10);
+
+                return view('employee.projects.index')->with(compact('projects'));
+            }
         }
     }
 
