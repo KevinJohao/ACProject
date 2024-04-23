@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Process;
 use App\Models\Project;
+use App\Models\TaskStatus;
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 
@@ -23,22 +24,22 @@ class ProcessController extends Controller
         if (auth()->user()->rol_id == 1) {
             // Asume que tienes una relación 'processes' en tu modelo Project
             $processes = Project::find($id)->processes()->paginate(10);
-            return view('admin.projects.show')->with(compact('processes'));
+            $task_statuses = TaskStatus::all();
+            return view('admin.projects.show')->with(compact('processes', 'task_statuses'));
         }
 
         // Empleado
         if ($user->isEmployee()) {
 
-            $project = Project::where('id',$id)
-                                ->where('status', true)
-                                ->firstOrFail();
+            $project = Project::where('id', $id)
+                ->where('status', true)
+                ->firstOrFail();
 
             $processes = $project->processes()
-                                ->where('status', true)
-                                ->paginate(10);
+                ->where('status', true)
+                ->paginate(10);
 
-            return view('employee.projects.show')->with(compact('project','processes'));
-
+            return view('employee.projects.show')->with(compact('project', 'processes'));
         }
     }
 
@@ -139,7 +140,8 @@ class ProcessController extends Controller
     {
         //
         $process = Process::find($id);
-        return view('admin.processes.edit')->with(compact('process'));
+        $task_statuses = TaskStatus::all();
+        return view('admin.processes.edit')->with(compact('process', 'task_statuses'));
     }
 
     /**
@@ -165,9 +167,12 @@ class ProcessController extends Controller
 
         $this->validate($request, $rules, $messages);
         $process = Process::find($id);
+        $process->type_process_id = $request->input('type_process_id');
         $process->vsm = $request->input('vsm');
         $process->next_review = $request->input('next_review');
         $process->process_value = $request->input('process_value');
+        $process->task_status_id = $request->input('task_status_id');
+        $process->save();
 
         return redirect('/admin/processes');
     }

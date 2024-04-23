@@ -29,25 +29,25 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#tasks" role="tab">
+                                <a href="{{ url('/admin/clients') }}" role="tab">
                                     <i class="material-icons">person</i>
                                     Clientes
                                 </a>
                             </li>
                             <li>
-                                <a href="#tasks" role="tab">
+                                <a href="{{ url('/admin/employees') }}" role="tab">
                                     <i class="material-icons">person</i>
                                     Empleados
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ url('/admin/projects') }}" role="tab">
+                                <a href="{{ url('/admin/processes') }}" role="tab">
                                     <i class="material-icons">assignment</i>
                                     Trámites
                                 </a>
                             </li>
                             <li>
-                                <a href="#tasks" role="tab">
+                                <a href="{{ url('/admin/docs') }}" role="tab">
                                     <i class="material-icons">topic</i>
                                     Documentos
                                 </a>
@@ -55,7 +55,7 @@
                         @endif
                         @if (auth()->user()->rol_id == 3)
                             <li>
-                                <a href="{{url('/empleado/projects')}}" role="tab">
+                                <a href="{{ url('/empleado/projects') }}" role="tab">
                                     <i class="material-icons">handyman</i>
                                     Proyectos
                                 </a>

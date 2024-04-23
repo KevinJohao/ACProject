@@ -23,8 +23,16 @@
                     </div>
                 @endif
                 <form method="post" action="{{ url('/admin/processes/' . $process->id . '/edit') }}">
+                    @method('PUT')
                     {{ csrf_field() }}
                     <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Tipo de trámite</label>
+                                <input type="text" class="form-control" name="type_process_id"
+                                    value="{{ old('vsm', $process->typeProcess->name) }}">
+                            </div>
+                        </div>
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
                                 <label class="control-label">VSM</label>
@@ -50,13 +58,20 @@
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
                                 <label class="control-label">Estado</label>
-                                <input type="text" class="form-control" name="task_status"
-                                    value="{{ old('task_status', $process->taskStatus->name) }}">
+                                <select class="form-control" name="task_status_id">
+                                    @foreach ($task_statuses as $task_status)
+                                        <option value="{{ $task_status->id }}"
+                                            @if ($task_status->id == $process->task_status_id) selected @endif>
+                                            {{ $task_status->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
                     <button class="btn btn-primary">Guardar cambios</button>
-                    <a href="{{ url('/admin/projects/' . $process->project->id . '/show') }}" class="btn btn-default">Cancelar</a>
+                    <a href="{{ url('/admin/processes/' . $process->project->id . '/show') }}"
+                        class="btn btn-default">Cancelar</a>
                 </form>
             </div>
         </div>

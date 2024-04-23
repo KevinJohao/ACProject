@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Listado de proyectos')
+@section('title', 'Listado de clientes')
 
 @section('body-class', 'product -page')
 
@@ -11,73 +11,59 @@
 
     <div class="main main-raised">
         <div class="container">
-            <div class="section">
-                <h2 class="title text-center">Editar proyecto seleccionado</h2>
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                <form method="post" action="{{ url('/admin/projects/' . $project->id . '/edit') }}">
-                    {{ csrf_field() }}
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group label-floating">
-                                <label class="control-label">Nombre del proyecto</label>
-                                <input type="text" class="form-control" name="name"
-                                    value="{{ old('name', $project->name) }}">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group label-floating">
-                                <label class="control-label">Cliente</label>
-                                <select class="form-control" name="client">
-                                    @foreach ($users as $user)
-                                        <option value="{{ $user->id }}" {{ $user->id == $client_id ? 'selected' : '' }}>
-                                            {{ $user->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
+            <div class="section text-center">
+                <h2 class="title">Listado de clientes </h2>
 
-                        <div class="col-sm-6">
-                            <div class="form-group label-floating">
-                                <label class="control-label">Lugar</label>
-                                <input type="text" class="form-control" name="place"
-                                    value="{{ old('place', $project->place) }}">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group label-floating">
-                                <label class="control-label">Fecha de inicio</label>
-                                <input type="date" class="form-control" name="start_date"
-                                    value="{{ old('start_date', $project->start_date) }}" onfocus="(this.type='date')"
-                                    onblur="(this.type='text')">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group label-floating">
-                                <label class="control-label">Fecha de entrega</label>
-                                <input type="date" class="form-control" name="due_date"
-                                    value="{{ old('due_date', $project->due_date) }}" onfocus="(this.type='date')"
-                                    onblur="(this.type='text')">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group label-floating">
-                                <label class="control-label">Valor total</label>
-                                <input type="number" step="0.01" class="form-control" name="total_value"
-                                    value="{{ old('total_value', $project->total_value) }}">
-                            </div>
-                        </div>
+                <div class="team">
+                    <div class="row">
+                        <a href="{{ url('/admin/clients/create') }}" class="btn btn-primary btn-round">Nuevo cliente</a>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th>Nombres</th>
+                                    <th>Apellidos</th>
+                                    <th>Teléfono</th>
+                                    <th>Correo</th>
+                                    <th class="col-md-4">Lugar de trabajo</th>
+                                    <th class="text-right">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($clients as $client)
+                                    <tr>
+                                        <td class="text-center">{{ $client->user->name }}</td>
+                                        <td>{{ $client->user->lastname }}</td>
+                                        <td>{{ $client->user->phone }}</td>
+                                        <td>{{ $client->user->email }}</td>
+                                        <td class="text-right">{{ $client->work_place }}</td>
+                                        <td class="td-actions text-right">
+                                            <form method="post" action="{{ url('/admin/clients/' . $client->id) }}">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
+                                                <a type="button" rel="tooltip" title="Ver cliento"
+                                                    class="btn btn-info btn-simple btn-xs">
+                                                    <i class="fa fa-info"></i>
+                                                </a>
+                                                <a href="{{ url('/admin/clients/' . $client->id . '/edit') }}"
+                                                    type="button" rel="tooltip" title="Editar cliento"
+                                                    class="btn btn-success btn-simple btn-xs">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <button type="submit" rel="tooltip" title="Eliminar"
+                                                    class="btn btn-danger
+                                        btn-simple btn-xs">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        {{ $clients->links() }}
                     </div>
-                    <button class="btn btn-primary">Guardar cambios</button>
-                    <a href="{{ url('/admin/projects') }}" class="btn btn-default">Cancelar</a>
-                </form>
+                </div>
             </div>
         </div>
 

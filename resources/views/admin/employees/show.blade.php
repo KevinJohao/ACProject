@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Listado de clientes')
+@section('title', 'Proyecto')
 
 @section('body-class', 'product -page')
 
@@ -12,47 +12,53 @@
     <div class="main main-raised">
         <div class="container">
             <div class="section text-center">
-                <h2 class="title">Listado de clientes </h2>
+
+                @foreach ($processes as $process)
+                    <h2 class="title">Información del proyecto "{{ $process->project->name }}"</h2>
+                @endforeach
 
                 <div class="team">
                     <div class="row">
-                        <a href="{{ url('/admin/clients/create') }}" class="btn btn-primary btn-round">Nuevo cliente</a>
+                        <a href="{{ url('/admin/processes/create') }}" class="btn btn-primary btn-round">Nuevo trámite</a>
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th>Nombres</th>
-                                    <th>Apellidos</th>
-                                    <th>Teléfono</th>
-                                    <th>Correo</th>
-                                    <th class="col-md-4">Lugar de trabajo</th>
-                                    <th class="text-right">Opciones</th>
+                                    <th>Tipo de trámite</th>
+                                    <th>VSM</th>
+                                    <th class="col-xs-2 text-center">Próxima revisión</th>
+                                    <th class="col-xs-2 text-center">Valor del trámite</th>
+                                    <th class="col-xs-2 text-center">Estado</th>
+                                    <th class="text-center">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($clients as $client)
+                                @foreach ($processes as $process)
                                     <tr>
-                                        <td class="text-center">{{ $client->user->name }}</td>
-                                        <td>{{ $client->user->lastname }}</td>
-                                        <td>{{ $client->user->phone }}</td>
-                                        <td>{{ $client->user->email }}</td>
-                                        <td class="text-right">{{ $client->work_place }}</td>
+                                        <td class="text-center">{{ $process->id }}</td>
+                                        <td class="text-left">{{ $process->typeProcess->name }}</td>
+                                        <td class="text-left">{{ $process->vsm }}</td>
+                                        <td>{{ $process->next_review }}</td>
+                                        <td class="text-center">&dollar; {{ $process->process_value }}</td>
+                                        <td class="text-center">{{ $process->taskStatus->name }}</td>
                                         <td class="td-actions text-right">
-                                            <form method="post" action="{{ url('/admin/clients/' . $client->id) }}">
+                                            <form method="post" action="{{ url('/admin/processes/' . $process->id) }}">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
-                                                <a type="button" rel="tooltip" title="Ver cliento"
+
+                                                <a href="{{ url('/admin/processes/' . $process->id . '/show') }}"
+                                                    type="button" rel="tooltip" title="Ver trámite"
                                                     class="btn btn-info btn-simple btn-xs">
                                                     <i class="fa fa-info"></i>
                                                 </a>
-                                                <a href="{{ url('/admin/clients/' . $client->id . '/edit') }}"
-                                                    type="button" rel="tooltip" title="Editar cliento"
+
+                                                <a href="{{ url('/admin/processes/' . $process->id . '/edit') }}"
+                                                    type="button" rel="tooltip" title="Editar trámite"
                                                     class="btn btn-success btn-simple btn-xs">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
                                                 <button type="submit" rel="tooltip" title="Eliminar"
-                                                    class="btn btn-danger
-                                        btn-simple btn-xs">
+                                                    class="btn btn-danger btn-simple btn-xs">
                                                     <i class="fa fa-times"></i>
                                                 </button>
                                             </form>
@@ -61,13 +67,12 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $clients->links() }}
+                        {{ $processes->links() }}
                     </div>
                 </div>
+
             </div>
         </div>
-
     </div>
-
     @include('includes.footer')
 @endsection

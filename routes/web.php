@@ -27,10 +27,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/processes/create', [App\Http\Controllers\ProcessController::class, 'create']); //formulario
         Route::post('/processes', [App\Http\Controllers\ProcessController::class, 'store']); //registrar
         Route::get('/processes/{id}/edit', [App\Http\Controllers\ProcessController::class, 'edit']); //form de edicion
-        Route::post('/processes/{id}/edit', [App\Http\Controllers\ProcessController::class, 'update']); //actualizar
+        Route::put('/processes/{id}/edit', [App\Http\Controllers\ProcessController::class, 'update']); //actualizar
         Route::delete('/processes/{id}', [App\Http\Controllers\ProcessController::class, 'destroy']); //form eliminar
         //Clients
         Route::get('/clients', [App\Http\Controllers\ClientController::class, 'index']); //listado
+        //Employees
+        Route::get('/employees', [App\Http\Controllers\EmployeeController::class, 'index']); //listado
 
     });
 
