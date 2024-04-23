@@ -13,12 +13,7 @@ class ActivityController extends Controller
      */
     public function index(string $id)
     {
-        $process = Process::where('id', $id)
-            ->where('status', true)
-            ->firstOrFail();
-        //Obtener las actividades asociados al trámite
-        $activities = $process->activities()->paginate(10);
-        return view('employee.activities.index')->with(compact('activities'));
+
     }
 
     /**
@@ -42,12 +37,24 @@ class ActivityController extends Controller
      */
     public function show(string $id)
     {
-        $process = Process::where('id', $id)
-            ->where('status', true)
-            ->firstOrFail();
-        //Obtener las actividades asociados al trámite
-        $activities = $process->activities()->paginate(10);
-        return view('employee.activities.index')->with(compact('process', 'activities'));
+        // Obtener el ID del usuario logeado
+        /** @var \App\Models\User $user **/
+        $user = auth()->user();
+
+        if ($user->isEmployee()) {
+
+            $process = Process::where('id', $id)
+                                ->where('status', true)
+                                ->firstOrFail();
+            
+            //Obtener las actividades asociados al trámite
+            $activities = $user->employee->activities()
+                                    ->where('process_id', $id)
+                                    ->where('status', true)
+                                    ->paginate(10);
+
+            return view('employee.processes.show')->with(compact('process','activities'));
+        }
     }
 
     /**

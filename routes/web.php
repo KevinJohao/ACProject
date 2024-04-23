@@ -44,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
         // Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index']); //dashboard
         Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index']); // listado
         Route::get('/projects/{id}/show', [App\Http\Controllers\ProcessController::class, 'index']); //show
-        Route::get('/processes/{id}/show', [App\Http\Controllers\ActivityController::class, 'index']);
+        Route::get('/activities', [App\Http\Controllers\ActivityController::class, 'index']);
+        Route::get('/processes/{id}/show', [App\Http\Controllers\ActivityController::class, 'show']);
     });
 });

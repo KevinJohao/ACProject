@@ -13,7 +13,7 @@
         <div class="container">
             <div class="section text-center">
 
-                    <h2 class="title">Información del trámite</h2>
+                    <h2 class="title">Información del trámite "{{ $process->TypeProcess->name}}"</h2>
 
                 <div class="team">
                     <div class="row">
@@ -21,9 +21,8 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th>Proyecto</th>
-                                    <th>Trámite</th>
-                                    <th>N° Actividades</th>
+                                    <th>Actividad</th>
+                                    <th>Encargado</th>
                                     <th class="col-xs-2 text-center">Estado</th>
                                     <th class="text-center">Opciones</th>
                                 </tr>
@@ -33,8 +32,7 @@
                                     <tr>
                                         <td class="text-center">{{ $activity->id }}</td>
                                         <td class="text-left">{{ $activity->typeActivity->name }}</td>
-                                        <td class="text-left">{{ $activity->typeActivity->name }}</td>
-                                        <td class="text-center">{{ $activity->employee->user->name}}</td>
+                                        <td class="text-center">{{ $activity->employee->user->name }}</td>
                                         <td class="text-center">{{ $activity->taskStatus->name }}</td>
                                         <td class="td-actions text-right">
                                             <form method="post" action="{{ url('/employee/processes/' . $activity->id) }}">
