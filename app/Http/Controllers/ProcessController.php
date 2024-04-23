@@ -88,30 +88,23 @@ class ProcessController extends Controller
         return redirect('/admin/processes');
     }
 
-    public function show(string $id)
+    public function showActivities(string $id)
     {
-        $userId = auth()->id();
+        // Obtener el ID del usuario logeado
+        /** @var \App\Models\User $user **/
+        $user = auth()->user();
+        // Empleado
+        if ($user->isEmployee()) {
 
-        if (auth()->user()->rol_id == 1) {
-            // Asume que tienes una relación 'processes' en tu modelo Project
-            $processes = Project::find($id)->processes()->paginate(10);
-            return view('admin.projects.show')->with(compact('processes'));
-        }
-
-        if (auth()->user()->rol_id == 2) {
-            # code...
-        }
-
-        if (auth()->user()->rol_id == 3) {
-            // Obtener el proyecto que cumple con las condiciones
             $project = Project::where('id', $id)
-                ->where('user_id', $userId)
                 ->where('status', true)
                 ->firstOrFail();
 
-            // Obtener los procesos asociados con el proyecto
-            $processes = $project->processes()->paginate(10);
-            return view('employee.projects.show')->with(compact('project', 'processes'));
+            $processes = $project->processes()
+                ->where('status', true)
+                ->paginate(10);
+
+            return view('employee.activities.index')->with(compact('project', 'processes'));
         }
     }
 

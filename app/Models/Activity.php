@@ -25,10 +25,10 @@ class Activity extends Model
         return $this->belongsTo(TaskStatus::class);
     }
 
-    public function user()
+    public function employee()
     {
         //$Activity->$user
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Employee::class);
     }
 
     public function trackings()
