@@ -42,19 +42,29 @@ class ClientController extends Controller
     {
         //Validar
         $messages = [
-            'name.required' => 'Es necesario ingresar el nombre',
-            'name.min' => 'El nombre debe tener un mínimo de 3 caracteres',
-            'work_place.required' => 'Es necesario ingresar el lugar',
-            'work_place.min' => 'El lugar debe tener un mínimo de 3 caracteres',
+            'name.required' => 'Es necesario ingresar los nombres',
+            'name.min' => 'Los nombres debe tener un mínimo de 3 caracteres',
+            'lastname.required' => 'Es necesario ingresar los apellidos',
+            'lastname.min' => 'Los apellidos debe tener un mínimo de 3 caracteres',
+            'phone.required' => 'Es necesario ingresar un número de teléfono',
+            'phone.min' => 'Es necesario ingresar un número de teléfono',
+            'phone.numeric' => 'Es necesario ingresar un número de teléfono',
+            'email.required' => 'Es necesario ingresar un correo no duplicado',
+            'email.email' => 'Es necesario ingresar un correo válido',
+            'password.required' => 'Es necesario ingresar una contraseña',
+            'password.email' => 'La contraseña debe tener un mínimo de 8 caracteres',
+            'work_place.required' => 'Es necesario ingresar el lugar de trabajo',
+            'work_place.min' => 'El lugar de trabajo debe tener un mínimo de 3 caracteres',
         ];
         $rules = [
             'name' => 'required|min:3',
             'lastname' => 'required|min:3',
-            'phone' => 'required|min:10',
-            'email' => 'required|',
+            'phone' => 'required|numeric|min:10',
+            'email' => 'required|email',
             'password' => 'required|min:8',
             'work_place' => 'required|min:3',
         ];
+        $this->validate($request, $rules, $messages);
         // Primero, crea un nuevo usuario.
         $user = new User();
         $user->name = $request->input('name');
