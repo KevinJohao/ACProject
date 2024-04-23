@@ -59,7 +59,7 @@
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
                                 <label class="control-label">Contraseña</label>
-                                <input type="text" class="form-control" name="password" value="{{ old('password') }}">
+                                <input type="password" class="form-control" name="password" value="{{ old('password') }}">
                             </div>
                         </div>
                     </div>

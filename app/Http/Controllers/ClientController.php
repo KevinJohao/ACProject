@@ -49,6 +49,10 @@ class ClientController extends Controller
         ];
         $rules = [
             'name' => 'required|min:3',
+            'lastname' => 'required|min:3',
+            'phone' => 'required|min:10',
+            'email' => 'required|',
+            'password' => 'required|min:8',
             'work_place' => 'required|min:3',
         ];
         // Primero, crea un nuevo usuario.
