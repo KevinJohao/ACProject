@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Process;
 use App\Models\Project;
 use App\Models\TaskStatus;
+use App\Models\TypeProcess;
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
 
@@ -114,25 +115,6 @@ class ProcessController extends Controller
         }
     }
 
-    public function showProcesses(string $id)
-    {
-        $userId = auth()->id();
-        // Asume que tienes una relación 'typeProcess' en tu modelo Process
-        if (auth()->user()->rol_id == 1) {
-            $processes = Project::find($id)->processes()->paginate(10);
-            return view('admin.processes.show')->with(compact('processes'));
-        }
-
-        if (auth()->user()->rol_id == 3) {
-            $process = Process::where('id', $id)
-                ->where('status', true)
-                ->firstOrFail();
-            //Obtener las actividades asociados al trámite
-            $activities = $process->activities()->paginate(10);
-            return view('employee.activities.index')->with(compact('process', 'activities'));
-        }
-    }
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -141,7 +123,8 @@ class ProcessController extends Controller
         //
         $process = Process::find($id);
         $task_statuses = TaskStatus::all();
-        return view('admin.processes.edit')->with(compact('process', 'task_statuses'));
+        $type_processes = TypeProcess::all();
+        return view('admin.processes.edit')->with(compact('process', 'task_statuses', 'type_processes'));
     }
 
     /**

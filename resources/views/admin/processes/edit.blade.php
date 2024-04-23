@@ -22,15 +22,21 @@
                         </ul>
                     </div>
                 @endif
-                <form method="post" action="{{ url('/admin/processes/' . $process->id . '/edit') }}">
+                <form method="POST" action="{{ url('/admin/processes/' . $process->id . '/edit') }}">
                     @method('PUT')
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
                                 <label class="control-label">Tipo de trámite</label>
-                                <input type="text" class="form-control" name="type_process_id"
-                                    value="{{ old('vsm', $process->typeProcess->name) }}">
+                                <select class="form-control" name="type_process_id">
+                                    @foreach ($type_processes as $type_process)
+                                        <option value="{{ $type_process->id }}"
+                                            @if ($type_process->id == $process->typeProcess->id) selected @endif>
+                                            {{ $type_process->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="col-sm-6">

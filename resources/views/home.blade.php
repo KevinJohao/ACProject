@@ -52,12 +52,30 @@
                                     Documentos
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ url('/admin/docs') }}" role="tab">
+                                    <i class="material-icons">task</i>
+                                    Actividades
+                                </a>
+                            </li>
                         @endif
                         @if (auth()->user()->rol_id == 3)
                             <li>
                                 <a href="{{ url('/empleado/projects') }}" role="tab">
                                     <i class="material-icons">handyman</i>
                                     Proyectos
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/admin/docs') }}" role="tab">
+                                    <i class="material-icons">task</i>
+                                    Actividades
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/admin/docs') }}" role="tab">
+                                    <i class="material-icons">timeline</i>
+                                    Seguimiento
                                 </a>
                             </li>
                         @endif
