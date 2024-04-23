@@ -30,7 +30,9 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all();
+        //Formulario de registro
+        return view('admin.clients.create')->with(compact('users'));;
     }
 
     /**
@@ -38,7 +40,35 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Validar
+        $messages = [
+            'name.required' => 'Es necesario ingresar el nombre',
+            'name.min' => 'El nombre debe tener un mínimo de 3 caracteres',
+            'work_place.required' => 'Es necesario ingresar el lugar',
+            'work_place.min' => 'El lugar debe tener un mínimo de 3 caracteres',
+        ];
+        $rules = [
+            'name' => 'required|min:3',
+            'work_place' => 'required|min:3',
+        ];
+        // Primero, crea un nuevo usuario.
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->lastname = $request->input('lastname');
+        $user->phone = $request->input('phone');
+        $user->email = $request->input('email');
+        $user->password = $request->input('password');
+        $user->rol_id = 2; // Rol predeterminado
+        $user->save();
+
+        // Luego, crea un nuevo cliente con el mismo ID que el usuario.
+        $client = new Client();
+        $client->id = $user->id; // Asegúrate de que 'id' es fillable en Client.
+        $client->user_id = $user->id; // Asigna el ID del usuario a 'user_id'.
+        $client->work_place = $request->input('work_place');
+        $client->save(); //Insert
+
+        return redirect('/admin/clients');
     }
 
     /**

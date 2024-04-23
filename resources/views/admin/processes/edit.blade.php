@@ -22,8 +22,8 @@
                         </ul>
                     </div>
                 @endif
-                <form method="POST" action="{{ url('/admin/processes/' . $process->id . '/edit') }}">
-                    @method('PUT')
+                <form method="post" action="{{ url('/admin/processes/' . $process->id . '/edit') }}">
+                    @method('put')
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-sm-6">

@@ -17,7 +17,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['check.rol:1'])->prefix('admin')->group(function () {
         //Projects
         Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index']); //listado
-        Route::get('/processes/{id}/show', [App\Http\Controllers\ProcessController::class, 'index']); //show
+        Route::get('/processes/{id}/show', [App\Http\Controllers\ProcessController::class, 'index'])->name('admin.processes.show'); //show
         Route::get('/projects/create', [App\Http\Controllers\ProjectController::class, 'create']); //formulario
         Route::post('/projects', [App\Http\Controllers\ProjectController::class, 'store']); //registrar
         Route::get('/projects/{id}/edit', [App\Http\Controllers\ProjectController::class, 'edit']); //form de edicion
@@ -31,6 +31,8 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/processes/{id}', [App\Http\Controllers\ProcessController::class, 'destroy']); //form eliminar
         //Clients
         Route::get('/clients', [App\Http\Controllers\ClientController::class, 'index']); //listado
+        Route::get('clients/create', [App\Http\Controllers\ClientController::class, 'create']);
+        Route::post('/clients', [App\Http\Controllers\ClientController::class, 'store']);
         //Employees
         Route::get('/employees', [App\Http\Controllers\EmployeeController::class, 'index']); //listado
 

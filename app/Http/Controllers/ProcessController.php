@@ -147,7 +147,6 @@ class ProcessController extends Controller
             'next_review' => 'required',
             'process_value' => 'required|numeric|min:0'
         ];
-
         $this->validate($request, $rules, $messages);
         $process = Process::find($id);
         $process->type_process_id = $request->input('type_process_id');
@@ -157,7 +156,8 @@ class ProcessController extends Controller
         $process->task_status_id = $request->input('task_status_id');
         $process->save();
 
-        return redirect('/admin/processes');
+        return redirect('/admin/processes/' . $process->project->id . '/show');
+        //return redirect()->route('admin.processes.show', ['id' => $id]);
     }
 
     /**
