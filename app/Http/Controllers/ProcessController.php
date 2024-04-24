@@ -93,18 +93,20 @@ class ProcessController extends Controller
         // Obtener el ID del usuario logeado
         /** @var \App\Models\User $user **/
         $user = auth()->user();
-        // Empleado
+
         if ($user->isEmployee()) {
 
-            $project = Project::where('id', $id)
-                ->where('status', true)
-                ->firstOrFail();
+            $process = Process::where('id', $id)
+                                ->where('status', true)
+                                ->firstOrFail();
+            
+            //Obtener las actividades asociados al trámite
+            $activities = $process->activities()
+                                    ->where('process_id', $id)
+                                    ->where('status', true)
+                                    ->paginate(10);
 
-            $processes = $project->processes()
-                ->where('status', true)
-                ->paginate(10);
-
-            return view('employee.activities.index')->with(compact('project', 'processes'));
+            return view('employee.activities.show')->with(compact('process','activities'));
         }
     }
 
