@@ -25,7 +25,7 @@
             </ul>
         </nav>
         <div class="copyright pull-right">
-            &copy; 2017, made with <i class="fa fa-heart heart"></i> by Creative Tim
+            &copy; 2024, made with <i class="fa fa-heart heart"></i> by Creative Tim
         </div>
     </div>
 </footer>

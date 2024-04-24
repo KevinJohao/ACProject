@@ -13,48 +13,50 @@
         <div class="container">
             <div class="section text-center">
 
-                    <h2 class="title">Información del trámite</h2>
+                    <h2 class="title">Actividades</h2>
 
-                <div class="team">
-                    <div class="row">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">#</th>
-                                    <th>Proyecto</th>
-                                    <th>Trámite</th>
-                                    <th>N° Actividades</th>
-                                    <th class="col-xs-2 text-center">Estado</th>
-                                    <th class="text-center">Opciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($activities as $activity)
+                    <div class="team">
+                        <div class="row">
+                            <table class="table">
+                                <thead>
                                     <tr>
-                                        <td class="text-center">{{ $activity->id }}</td>
-                                        <td class="text-left">{{ $activity->typeActivity->name }}</td>
-                                        <td class="text-left">{{ $activity->typeActivity->name }}</td>
-                                        <td class="text-center">{{ $activity->employee->user->name}}</td>
-                                        <td class="text-center">{{ $activity->taskStatus->name }}</td>
-                                        <td class="td-actions text-right">
-                                            <form method="post" action="{{ url('/employee/processes/' . $activity->id) }}">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
-
-                                                <a href="{{ url('/admin/processes/' . $activity->id . '/show') }}"
-                                                    type="button" rel="tooltip" title="Ver trámite"
-                                                    class="btn btn-info btn-simple btn-xs">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                            </form>
-                                        </td>
+                                        <th>Proyecto</th>
+                                        <th>Trámite</th>
+                                        <th>N° Actividades</th>
+                                        <th class="col-xs-2 text-center">Estado Trámite</th>
+                                        <th class="text-center">Opciones</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        {{ $activities->links() }}
+                                </thead>
+                                <tbody>
+                                    @foreach ($projects as $project)
+                                        @foreach ($project->processes as $process)
+                                            <tr>
+                                                <td class="text-left">{{ $project->name }}</td>
+                                                <td class="text-left">{{ $process->TypeProcess->name }}</td>
+                                                <td class="text-center">{{ $process->activities->count() }}</td>
+                                                <td class="text-center">{{$process->TaskStatus->name}}</td>
+                                                <td class="td-actions text-right">
+                                                    <!-- Aquí puedes agregar tus opciones -->
+                                                    <form method="post" action="{{ url('/employee/processes/' . $process->id) }}">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('DELETE') }}
+                    
+                                                        <a href="{{ url('/admin/processes/' . $process->id . '/show') }}"
+                                                            type="button" rel="tooltip" title="Ver trámite"
+                                                            class="btn btn-info btn-simple btn-xs">
+                                                            <i class="fa fa-eye"></i>
+                                                        </a>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            {{ $projects->links() }}
+                        </div>
                     </div>
-                </div>
+                    
 
             </div>
         </div>

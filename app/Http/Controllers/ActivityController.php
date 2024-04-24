@@ -11,8 +11,25 @@ class ActivityController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(string $id)
+    public function index()
     {
+        // Obtener el ID del usuario logeado
+        /** @var \App\Models\User $user **/
+        $user = auth()->user();
+
+        if ($user->isEmployee()) {
+            $projects = $user->employee->projects()->with(['processes.activities' => function ($query) {
+                // Filtrar actividades con estado verdadero y con estado de tarea igual a 1
+                $query->where('status', true)
+                      ->where('task_status_id', 1);
+            }, 'processes' => function($query){
+                // Filtrar trámites con estado verdadero y con estado de tarea igual a 1
+                $query->where('status', true)
+                      ->where('task_status_id', 1);
+            }])->paginate(10);
+    
+            return view('employee.activities.index')->with(compact('projects'));
+        }
 
     }
 

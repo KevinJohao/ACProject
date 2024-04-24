@@ -67,7 +67,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ url('/admin/docs') }}" role="tab">
+                                <a href="{{ url('/empleado/activities') }}" role="tab">
                                     <i class="material-icons">task</i>
                                     Actividades
                                 </a>
