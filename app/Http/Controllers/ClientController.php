@@ -32,7 +32,7 @@ class ClientController extends Controller
     {
         $users = User::all();
         //Formulario de registro
-        return view('admin.clients.create')->with(compact('users'));;
+        return view('admin.clients.create')->with(compact('users'));
     }
 
     /**

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Listado de proyectos')
+@section('title', 'Listado de empleados')
 
 @section('body-class', 'product -page')
 
@@ -12,7 +12,7 @@
     <div class="main main-raised">
         <div class="container">
             <div class="section">
-                <h2 class="title text-center">Crear nuevo proyecto</h2>
+                <h2 class="title text-center">Crear nuevo empleado</h2>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -22,62 +22,45 @@
                         </ul>
                     </div>
                 @endif
-                <form method="post" action="{{ url('/admin/projects') }}">
+                <form method="post" action="{{ url('/admin/employees') }}">
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
-                                <label class="control-label">Nombre del proyecto</label>
+                                <label class="control-label">Nombres del empleado</label>
                                 <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
-                                <select class="form-control" name="client">
-                                    <option value="">Selecciona un cliente</option> <!-- Opción vacía -->
-                                    @foreach ($users as $user)
-                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-
-                        <div class="col-sm-6">
-                            <div class="form-group label-floating">
-                                <label class="control-label">Lugar</label>
-                                <input type="text" class="form-control" name="place" value="{{ old('place') }}">
+                                <label class="control-label">Apellidos del empleado</label>
+                                <input type="text" class="form-control" name="lastname" value="{{ old('lastname') }}">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
-                                <label>Fecha de inicio</label>
-                                <input type="date" class="form-control" name="start_date" value="{{ old('start_date') }}"
-                                    onfocus="(this.type='date')" onblur="(this.type='text')">
+                                <label class="control-label">Teléfono</label>
+                                <input type="text" class="form-control" name="phone" value="{{ old('phone') }}">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
-                                <label>Fecha de entrega</label>
-                                <input type="date" class="form-control" name="due_date" value="{{ old('due_date') }}"
-                                    onfocus="(this.type='date')" onblur="(this.type='text')">
+                                <label class="control-label">Correo electrónico</label>
+                                <input type="text" class="form-control" name="email" value="{{ old('email') }}">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
-                                <label class="control-label">Valor total</label>
-                                <input type="number" class="form-control" name="total_value"
-                                    value="{{ old('total_value') }}">
+                                <label class="control-label">Contraseña</label>
+                                <input type="password" class="form-control" name="password" value="{{ old('password') }}">
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary">Registrar proyecto</button>
-                    <a href="{{ url('/admin/projects') }}" class="btn btn-default">Cancelar</a>
+                    <button class="btn btn-primary">Registrar empleado</button>
+                    <a href="{{ url('/admin/employees') }}" class="btn btn-default">Cancelar</a>
                 </form>
             </div>
         </div>
-
     </div>
-
     @include('includes.footer')
 @endsection

@@ -90,7 +90,9 @@ class ProjectController extends Controller
         $project->start_date = $request->input('start_date');
         $project->due_date = $request->input('due_date');
         $project->total_value = $request->input('total_value');
-        // $project->status = $request->input('status');
+        $project->employee_id = $request->input('employee_id');
+        $project->client_id = $request->input('client_id');
+        $project->task_status_id = $request->input('task_status_id');
         $project->save(); //Insert
 
 

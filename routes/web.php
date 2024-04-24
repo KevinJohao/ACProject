@@ -24,6 +24,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/projects/{id}/edit', [App\Http\Controllers\ProjectController::class, 'update']); //actualizar
         Route::delete('/projects/{id}', [App\Http\Controllers\ProjectController::class, 'destroy']); //form eliminar
         //Processes
+        Route::get('/processes', [App\Http\Controllers\ProcessController::class, 'indexProcesses']); //listado
         Route::get('/processes/create', [App\Http\Controllers\ProcessController::class, 'create']); //formulario
         Route::post('/processes', [App\Http\Controllers\ProcessController::class, 'store']); //registrar
         Route::get('/processes/{id}/edit', [App\Http\Controllers\ProcessController::class, 'edit']); //form de edicion
@@ -31,11 +32,12 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/processes/{id}', [App\Http\Controllers\ProcessController::class, 'destroy']); //form eliminar
         //Clients
         Route::get('/clients', [App\Http\Controllers\ClientController::class, 'index']); //listado
-        Route::get('clients/create', [App\Http\Controllers\ClientController::class, 'create']);
-        Route::post('/clients', [App\Http\Controllers\ClientController::class, 'store']);
+        Route::get('clients/create', [App\Http\Controllers\ClientController::class, 'create']); //formulario
+        Route::post('/clients', [App\Http\Controllers\ClientController::class, 'store']); //registrar
         //Employees
         Route::get('/employees', [App\Http\Controllers\EmployeeController::class, 'index']); //listado
-
+        Route::get('employees/create', [App\Http\Controllers\EmployeeController::class, 'create']); //formulario
+        Route::post('/employees', [App\Http\Controllers\EmployeeController::class, 'store']); //registrar
     });
 
     // ROL: EMPLEADO

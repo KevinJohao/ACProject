@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -29,7 +30,8 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all();
+        return view('admin.employees.create')->with(compact('users'));
     }
 
     /**
@@ -37,7 +39,45 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Validar
+        $messages = [
+            'name.required' => 'Es necesario ingresar los nombres',
+            'name.min' => 'Los nombres debe tener un mínimo de 3 caracteres',
+            'lastname.required' => 'Es necesario ingresar los apellidos',
+            'lastname.min' => 'Los apellidos debe tener un mínimo de 3 caracteres',
+            'phone.required' => 'Es necesario ingresar un número de teléfono',
+            'phone.min' => 'Es necesario ingresar un número de teléfono',
+            'phone.numeric' => 'Es necesario ingresar un número de teléfono',
+            'email.required' => 'Es necesario ingresar un correo no duplicado',
+            'email.email' => 'Es necesario ingresar un correo válido',
+            'password.required' => 'Es necesario ingresar una contraseña',
+            'password.email' => 'La contraseña debe tener un mínimo de 8 caracteres'
+        ];
+        $rules = [
+            'name' => 'required|min:3',
+            'lastname' => 'required|min:3',
+            'phone' => 'required|numeric|min:10',
+            'email' => 'required|email',
+            'password' => 'required|min:8'
+        ];
+        $this->validate($request, $rules, $messages);
+        // Primero, crea un nuevo usuario.
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->lastname = $request->input('lastname');
+        $user->phone = $request->input('phone');
+        $user->email = $request->input('email');
+        $user->password = $request->input('password');
+        $user->rol_id = 3; // Rol predeterminado
+        $user->save();
+
+        // Luego, crea un nuevo cliente con el mismo ID que el usuario.
+        $employee = new Employee();
+        $employee->id = $user->id; // Asegúrate de que 'id' es fillable en employee.
+        $employee->user_id = $user->id; // Asigna el ID del usuario a 'user_id'.
+        $employee->save(); //Insert
+
+        return redirect('/admin/employees');
     }
 
     /**

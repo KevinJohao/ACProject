@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     use HasFactory;
+    protected $fillable = ['id', /* otros campos que quieras hacer fillable */];
+
     public function user()
     {
         return $this->belongsTo(User::class);

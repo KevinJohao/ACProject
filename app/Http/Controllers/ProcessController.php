@@ -44,6 +44,20 @@ class ProcessController extends Controller
         }
     }
 
+    public function indexProcesses()
+    {
+        // Obtener el ID del usuario logeado
+        $userId = auth()->id();
+
+        // Direccionar al index de cada tipo de usuario
+        if (auth()->user()->rol_id == 1) {
+            $type_processes = TypeProcess::where('status', true)
+                ->orderBy('created_at', 'desc')->paginate(10);
+
+            return view('admin.processes.index')->with(compact('type_processes'));
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      */
