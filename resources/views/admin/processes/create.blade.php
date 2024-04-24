@@ -22,41 +22,39 @@
                         </ul>
                     </div>
                 @endif
+                <style>
+                    .form-group {
+                        height: 100px;
+                        /* Ajusta este valor según tus necesidades */
+                    }
+
+                    .form-group input,
+                    .form-group textarea {
+                        height: 100%;
+                        /* Esto hará que el input y el textarea llenen la altura de su contenedor .form-group */
+                    }
+                </style>
+
                 <form method="post" action="{{ url('/admin/processes') }}">
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
-                                <label class="control-label">VSM</label>
-                                <input type="text" class="form-control" name="vsm" value="{{ old('vsm') }}">
+                                <label class="control-label">Nombre</label>
+                                <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
-                                <label class="control-label">Próxima revisión</label>
-                                <input type="date" class="form-control" name="next_review"
-                                    value="{{ old('next_review') }}" onfocus="(this.type='date')"
-                                    onblur="(this.type='text')">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group label-floating">
-                                <label class="control-label">Valor del trámite</label>
-                                <input type="number" step="0.01" class="form-control" name="process_value"
-                                    value="{{ old('process_value') }}">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group label-floating">
-                                <label class="control-label">Estado</label>
-                                <input type="text" class="form-control" name="task_status"
-                                    value="{{ old('task_status') }}">
+                                <label class="control-label">Descripción</label>
+                                <textarea class="form-control" name="description" rows="4">{{ old('description') }}</textarea>
                             </div>
                         </div>
                     </div>
                     <button class="btn btn-primary">Registrar trámite</button>
-                    <a href="{{ url('/admin/projects/') }}" class="btn btn-default">Cancelar</a>
+                    <a href="{{ url('/admin/processes/') }}" class="btn btn-default">Cancelar</a>
                 </form>
+
             </div>
         </div>
 

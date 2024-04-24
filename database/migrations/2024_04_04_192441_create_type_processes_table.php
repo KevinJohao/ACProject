@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('type_processes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->string('description', 500);
             $table->boolean('status')->default(true);
-            
+
             $table->timestamps();
         });
     }

@@ -64,8 +64,8 @@ class ProcessController extends Controller
     public function create()
     {
         //Formulario de registro
-        $processes = Process::all();
-        return view('admin.processes.create')->with(compact('processes'));
+        $type_processes = Process::all();
+        return view('admin.processes.create')->with(compact('type_processes'));
     }
 
     /**
@@ -75,29 +75,21 @@ class ProcessController extends Controller
     {
         //Validar
         $messages = [
-            'vsm.required' => 'Es necesario ingresar el vsm',
-            'vsm.min' => 'El vsm debe tener un mínimo de 3 caracteres',
-            'next_review.required' => 'Es necesario ingresar una fecha para la próxima revisión',
-            'process_value.required' => 'Es necesario ingresar un valor',
-            'process_value.numeric' => 'El valor debe ser mayor numerico',
-            'process_value.min' => 'El valor debe ser mayor a 0 ',
+            'name.required' => 'Es necesario ingresar el nombre',
+            'name.min' => 'El nombre debe tener un mínimo de 3 caracteres',
+            'description.required' => 'Es necesario ingresar una descripción',
+            'description.min' => 'La descripción debe ser más extensa'
         ];
         $rules = [
-            'vsm' => 'required|min:3',
-            //'next_review' => ['required, new AfterOneWeek'],
-            'next_review' => 'required',
-            'process_value' => 'required|numeric|min:0'
+            'name' => 'required|min:3',
+            'description' => 'required|min:10'
         ];
 
         $this->validate($request, $rules, $messages);
-        $process = new Process();
-        $process->vsm = $request->input('vsm');
-        $process->next_review = $request->input('next_review');
-        $process->process_value = $request->input('process_value');
-        $process->project_id = $request->input('project_id');
-        $process->type_process_id = $request->input('type_process_id');
-        $process->task_status_id = $request->input('task_status_id');
-        $process->save();
+        $type_process = new TypeProcess();
+        $type_process->name = $request->input('name');
+        $type_process->description = $request->input('description');
+        $type_process->save();
 
         return redirect('/admin/processes');
     }
@@ -111,16 +103,16 @@ class ProcessController extends Controller
         if ($user->isEmployee()) {
 
             $process = Process::where('id', $id)
-                                ->where('status', true)
-                                ->firstOrFail();
-            
+                ->where('status', true)
+                ->firstOrFail();
+
             //Obtener las actividades asociados al trámite
             $activities = $process->activities()
-                                    ->where('process_id', $id)
-                                    ->where('status', true)
-                                    ->paginate(10);
+                ->where('process_id', $id)
+                ->where('status', true)
+                ->paginate(10);
 
-            return view('employee.activities.show')->with(compact('process','activities'));
+            return view('employee.activities.show')->with(compact('process', 'activities'));
         }
     }
 

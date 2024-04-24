@@ -14,11 +14,11 @@
                 <h2 class="title">Listado de trámites</h2>
                 <div class="team">
                     <div class="row">
-                        <a href="{{ url('/admin/processes/create') }}" class="btn btn-primary btn-round">Nuevo proyecto</a>
+                        <a href="{{ url('/admin/processes/create') }}" class="btn btn-primary btn-round">Nuevo trámite</a>
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Nombre del trámite</th>
+                                    <th class="col-xs-2 text-center">Nombre del trámite</th>
                                     <th>Descripción</th>
                                     <th class="text-center">Opciones</th>
                                 </tr>
