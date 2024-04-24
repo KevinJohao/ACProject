@@ -19,7 +19,7 @@
                             <thead>
                                 <tr>
                                     <th class="col-xs-2 text-center">Nombre del trámite</th>
-                                    <th>Descripción</th>
+                                    <th class="col-xs-8 text-center">Descripción</th>
                                     <th class="text-center">Opciones</th>
                                 </tr>
                             </thead>
