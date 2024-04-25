@@ -22,8 +22,8 @@
                                     <tr>
                                         <th>Proyecto</th>
                                         <th>Trámite</th>
-                                        <th>N° Actividades</th>
-                                        <th class="col-xs-2 text-center">Estado Trámite</th>
+                                        <th class="text-center">N° Actividades Pendientes</th>
+                                        <th class="text-center">Estado Trámite</th>
                                         <th class="text-center">Opciones</th>
                                     </tr>
                                 </thead>
@@ -35,13 +35,13 @@
                                                 <td class="text-left">{{ $process->TypeProcess->name }}</td>
                                                 <td class="text-center">{{ $process->activities->count() }}</td>
                                                 <td class="text-center">{{$process->TaskStatus->name}}</td>
-                                                <td class="td-actions text-right">
+                                                <td class="td-actions text-center">
                                                     <!-- Aquí puedes agregar tus opciones -->
                                                     <form method="post" action="{{ url('/employee/processes/' . $process->id) }}">
                                                         {{ csrf_field() }}
                                                         {{ method_field('DELETE') }}
                     
-                                                        <a href="{{ url('/admin/processes/' . $process->id . '/show') }}"
+                                                        <a href="{{ url('/empleado/processes/' . $process->id . '/show') }}"
                                                             type="button" rel="tooltip" title="Ver trámite"
                                                             class="btn btn-info btn-simple btn-xs">
                                                             <i class="fa fa-eye"></i>
