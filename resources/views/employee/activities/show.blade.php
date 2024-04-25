@@ -13,8 +13,25 @@
         <div class="container">
             <div class="section text-center">
 
-                    <h2 class="title">Información del trámite "{{ $process->TypeProcess->name}}"</h2>
+                    <h4 class="title text-left">ACTIVIDADES DEL TRÁMITE</h4>
 
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-6 text-left">
+                                    <h6 class="card-title">Proyecto: {{$process->project->name}}</h6>
+                                    <p class="card-text mb-2">Cliente: {{$process->project->client->user->name}}</p>
+                                    <p class="card-text">Encargado: {{$process->project->employee->user->name}}</p>
+                                </div>
+                                <div class="col-lg-6 text-left">
+                                    <h6 class="card-title">Trámite: {{$process->typeProcess->name}}</h6>
+                                    <p class="card-text">Próxima revisión: {{$process->next_review}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
                 <div class="team">
                     <div class="row">
                         <table class="table">
@@ -22,7 +39,7 @@
                                 <tr>
                                     <th class="text-center">#</th>
                                     <th>Actividad</th>
-                                    <th>Encargado</th>
+                                    <th class="text-left">Encargado</th>
                                     <th class="col-xs-2 text-center">Estado</th>
                                     <th class="text-center">Opciones</th>
                                 </tr>
@@ -32,9 +49,9 @@
                                     <tr>
                                         <td class="text-center">{{ $activity->id }}</td>
                                         <td class="text-left">{{ $activity->typeActivity->name }}</td>
-                                        <td class="text-center">{{ $activity->employee->user->name }}</td>
+                                        <td class="text-left">{{ $activity->employee->user->name }}</td>
                                         <td class="text-center">{{ $activity->taskStatus->name }}</td>
-                                        <td class="td-actions text-right">
+                                        <td class="td-actions text-center">
                                             <form method="post" action="{{ url('/employee/processes/' . $activity->id) }}">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
