@@ -38,6 +38,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/employees', [App\Http\Controllers\EmployeeController::class, 'index']); //listado
         Route::get('employees/create', [App\Http\Controllers\EmployeeController::class, 'create']); //formulario
         Route::post('/employees', [App\Http\Controllers\EmployeeController::class, 'store']); //registrar
+        //Docs
+        Route::get('/docs', [\App\Http\Controllers\DocsController::class, 'index']); //listado
+        Route::get('docs/create', [App\Http\Controllers\DocsController::class, 'create']); //formulario
+        Route::post('/docs', [App\Http\Controllers\DocsController::class, 'store']); //registrar
     });
 
     // ROL: EMPLEADO
