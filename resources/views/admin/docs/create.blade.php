@@ -40,6 +40,16 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
+                                <select class="form-control" name="client">
+                                    <option value="">Selecciona un trámite</option> <!-- Opción vacía -->
+                                    @foreach ($type_processes as $type_process)
+                                        <option value="{{ $type_process->id }}">{{ $type_process->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
                                 <label class="control-label">Nombre</label>
                                 <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                             </div>
@@ -48,16 +58,6 @@
                             <div class="form-group label-floating">
                                 <label class="control-label">Descripción</label>
                                 <textarea class="form-control" name="description" rows="4">{{ old('description') }}</textarea>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group label-floating">
-                                <select class="form-control" name="client">
-                                    <option value="">Selecciona un trámite</option> <!-- Opción vacía -->
-                                    @foreach ($type_processes as $type_processes)
-                                        <option value="{{ $type_processes->id }}">{{ $type_processes->name }}</option>
-                                    @endforeach
-                                </select>
                             </div>
                         </div>
                     </div>

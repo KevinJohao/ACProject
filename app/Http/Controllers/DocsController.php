@@ -57,7 +57,8 @@ class DocsController extends Controller
         $document = new TypeDocs();
         $document->name = $request->input('name');
         $document->description = $request->input('description');
-        $document->type_processes_id = $request->input('type_processes_id');
+        $document->status = true;
+        $document->type_process_id = $request->input('type_process_id');
         $document->save();
 
         return redirect('/admin/processes');
