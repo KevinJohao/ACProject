@@ -56,7 +56,7 @@
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
 
-                                                <a href="{{ url('/admin/processes/' . $activity->id . '/show') }}"
+                                                <a href="{{ url('/empleado/activities/' . $activity->id . '/show') }}"
                                                     type="button" rel="tooltip" title="Ver trámite"
                                                     class="btn btn-info btn-simple btn-xs">
                                                     <i class="fa fa-eye"></i>

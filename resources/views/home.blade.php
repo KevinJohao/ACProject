@@ -73,7 +73,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ url('/admin/docs') }}" role="tab">
+                                <a href="{{ url('/empleado/trackings') }}" role="tab">
                                     <i class="material-icons">timeline</i>
                                     Seguimiento
                                 </a>

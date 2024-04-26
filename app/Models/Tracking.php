@@ -20,9 +20,14 @@ class Tracking extends Model
         return $this->belongsTo(TaskStatus::class);
     }
 
-    public function user()
+    public function employee()
     {
         //$tracking->$user
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Employee::class);
+    }
+
+    public function typeTracking(){
+
+        return $this->belongsTo(TypeTracking::class);
     }
 }
