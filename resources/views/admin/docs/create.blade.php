@@ -40,7 +40,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
-                                <select class="form-control" name="client">
+                                <select class="form-control" name="type_process_id">
                                     <option value="">Selecciona un trámite</option> <!-- Opción vacía -->
                                     @foreach ($type_processes as $type_process)
                                         <option value="{{ $type_process->id }}">{{ $type_process->name }}</option>

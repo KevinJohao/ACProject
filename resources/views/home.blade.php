@@ -19,66 +19,68 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                    <!-- Admin rol -->
                     <ul class="nav nav-pills nav-pills-primary" role="tablist">
                         @if (auth()->user()->rol_id == 1)
                             <li>
-                                <a href="{{ url('/admin/projects') }}" role="tab">
+                                <a href="{{ url('/admin/projects') }}" role="tab" target="_self">
                                     <i class="material-icons">handyman</i>
                                     Proyectos
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ url('/admin/clients') }}" role="tab">
+                                <a href="{{ url('/admin/clients') }}" role="tab" target="_self">
                                     <i class="material-icons">person</i>
                                     Clientes
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ url('/admin/employees') }}" role="tab">
+                                <a href="{{ url('/admin/employees') }}" role="tab" target="_self">
                                     <i class="material-icons">person</i>
                                     Empleados
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ url('/admin/processes') }}" role="tab">
+                                <a href="{{ url('/admin/processes') }}" role="tab" target="_self">
                                     <i class="material-icons">assignment</i>
                                     Trámites
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ url('/admin/docs') }}" role="tab">
+                                <a href="{{ url('/admin/docs') }}" role="tab" target="_self">
                                     <i class="material-icons">topic</i>
                                     Documentos
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ url('/admin/docs') }}" role="tab">
+                                <a href="{{ url('/admin/docs') }}" role="tab" target="_self">
                                     <i class="material-icons">task</i>
                                     Actividades
                                 </a>
                             </li>
                         @endif
+                        <!-- Employee rol -->
                         @if (auth()->user()->rol_id == 3)
                             <li>
-                                <a href="{{ url('/empleado/projects') }}" role="tab">
+                                <a href="{{ url('/empleado/projects') }}" role="tab" target="_self">
                                     <i class="material-icons">handyman</i>
                                     Proyectos
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ url('/empleado/activities') }}" role="tab">
+                                <a href="{{ url('/empleado/activities') }}" role="tab" target="_self">
                                     <i class="material-icons">task</i>
                                     Actividades
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ url('/empleado/trackings') }}" role="tab">
+                                <a href="{{ url('/empleado/trackings') }}" role="tab" target="_self">
                                     <i class="material-icons">timeline</i>
                                     Seguimiento
                                 </a>
                             </li>
                         @endif
+                        <!-- Client rol -->
                         @if (auth()->user()->rol_id == 2)
                             <li>
                                 <a href="#dashboard" role="tab">

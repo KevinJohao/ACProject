@@ -44,49 +44,126 @@
                         <li><a href="{{ route('login') }}">Ingresar</a></li>
                         <li><a href="{{ route('register') }}">Registro</a></li>
                     @else
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                                aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
-
-                            <ul class="dropdown-menu" role="menu">
-                                @if (auth()->user()->rol_id == 1)
+                        <!-- Admin rol -->
+                        @if (auth()->user()->rol_id == 1)
+                            <li>
+                                <a href="{{ url('/admin/projects') }}" target="_self">
+                                    Proyectos
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/admin/clients') }}" target="_self">
+                                    Clientes
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/admin/employees') }}" target="_self">
+                                    Empleados
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/admin/processes') }}" target="_self">
+                                    Trámites
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/admin/docs') }}" target="_self">
+                                    Documentos
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_self">
+                                    Actividades
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                                    aria-expanded="false">
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="{{ url('/admin/projects') }}">Gestionar proyectos</a>
-                                    </li>
-                                @endif
-                                <li>
-                                    <a href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
-                                        Cerrar Sesión
-                                    </a>
+                                            Cerrar Sesión
+                                        </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+                        <!-- Client rol -->
+                        @if (auth()->user()->rol_id == 2)
+                            <li>
+                                <a href="#" target="_self">
+                                    Proyectos
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                                    aria-expanded="false">
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                            Cerrar Sesión
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+                        <!-- Employee rol -->
+                        @if (auth()->user()->rol_id == 3)
+                            <li>
+                                <a href="{{ url('/empleado/projects') }}" target="_self">
+                                    Proyectos
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/empleado/activities') }}" target="_self">
+                                    Actividades
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/empleado/trackings') }}" target="_self">
+                                    Seguimiento
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                                    aria-expanded="false">
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                            Cerrar Sesión
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
                     @endguest
-                    <!--
-  <a href="https://twitter.com/CreativeTim" target="_blank" class="btn btn-simple btn-white btn-just-icon">
-       <i class="fa fa-twitter"></i>
-      </a>
-  </li>
-  <li>
-  <a href="https://www.facebook.com/CreativeTim" target="_blank" class="btn btn-simple btn-white btn-just-icon">
-       <i class="fa fa-facebook-square"></i>
-      </a>
-  </li>
-     <li>
-  <a href="https://www.instagram.com/CreativeTimOfficial" target="_blank" class="btn btn-simple btn-white btn-just-icon">
-       <i class="fa fa-instagram"></i>
-      </a>
-  </li>
-                    -->
                 </ul>
             </div>
         </div>
