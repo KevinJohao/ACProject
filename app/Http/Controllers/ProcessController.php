@@ -121,7 +121,6 @@ class ProcessController extends Controller
      */
     public function edit(string $id)
     {
-        //
         $process = Process::find($id);
         $task_statuses = TaskStatus::all();
         $type_processes = TypeProcess::all();

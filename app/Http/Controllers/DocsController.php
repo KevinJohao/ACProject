@@ -78,6 +78,8 @@ class DocsController extends Controller
     public function edit(string $id)
     {
         //
+        $document = TypeDocs::find($id);
+        return view('admin.docs.edit')->with(compact('document'));
     }
 
     /**

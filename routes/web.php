@@ -42,6 +42,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/docs', [\App\Http\Controllers\DocsController::class, 'index']); //listado
         Route::get('docs/create', [App\Http\Controllers\DocsController::class, 'create']); //formulario
         Route::post('/docs', [App\Http\Controllers\DocsController::class, 'store']); //registrar
+        Route::get('/docs/{id}/edit', [App\Http\Controllers\DocsController::class, 'edit']); //form de edicion
+        Route::put('/docs/{id}/edit', [App\Http\Controllers\DocsController::class, 'update']); //actualizar
     });
 
     // ROL: EMPLEADO
@@ -50,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
         // Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index']); //dashboard
         Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index']); // listado
         Route::get('/projects/{id}/show', [App\Http\Controllers\ProcessController::class, 'index']); //show
-        
+
         // ACTIVIDADES
         Route::get('/activities', [App\Http\Controllers\ActivityController::class, 'index']);
         Route::get('/processes/{id}/show', [App\Http\Controllers\ProcessController::class, 'showActivities']);
