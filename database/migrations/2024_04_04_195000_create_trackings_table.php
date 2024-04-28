@@ -18,6 +18,10 @@ return new class extends Migration
             $table->boolean('status')->default(true);
 
             //FK
+           
+            $table->unsignedBigInteger('type_tracking_id')->unsigned()->nullable();
+            $table->foreign('type_tracking_id')->references('id')->on('type_trackings');
+        
             $table->unsignedBigInteger('activity_id')->unsigned()->nullable();
             $table->foreign('activity_id')->references('id')->on('activities');
 
@@ -28,6 +32,7 @@ return new class extends Migration
             $table->foreign('task_status_id')->references('id')->on('task_statuses');
 
             $table->timestamps();
+            
         });
     }
 

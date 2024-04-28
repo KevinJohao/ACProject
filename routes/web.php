@@ -59,5 +59,6 @@ Route::middleware(['auth'])->group(function () {
 
         // SEGUIMIENTOS
         Route::get('/trackings', [App\Http\Controllers\TrackingController::class, 'indexEmployee']);
+        Route::get('/activities/{id}/show',[App\Http\Controllers\ActivityController::class, 'showTrackingsEmployee']);
     });
 });

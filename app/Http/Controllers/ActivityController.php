@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Activity;
 use App\Models\Process;
 use Illuminate\Http\Request;
 
@@ -52,7 +53,7 @@ class ActivityController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function showTrackingsEmployee(string $id)
     {
         // Obtener el ID del usuario logeado
         /** @var \App\Models\User $user **/
@@ -60,17 +61,17 @@ class ActivityController extends Controller
 
         if ($user->isEmployee()) {
 
-            $process = Process::where('id', $id)
+            $activity = Activity::where('id', $id)
                                 ->where('status', true)
                                 ->firstOrFail();
             
             //Obtener las actividades asociados al trámite
-            $activities = $user->employee->activities()
-                                    ->where('process_id', $id)
+            $trackings = $activity->trackings()
+                                    ->where('activity_id', $id)
                                     ->where('status', true)
                                     ->paginate(10);
 
-            return view('employee.processes.show')->with(compact('process','activities'));
+            return view('employee.trackings.show')->with(compact('activity','trackings'));
         }
     }
 
