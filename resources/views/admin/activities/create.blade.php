@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Nuevo documento')
+@section('title', 'Nueva actividad')
 
 @section('body-class', 'product -page')
 
@@ -12,7 +12,7 @@
     <div class="main main-raised">
         <div class="container">
             <div class="section">
-                <h2 class="title text-center">Crear nuevo documento</h2>
+                <h2 class="title text-center">Crear nueva actividad</h2>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -22,19 +22,21 @@
                         </ul>
                     </div>
                 @endif
-                <form method="post" action="{{ url('/admin/docs') }}">
+                <style>
+                    .form-group {
+                        height: 100px;
+                        /* Ajusta este valor según tus necesidades */
+                    }
+
+                    .form-group input,
+                    .form-group textarea {
+                        height: 100%;
+                        /* Esto hará que el input y el textarea llenen la altura de su contenedor .form-group */
+                    }
+                </style>
+                <form method="post" action="{{ url('/admin/activities') }}">
                     {{ csrf_field() }}
                     <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group label-floating">
-                                <select class="form-control" name="type_process_id">
-                                    <option value="">Selecciona un trámite</option> <!-- Opción vacía -->
-                                    @foreach ($type_processes as $type_process)
-                                        <option value="{{ $type_process->id }}">{{ $type_process->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
                                 <label class="control-label">Nombre</label>
@@ -48,14 +50,11 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary">Registrar trámite</button>
-                    <a href="{{ url('/admin/docs/') }}" class="btn btn-default">Cancelar</a>
+                    <button class="btn btn-primary">Registrar actividad</button>
+                    <a href="{{ url('/admin/activities/') }}" class="btn btn-default">Cancelar</a>
                 </form>
-
             </div>
         </div>
-
     </div>
-
     @include('includes.footer')
 @endsection

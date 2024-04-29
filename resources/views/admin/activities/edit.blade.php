@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Nuevo documento')
+@section('title', 'Actividad')
 
 @section('body-class', 'product -page')
 
@@ -12,7 +12,7 @@
     <div class="main main-raised">
         <div class="container">
             <div class="section">
-                <h2 class="title text-center">Crear nuevo documento</h2>
+                <h2 class="title text-center">Editar actividad "{{ $type_activity->name }}"</h2>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -22,36 +22,28 @@
                         </ul>
                     </div>
                 @endif
-                <form method="post" action="{{ url('/admin/docs') }}">
+                <form method="post" action="{{ url('/admin/activities/' . $type_activity->id . '/edit') }}">
+                    @method('put')
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
-                                <select class="form-control" name="type_process_id">
-                                    <option value="">Selecciona un trámite</option> <!-- Opción vacía -->
-                                    @foreach ($type_processes as $type_process)
-                                        <option value="{{ $type_process->id }}">{{ $type_process->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group label-floating">
                                 <label class="control-label">Nombre</label>
-                                <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                                <input type="text" class="form-control" name="name"
+                                    value="{{ old('name', $type_activity->name) }}">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group label-floating">
                                 <label class="control-label">Descripción</label>
-                                <textarea class="form-control" name="description" rows="4">{{ old('description') }}</textarea>
+                                <input type="text" class="form-control" name="description"
+                                    value="{{ old('description', $type_activity->description) }}">
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary">Registrar trámite</button>
-                    <a href="{{ url('/admin/docs/') }}" class="btn btn-default">Cancelar</a>
+                    <button class="btn btn-primary">Guardar cambios</button>
+                    <a href="{{ url('/admin/activities/') }}" class="btn btn-default">Cancelar</a>
                 </form>
-
             </div>
         </div>
 

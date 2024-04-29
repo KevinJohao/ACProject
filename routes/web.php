@@ -44,6 +44,12 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/docs', [App\Http\Controllers\DocsController::class, 'store']); //registrar
         Route::get('/docs/{id}/edit', [App\Http\Controllers\DocsController::class, 'edit']); //form de edicion
         Route::put('/docs/{id}/edit', [App\Http\Controllers\DocsController::class, 'update']); //actualizar
+        //Activities
+        Route::get('/activities', [\App\Http\Controllers\ActivityController::class, 'index']); //listado
+        Route::get('activities/create', [App\Http\Controllers\ActivityController::class, 'create']); //formulario
+        Route::post('/activities', [App\Http\Controllers\ActivityController::class, 'store']); //registrar
+        Route::get('/activities/{id}/edit', [App\Http\Controllers\ActivityController::class, 'edit']); //form de edicion
+        Route::put('/activities/{id}/edit', [App\Http\Controllers\ActivityController::class, 'update']); //actualizar
     });
 
     // ROL: EMPLEADO
@@ -59,6 +65,6 @@ Route::middleware(['auth'])->group(function () {
 
         // SEGUIMIENTOS
         Route::get('/trackings', [App\Http\Controllers\TrackingController::class, 'indexEmployee']);
-        Route::get('/activities/{id}/show',[App\Http\Controllers\ActivityController::class, 'showTrackingsEmployee']);
+        Route::get('/activities/{id}/show', [App\Http\Controllers\ActivityController::class, 'showTrackingsEmployee']);
     });
 });

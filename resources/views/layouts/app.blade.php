@@ -72,7 +72,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#" target="_self">
+                                <a href="{{ url('/admin/activities') }}" target="_self">
                                     Actividades
                                 </a>
                             </li>
