@@ -18,8 +18,8 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th class="col-xs-2 text-center">Nombre de la actividad</th>
-                                    <th class="col-xs-8 text-center">Descripción</th>
+                                    <th class="col-xs-3 text-center">Nombre de la actividad</th>
+                                    <th class="col-xs-5 text-center">Descripción</th>
                                     <th class="text-center">Opciones</th>
                                 </tr>
                             </thead>
@@ -28,7 +28,7 @@
                                     <tr>
                                         <td class="text-left">{{ $type_activity->name }}</td>
                                         <td class="text-left">{{ $type_activity->description }}
-                                        <td class="td-actions text-right">
+                                        <td class="td-actions text-center">
                                             <form method="post"
                                                 action="{{ url('/admin/activities/' . $type_activity->id) }}">
                                                 {{ csrf_field() }}
