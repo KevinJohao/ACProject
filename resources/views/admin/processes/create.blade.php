@@ -34,7 +34,6 @@
                         /* Esto hará que el input y el textarea llenen la altura de su contenedor .form-group */
                     }
                 </style>
-
                 <form method="post" action="{{ url('/admin/processes') }}">
                     {{ csrf_field() }}
                     <div class="row">

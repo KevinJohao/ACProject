@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Process;
 use App\Models\TypeDocs;
 use App\Models\TypeProcess;
 use Illuminate\Http\Request;
@@ -11,17 +12,24 @@ class DocsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $id)
     {
         // Obtener el ID del usuario logeado
         $userId = auth()->id();
 
         // Direccionar al index de cada tipo de usuario
         if (auth()->user()->rol_id == 1) {
-            $documents = Typedocs::where('status', true)
-                ->orderBy('created_at', 'desc')->paginate(10);
+            $type_process = TypeProcess::where('id', $id)
+                ->where('status', true)
+                ->firstOrFail();
 
-            return view('admin.docs.index')->with(compact('documents'));
+            //Obtener los typeDocs asociados a typeProcess
+            $documents = $type_process->typeDocs()
+                ->where('process_id', $id)
+                ->where('status', true)
+                ->paginate(10);
+
+            return view('admin.docs.index')->with(compact('documents', 'type_process'));
         }
     }
 
@@ -61,7 +69,7 @@ class DocsController extends Controller
         $document->type_process_id = $request->input('type_process_id');
         $document->save();
 
-        return redirect('/admin/processes');
+        return redirect('/admin/docs');
     }
 
     /**
@@ -69,7 +77,22 @@ class DocsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Obtener el ID del usuario logeado
+        /** @var \App\Models\User $user **/
+        $user = auth()->user();
+
+        if ($user->isAdmin()) {
+            $type_process = TypeProcess::where('id', $id)
+                ->where('status', true)
+                ->firstOrFail();
+
+            $type_documents = $type_process->typeDocs()
+                ->where('type_process_id', $id)
+                ->where('status', true)
+                ->paginate(10);
+
+            return view('admin.type_processes.show')->with(compact('type_process', 'type_documents'));
+        }
     }
 
     /**
@@ -79,7 +102,8 @@ class DocsController extends Controller
     {
         //
         $document = TypeDocs::find($id);
-        return view('admin.docs.edit')->with(compact('document'));
+        $type_processes = TypeProcess::all();
+        return view('admin.docs.edit')->with(compact('document', 'type_processes'));
     }
 
     /**
@@ -87,7 +111,26 @@ class DocsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //Validar
+        $messages = [
+            'name.required' => 'Es necesario ingresar el nombre',
+            'name.min' => 'El nombre debe tener un mínimo de 3 caracteres',
+            'description.required' => 'Es necesario ingresar una descripción',
+            'description.min' => 'La descripción debe ser más extensa'
+        ];
+        $rules = [
+            'name' => 'required|min:3',
+            'description' => 'required|min:10'
+        ];
+
+        $this->validate($request, $rules, $messages);
+        $document = TypeDocs::find($id);
+        $document->name = $request->input('name');
+        $document->description = $request->input('description');
+        $document->status = true;
+        $document->save();
+
+        return redirect('/admin/type_processes/' . $document->typeProcess->id . '/show');
     }
 
     /**

@@ -24,12 +24,16 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/projects/{id}/edit', [App\Http\Controllers\ProjectController::class, 'update']); //actualizar
         Route::delete('/projects/{id}', [App\Http\Controllers\ProjectController::class, 'destroy']); //form eliminar
         //Processes
-        Route::get('/processes', [App\Http\Controllers\ProcessController::class, 'indexProcesses']); //listado
         Route::get('/processes/create', [App\Http\Controllers\ProcessController::class, 'create']); //formulario
         Route::post('/processes', [App\Http\Controllers\ProcessController::class, 'store']); //registrar
         Route::get('/processes/{id}/edit', [App\Http\Controllers\ProcessController::class, 'edit']); //form de edicion
         Route::put('/processes/{id}/edit', [App\Http\Controllers\ProcessController::class, 'update']); //actualizar
-        Route::delete('/processes/{id}', [App\Http\Controllers\ProcessController::class, 'destroy']); //form eliminar
+        Route::get('/processes/{id}/show', [App\Http\Controllers\DocsController::class, 'index']); //show
+        //TypeProcesses
+        Route::get('/type_processes', [App\Http\Controllers\TypeProcessController::class, 'index']); //listado
+        Route::get('/type_processes/{id}/edit', [App\Http\Controllers\TypeProcessController::class, 'edit']); //form de edicion
+        Route::put('/type_processes/{id}/edit', [App\Http\Controllers\TypeProcessController::class, 'update']); //actualizar
+        Route::get('/type_processes/{id}/show', [App\Http\Controllers\TypeProcessController::class, 'show']); //show
         //Clients
         Route::get('/clients', [App\Http\Controllers\ClientController::class, 'index']); //listado
         Route::get('clients/create', [App\Http\Controllers\ClientController::class, 'create']); //formulario
@@ -39,11 +43,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('employees/create', [App\Http\Controllers\EmployeeController::class, 'create']); //formulario
         Route::post('/employees', [App\Http\Controllers\EmployeeController::class, 'store']); //registrar
         //Docs
-        Route::get('/docs', [\App\Http\Controllers\DocsController::class, 'index']); //listado
+        Route::get('/docs/{id}/show', [\App\Http\Controllers\DocsController::class, 'index']); //listado
         Route::get('docs/create', [App\Http\Controllers\DocsController::class, 'create']); //formulario
         Route::post('/docs', [App\Http\Controllers\DocsController::class, 'store']); //registrar
         Route::get('/docs/{id}/edit', [App\Http\Controllers\DocsController::class, 'edit']); //form de edicion
-        Route::put('/docs/{id}/edit', [App\Http\Controllers\DocsController::class, 'update']); //actualizar
+        Route::put('/docs/{id}', [App\Http\Controllers\DocsController::class, 'update']); //actualizar
         //Activities
         Route::get('/activities', [\App\Http\Controllers\ActivityController::class, 'index']); //listado
         Route::get('activities/create', [App\Http\Controllers\ActivityController::class, 'create']); //formulario
