@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Listado de empleados')
+@section('title', 'Empleados')
 
 @section('body-class', 'product -page')
 
@@ -38,10 +38,6 @@
                                             <form method="post" action="{{ url('/admin/employees/' . $employee->id) }}">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
-                                                <a type="button" rel="tooltip" title="Ver empleado"
-                                                    class="btn btn-info btn-simple btn-xs">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
                                                 <a href="{{ url('/admin/employees/' . $employee->id . '/edit') }}"
                                                     type="button" rel="tooltip" title="Editar empleado"
                                                     class="btn btn-success btn-simple btn-xs">

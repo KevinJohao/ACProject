@@ -38,10 +38,17 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/clients', [App\Http\Controllers\ClientController::class, 'index']); //listado
         Route::get('clients/create', [App\Http\Controllers\ClientController::class, 'create']); //formulario
         Route::post('/clients', [App\Http\Controllers\ClientController::class, 'store']); //registrar
+        Route::get('/clients/{id}/edit', [App\Http\Controllers\ClientController::class, 'edit']); //form de edicion
+        Route::put('/clients/{id}/edit', [App\Http\Controllers\ClientController::class, 'update']); //actualizar
+        Route::delete('/clients/{id}', [App\Http\Controllers\ClientController::class, 'destroy']); //form eliminar
+
         //Employees
         Route::get('/employees', [App\Http\Controllers\EmployeeController::class, 'index']); //listado
         Route::get('employees/create', [App\Http\Controllers\EmployeeController::class, 'create']); //formulario
         Route::post('/employees', [App\Http\Controllers\EmployeeController::class, 'store']); //registrar
+        Route::get('/employees/{id}/edit', [App\Http\Controllers\EmployeeController::class, 'edit']); //form de edicion
+        Route::put('/employees/{id}/edit', [App\Http\Controllers\EmployeeController::class, 'update']); //actualizar
+        Route::delete('/employees/{id}', [App\Http\Controllers\EmployeeController::class, 'destroy']); //form eliminar
         //Docs
         Route::get('/docs/{id}/show', [\App\Http\Controllers\DocsController::class, 'index']); //listado
         Route::get('docs/create', [App\Http\Controllers\DocsController::class, 'create']); //formulario

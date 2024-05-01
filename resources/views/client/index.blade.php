@@ -41,12 +41,12 @@
                                             <form method="post" action="{{ url('/admin/clients/' . $client->id) }}">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
-                                                <a type="button" rel="tooltip" title="Ver cliento"
+                                                <a type="button" rel="tooltip" title="Ver cliente"
                                                     class="btn btn-info btn-simple btn-xs">
                                                     <i class="fa fa-info"></i>
                                                 </a>
                                                 <a href="{{ url('/admin/clients/' . $client->id . '/edit') }}"
-                                                    type="button" rel="tooltip" title="Editar cliento"
+                                                    type="button" rel="tooltip" title="Editar cliente"
                                                     class="btn btn-success btn-simple btn-xs">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
