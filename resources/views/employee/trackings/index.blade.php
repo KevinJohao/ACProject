@@ -13,7 +13,7 @@
         <div class="container">
             <div class="section text-center">
 
-                <h2 class="title">Seguimientos Pendientes</h2>
+                <h2 class="title">Seguimientos Pendientes v2</h2>
 
                 <div class="team">
                     <div class="row">
