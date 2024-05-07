@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Listado de clientes')
+@section('title', 'Empleado')
 
 @section('body-class', 'product -page')
 
@@ -11,59 +11,62 @@
 
     <div class="main main-raised">
         <div class="container">
-            <div class="section text-center">
-                <h2 class="title">Listado de clientes </h2>
-
-                <div class="team">
-                    <div class="row">
-                        <a href="{{ url('/admin/clients/create') }}" class="btn btn-primary btn-round">Nuevo cliente</a>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">#</th>
-                                    <th>Nombres</th>
-                                    <th>Apellidos</th>
-                                    <th>Teléfono</th>
-                                    <th>Correo</th>
-                                    <th class="col-md-4">Lugar de trabajo</th>
-                                    <th class="text-right">Opciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($clients as $client)
-                                    <tr>
-                                        <td class="text-center">{{ $client->user->name }}</td>
-                                        <td>{{ $client->user->lastname }}</td>
-                                        <td>{{ $client->user->phone }}</td>
-                                        <td>{{ $client->user->email }}</td>
-                                        <td class="text-right">{{ $client->work_place }}</td>
-                                        <td class="td-actions text-right">
-                                            <form method="post" action="{{ url('/admin/clients/' . $client->id) }}">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
-                                                <a type="button" rel="tooltip" title="Ver cliento"
-                                                    class="btn btn-info btn-simple btn-xs">
-                                                    <i class="fa fa-info"></i>
-                                                </a>
-                                                <a href="{{ url('/admin/clients/' . $client->id . '/edit') }}"
-                                                    type="button" rel="tooltip" title="Editar cliento"
-                                                    class="btn btn-success btn-simple btn-xs">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <button type="submit" rel="tooltip" title="Eliminar"
-                                                    class="btn btn-danger
-                                        btn-simple btn-xs">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        {{ $clients->links() }}
+            <div class="section">
+                <h2 class="title text-center">Editar empleado "{{ $employees->user->name }}"</h2>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
                     </div>
-                </div>
+                @endif
+                <form method="post" action="{{ url('/admin/employees/' . $employees->user->id . '/edit') }}">
+                    @method('put')
+                    {{ csrf_field() }}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Nombres</label>
+                                <input type="text" class="form-control" name="name"
+                                    value="{{ old('name', $employees->user->name) }}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Apellidos</label>
+                                <input type="text" class="form-control" name="lastname"
+                                    value="{{ old('lastname', $employees->user->lastname) }}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Teléfono</label>
+                                <input type="text" class="form-control" name="phone"
+                                    value="{{ old('phone', $employees->user->phone) }}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Correo</label>
+                                <input type="text" class="form-control" name="email"
+                                    value="{{ old('email', $employees->user->email) }}">
+                            </div>
+                        </div>
+                        <!--
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group label-floating">
+                                                            <label class="control-label">Contraseña</label>
+                                                            <input type="text" class="form-control" name="password"
+                                                                value="{{ old('password', $employees->user->password) }}">
+                                                        </div>
+                                                    </div>
+                                                    -->
+                    </div>
+                    <button class="btn btn-primary">Guardar cambios</button>
+                    <a href="{{ url('/admin/employees/') }}" class="btn btn-default">Cancelar</a>
+                </form>
             </div>
         </div>
 

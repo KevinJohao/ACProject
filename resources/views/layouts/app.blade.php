@@ -62,13 +62,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ url('/admin/processes') }}" target="_self">
+                                <a href="{{ url('/admin/type_processes') }}" target="_self">
                                     Trámites
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/admin/docs') }}" target="_self">
-                                    Documentos
                                 </a>
                             </li>
                             <li>

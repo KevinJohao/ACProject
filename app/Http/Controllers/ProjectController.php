@@ -28,10 +28,6 @@ class ProjectController extends Controller
                 $projects = Project::where('status', true)
                     ->orderBy('created_at', 'desc')->paginate(10);
 
-                if (view()->exists('admin.projects.index')) {
-                    return view('admin.projects.index')->with(compact('projects'));
-                }
-
                 return view('admin.projects.index')->with(compact('projects'));
             }
 

@@ -93,7 +93,8 @@ class EmployeeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $employees = Employee::find($id);
+        return view('admin.employees.edit')->with(compact('employees'));
     }
 
     /**
@@ -101,7 +102,38 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //Validar
+        $messages = [
+            'name.required' => 'Es necesario ingresar los nombres',
+            'name.min' => 'Los nombres debe tener un mínimo de 3 caracteres',
+            'lastname.required' => 'Es necesario ingresar los apellidos',
+            'lastname.min' => 'Los apellidos debe tener un mínimo de 3 caracteres',
+            'phone.required' => 'Es necesario ingresar un número de teléfono',
+            'phone.min' => 'Es necesario ingresar un número de teléfono',
+            'phone.numeric' => 'Es necesario ingresar un número de teléfono',
+            'email.required' => 'Es necesario ingresar un correo no duplicado',
+            'email.email' => 'Es necesario ingresar un correo válido',
+            'password.required' => 'Es necesario ingresar una contraseña',
+            'password.email' => 'La contraseña debe tener un mínimo de 8 caracteres'
+        ];
+        $rules = [
+            'name' => 'required|min:3',
+            'lastname' => 'required|min:3',
+            'phone' => 'required|numeric|min:10',
+            'email' => 'required|email',
+            // 'password' => 'required|min:8'
+        ];
+        $this->validate($request, $rules, $messages);
+        // Primero, encuentra el usuario existente.
+        $user = User::find($id);
+        $user->name = $request->input('name');
+        $user->lastname = $request->input('lastname');
+        $user->phone = $request->input('phone');
+        $user->email = $request->input('email');
+        // $user->password = $request->input('password');
+        $user->save();
+
+        return redirect('/admin/employees');
     }
 
     /**
@@ -109,6 +141,10 @@ class EmployeeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $employee = Employee::find($id);
+        $employee->status = false;
+        $employee->save();
+
+        return redirect('/admin/employees');
     }
 }

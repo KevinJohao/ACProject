@@ -33,15 +33,13 @@
                                                 action="{{ url('/admin/processes/' . $type_process->id) }}">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
-
-                                                <a href="{{ url('/admin/processes/' . $type_process->id . '/show') }}"
-                                                    type="button" rel="tooltip" title="Ver proyecto"
+                                                <a href="{{ url('/admin/docs/' . $type_process->id . '/show') }}"
+                                                    type="button" rel="tooltip" title="Ver trámite"
                                                     class="btn btn-info btn-simple btn-xs">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
-
-                                                <a href="{{ url('/admin/processes/' . $type_process->id . '/edit') }}"
-                                                    type="button" rel="tooltip" title="Editar proyecto"
+                                                <a href="{{ url('/admin/type_processes/' . $type_process->id . '/edit') }}"
+                                                    type="button" rel="tooltip" title="Editar trámite"
                                                     class="btn btn-success btn-simple btn-xs">
                                                     <i class="fa fa-edit"></i>
                                                 </a>

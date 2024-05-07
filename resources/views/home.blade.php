@@ -41,15 +41,9 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ url('/admin/processes') }}" role="tab" target="_self">
+                                <a href="{{ url('/admin/type_processes') }}" role="tab" target="_self">
                                     <i class="material-icons">assignment</i>
                                     Trámites
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/admin/docs') }}" role="tab" target="_self">
-                                    <i class="material-icons">topic</i>
-                                    Documentos
                                 </a>
                             </li>
                             <li>
