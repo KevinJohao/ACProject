@@ -106,10 +106,11 @@ class ProcessController extends Controller
                 ->where('status', true)
                 ->firstOrFail();
 
-            //Obtener las actividades asociados al trámite
+            //Obtener las actividades asociados al trámite y al empleado logeado
             $activities = $process->activities()
-                ->where('process_id', $id)
+                ->where('employee_id', $user->employee->id)
                 ->where('status', true)
+                ->where('task_status_id', 1)
                 ->paginate(10);
 
             return view('employee.activities.show')->with(compact('process', 'activities'));

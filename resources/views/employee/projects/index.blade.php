@@ -31,6 +31,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if ($projects->isNotEmpty())
                                 @foreach ($projects as $project)
                                     <tr>
                                         <td class="text-center">{{ $project->id }}</td>
@@ -57,6 +58,11 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="6" class="text-center">No hay proyectos asignados</td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
                         {{ $projects->links() }}

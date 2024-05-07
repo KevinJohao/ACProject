@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Activity;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class TrackingController extends Controller
 {
@@ -17,18 +19,28 @@ class TrackingController extends Controller
         $user = auth()->user();
 
         if ($user->isEmployee()) {
-            $projects = $user->employee->projects()->with(['processes.activities.trackings' => function ($query) {
-                // Filtrar actividades con estado verdadero y con estado de tarea igual a 1
+  
+            $activities = Activity::whereHas('process', function($query){
                 $query->where('status', true)
-                    ->where('task_status_id', 1);
-            }, 'processes' => function ($query) {
-                // Filtrar trámites con estado verdadero y con estado de tarea igual a 1
-                $query->where('status', true)
-                    ->where('task_status_id', 1);
-            }])->paginate(10);
+                      ->where('task_status_id', 1);
+            })
+            ->whereHas('trackings', function($query) use ($user) {
+                $query->where('employee_id', $user->employee->id)
+                      ->where('status', true)
+                      ->where('task_status_id', 1);
+            })
+            ->where('status', true)
+            ->where('task_status_id', 1)
+            ->withCount(['trackings' => function ($query) use ($user) {
+                $query->where('employee_id', $user->employee->id)
+                      ->where('status', true)
+                      ->where('task_status_id', 1);
+            }])
+            ->paginate(10);
 
-            return view('employee.tracking.index')->with(compact('projects'));
+         return view('employee.trackings.index')->with(compact('activities'));
         }
+
     }
 
     /**

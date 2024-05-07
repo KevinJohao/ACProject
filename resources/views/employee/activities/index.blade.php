@@ -13,7 +13,7 @@
         <div class="container">
             <div class="section text-center">
 
-                    <h2 class="title">Actividades</h2>
+                    <h2 class="title">Actividades Pendientes</h2>
 
                     <div class="team">
                         <div class="row">
@@ -28,34 +28,39 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($projects as $project)
-                                        @foreach ($project->processes as $process)
-                                            <tr>
-                                                <td class="text-left">{{ $project->name }}</td>
-                                                <td class="text-left">{{ $process->TypeProcess->name }}</td>
-                                                <td class="text-center">{{ $process->activities->count() }}</td>
-                                                <td class="text-center">{{$process->TaskStatus->name}}</td>
-                                                <td class="td-actions text-center">
-                                                    <!-- Aquí puedes agregar tus opciones -->
-                                                    <form method="post" action="{{ url('/employee/processes/' . $process->id) }}">
-                                                        {{ csrf_field() }}
-                                                        {{ method_field('DELETE') }}
+                                    @if ($processes->isNotEmpty())
+                                    @foreach ($processes as $process)
+                                        <tr>
+                                            <td class="text-left">{{ $process->project->name }}</td>
+                                            <td class="text-left">{{ $process->TypeProcess->name }}</td>
+                                            <td class="text-center">{{ $process->activities_count }}</td>
+                                            <td class="text-center">{{ $process->TaskStatus->name }}</td>
+                                            <td class="td-actions text-center">
+                                                <!-- Aquí puedes agregar tus opciones -->
+                                                <form method="post" action="{{ url('/employee/processes/' . $process->id) }}">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('DELETE') }}
                     
-                                                        <a href="{{ url('/empleado/processes/' . $process->id . '/show') }}"
-                                                            type="button" rel="tooltip" title="Ver trámite"
-                                                            class="btn btn-info btn-simple btn-xs">
-                                                            <i class="fa fa-eye"></i>
-                                                        </a>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                                                    <a href="{{ url('/empleado/processes/' . $process->id . '/show') }}"
+                                                        type="button" rel="tooltip" title="Ver trámite"
+                                                        class="btn btn-info btn-simple btn-xs">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                </form>
+                                            </td>
+                                        </tr>
                                     @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="6" class="text-center">No hay actividades con seguimientos</td>
+                                        </tr>
+                                    @endif
                                 </tbody>
                             </table>
-                            {{ $projects->links() }}
+                            {{ $processes->links() }}
                         </div>
                     </div>
+                    
                     
 
             </div>

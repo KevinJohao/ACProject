@@ -13,7 +13,7 @@
         <div class="container">
             <div class="section text-center">
 
-                    <h2 class="title">Información del proyecto "{{ $project->name }}"</h2>
+                    <h2 class="title">Trámites del proyecto "{{ $project->name }}"</h2>
 
                 <div class="team">
                     <div class="row">
@@ -30,6 +30,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if ($processes->isNotEmpty())
                                 @foreach ($processes as $process)
                                     <tr>
                                         <td class="text-center">{{ $process->id }}</td>
@@ -52,6 +53,11 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="6" class="text-center"> No hay trámites del proyecto</td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
                         {{ $processes->links() }}

@@ -40,32 +40,40 @@
                                 <tr>
                                     <th class="text-center">#</th>
                                     <th>Seguimiento</th>
-                                    <th class="text-left">Encargado</th>
+                                    <th class="text-center">Fecha</th>
+                                    <th class="text-center">Encargado</th>
                                     <th class="col-xs-2 text-center">Estado</th>
-                                    <th class="text-center">Opciones</th>
+                                    <th class="text-center">Observaciones </th>
+                                    <th class="text-center">Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @if ($trackings->isNotEmpty())
                                 @foreach ($trackings as $tracking)
                                     <tr>
                                         <td class="text-center">{{ $tracking->id }}</td>
-                                        <td class="text-left">{{ $tracking }}</td>
-                                        <td class="text-left">{{ $tracking->employee->user->name }}</td>
+                                        <td class="text-left">{{ $tracking->TypeTracking->name }}</td>
+                                        <td>{{$tracking->date}}</td>
+                                        <td class="text-center">{{ $tracking->employee->user->name }}</td>
                                         <td class="text-center">{{ $tracking->taskStatus->name }}</td>
+                                        <td class="text-left">{{ $tracking->observation}}</td>
                                         <td class="td-actions text-center">
-                                            <form method="post" action="{{ url('/employee/processes/' . $activity->id) }}">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
-
-                                                <a href="{{ url('/empleado/activities/' . $activity->id . '/show') }}"
-                                                    type="button" rel="tooltip" title="Ver trámite"
-                                                    class="btn btn-info btn-simple btn-xs">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                            </form>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Abrir modal</button>
+                                               <!--- <button
+                                                    type="button" title="Registrar observación"
+                                                    class="btn btn-info btn-simple btn-xs" data-toggle="modal" data-target="#modal-form">
+                                                    <i class="fa fa-pencil"></i> Registrar Observación
+                                                </button>
+                                            -->
                                         </td>
                                     </tr>
+                                    @include('employee/trackings/modalAddObservation')
                                 @endforeach
+                                @else   
+                                    <tr>
+                                        <td colspan="6" class="text-center"> No hay seguimientos asignados para la actividad</td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
                         {{ $trackings->links() }}
@@ -73,8 +81,10 @@
                 </div>
 
             </div>
+
+            </div>
+
         </div>
     </div>
-
     @include('includes.footer')
 @endsection

@@ -45,6 +45,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if ($activities->isNotEmpty())
                                 @foreach ($activities as $activity)
                                     <tr>
                                         <td class="text-center">{{ $activity->id }}</td>
@@ -65,6 +66,11 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="6" class="text-center"> No hay actividades asignadas para el trámite</td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
                         {{ $activities->links() }}
