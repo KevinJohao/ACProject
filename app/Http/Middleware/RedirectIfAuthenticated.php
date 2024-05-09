@@ -17,12 +17,21 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, string ...$guards): Response
     {
+        /** @var \App\Models\User $user **/
+        $user = auth()->user();
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
-            }
+                if ($user->isAdmin()){
+                    return redirect('/admin/dashboard');
+                    //return redirect(RouteServiceProvider::HOME);
+                } elseif ($user->isClient()){
+                    return redirect('/cliente/dashboard');
+                } elseif ($user->isEmployee()){
+                    return redirect('/empleado/dashboard');
+                }
+             }
         }
 
         return $next($request);

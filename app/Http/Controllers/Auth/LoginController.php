@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -19,13 +20,30 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+    
 
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/login';
+    //protected $redirectTo = '/login';
+
+    protected function redirectTo()
+    {
+        /** @var \App\Models\User $user **/
+        $user = auth()->user();
+        if ($user->isAdmin()) {
+            return '/admin/dashboard';
+        } elseif ($user->isClient()) {
+            return '/cliente/dashboard';
+        } elseif ($user->isEmployee()) {
+            return '/empleado/dashboard';
+        } else {
+            // Default redirect path for users without a valid role
+            return '/';
+        }
+    }
 
     /**
      * Create a new controller instance.

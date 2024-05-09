@@ -24,11 +24,12 @@ class ProjectController extends Controller
 
             /*** Direccionar al view index de cada tipo de usuario ***/
             // Admin
-            if (auth()->user()->rol_id == 1) {
+            if ($user->isAdmin()) {
                 $projects = Project::where('status', true)
                     ->orderBy('created_at', 'desc')->paginate(10);
 
-                return view('admin.projects.index')->with(compact('projects'));
+                //return view('admin.projects.index')->with(compact('projects'));
+                return view('admin.dashboard')->with(compact('projects'));
             }
 
             // Empleado
@@ -39,7 +40,8 @@ class ProjectController extends Controller
                     ->orderBy('created_at', 'desc')
                     ->paginate(10);
 
-                return view('employee.projects.index')->with(compact('projects'));
+                //return view('employee.projects.index')->with(compact('projects'));
+                return view('employee.dashboard')->with(compact('projects'));
             }
         }
     }

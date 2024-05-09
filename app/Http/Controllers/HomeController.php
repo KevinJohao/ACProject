@@ -26,10 +26,14 @@ class HomeController extends Controller
     {
             $projects = Project::where('status', true)
                 ->orderBy('created_at', 'desc')->paginate(10);
-
+        /*
             if (view()->exists('home')) {
                 return view('home')->with(compact('projects'));
             }
+        */
+        if (view()->exists('index')) {
+            return view('index')->with(compact('projects'));
+        }
         //return view('admin.dashboard');
         //return view('admin.dashboard');
     }
