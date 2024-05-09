@@ -17,7 +17,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['check.rol:1'])->prefix('admin')->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\ProjectController::class, 'index']);
         //Projects
-        /*
+        
         Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index']); //listado
         Route::get('/processes/{id}/show', [App\Http\Controllers\ProcessController::class, 'index'])->name('admin.processes.show'); //show
         Route::get('/projects/create', [App\Http\Controllers\ProjectController::class, 'create']); //formulario
@@ -63,14 +63,14 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/activities', [App\Http\Controllers\ActivityController::class, 'store']); //registrar
         Route::get('/activities/{id}/edit', [App\Http\Controllers\ActivityController::class, 'edit']); //form de edicion
         Route::put('/activities/{id}/edit', [App\Http\Controllers\ActivityController::class, 'update']); //actualizar
-        */
+        
     });
 
     // ROL: EMPLEADO
     Route::middleware(['check.rol:3'])->prefix('empleado')->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\ProjectController::class, 'index']);
 
-        /*
+        
         // Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index']); //dashboard
         Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index']); // listado
         Route::get('/projects/{id}/show', [App\Http\Controllers\ProcessController::class, 'index']); //show
@@ -83,6 +83,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/trackings', [App\Http\Controllers\TrackingController::class, 'indexEmployee']);
         Route::get('/activities/{id}/show', [App\Http\Controllers\ActivityController::class, 'showTrackingsEmployee']);
 
-        */
+        
     });
 });
