@@ -72,7 +72,7 @@ class ActivityController extends Controller
             $trackings = $activity->trackings()
                                     ->where('employee_id', $user->employee->id)
                                     ->where('status', true)
-                                    ->where('task_status_id', 1)
+                                    //->where('task_status_id', 1)
                                     ->paginate(10);
 
             return view('employee.trackings.show')->with(compact('activity','trackings'));

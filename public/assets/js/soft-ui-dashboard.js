@@ -445,3 +445,43 @@ function sidenavTypeOnResize() {
     });
   }
 }
+
+// Selecciona todos los formularios de estado
+var statusForms = document.querySelectorAll('.dropdown-menu form');
+
+// Agrega un controlador de eventos a cada formulario
+statusForms.forEach(function(form) {
+    form.onsubmit = function() {
+        // Muestra la notificación cuando se envía el formulario
+        var alert = document.getElementById('success-alert');
+        alert.style.opacity = '1';
+
+        // Desvanece la notificación después de 4 segundos
+        window.setTimeout(function() {
+            alert.style.opacity = '0';
+        }, 4000);
+    }
+});
+
+/*
+window.onload = function() {
+  var alert = document.getElementById('success-alert');
+  alert.style.opacity = '1';
+
+  window.setTimeout(function() {
+      var alert = document.getElementById('success-alert');
+      alert.style.opacity = '0';
+  }, 4000);
+}
+*/
+/*
+window.onload = function() {
+  var alert = document.getElementById('success-alert');
+  alert.style.opacity = '1';
+  }
+
+  window.setTimeout(function() {
+      var alert = document.getElementById('success-alert');
+      alert.style.opacity = '0';
+  }, 4000);
+  */
