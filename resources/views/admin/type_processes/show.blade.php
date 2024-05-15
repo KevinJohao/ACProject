@@ -10,8 +10,8 @@
                                 <h4 class="mb-0">Información del trámite</h4>
                             </div>
                             <div class="col-6 text-end">
-                                <a class="btn bg-gradient-primary mt-3" href="{{ url('/admin/processes/create') }}"><i
-                                        class="fas fa-plus"></i>&nbsp;&nbsp;Nuevo Trámite</a>
+                                <a class="btn bg-gradient-primary mt-3" href="{{ url('/admin/docs/create') }}"><i
+                                        class="fas fa-plus"></i>&nbsp;&nbsp;Nuevo documento</a>
                             </div>
                         </div>
                     </div>
@@ -37,28 +37,22 @@
                                     <tbody>
                                         @foreach ($type_documents as $type_document)
                                             <tr>
-                                                <td>
+                                                <td class="col-4">
                                                     <div class="px-3">
                                                         <h6 class="mb-0 text-xs">{{ $type_document->name }}</h6>
                                                     </div>
                                                 </td>
-                                                <td class="text-left text-xs"
+                                                <td class="col-6 text-left text-xs"
                                                     style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                                     {{ $type_document->description }}
                                                 </td>
-
                                                 <td class="text-center td-actions text-md">
                                                     <form method="post"
                                                         action="{{ url('/admin/docs/' . $type_document->id) }}">
                                                         {{ csrf_field() }}
                                                         {{ method_field('DELETE') }}
-                                                        <a href="{{ url('/admin/docs/' . $type_document->id . '/show') }}"
-                                                            type="button" rel="tooltip" title="Ver trámite"
-                                                            class="btn btn-info btn-simple btn-xs" style="padding: 10px;">
-                                                            <i class="fa fa-eye"></i>
-                                                        </a>
                                                         <a href="{{ url('/admin/docs/' . $type_document->id . '/edit') }}"
-                                                            type="button" rel="tooltip" title="Editar trámite"
+                                                            type="button" rel="tooltip" title="Editar documento"
                                                             class="btn btn-success btn-simple btn-xs"
                                                             style="padding: 10px;">
                                                             <i class="fa fa-edit"></i>

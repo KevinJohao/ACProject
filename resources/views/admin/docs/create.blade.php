@@ -1,61 +1,70 @@
-@extends('layouts.app')
-
-@section('title', 'Nuevo documento')
-
-@section('body-class', 'product -page')
-
-@section('content')
-    <div class="header header-filter"
-        style="background-image: url('https://images.unsplash.com/photo-1423655156442-ccc11daa4e99?crop=entropy&dpr=2&fit=crop&fm=jpg&h=750&ixjsv=2.1.0&ixlib=rb-0.3.5&q=50&w=1450');">
-    </div>
-
-    <div class="main main-raised">
-        <div class="container">
-            <div class="section">
-                <h2 class="title text-center">Crear nuevo documento</h2>
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                <form method="post" action="{{ url('/admin/docs') }}">
-                    {{ csrf_field() }}
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group label-floating">
-                                <select class="form-control" name="type_process_id">
-                                    <option value="">Selecciona un trámite</option> <!-- Opción vacía -->
-                                    @foreach ($type_processes as $type_process)
-                                        <option value="{{ $type_process->id }}">{{ $type_process->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group label-floating">
-                                <label class="control-label">Nombre</label>
-                                <input type="text" class="form-control" name="name" value="{{ old('name') }}">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group label-floating">
-                                <label class="control-label">Descripción</label>
-                                <textarea class="form-control" name="description" rows="4">{{ old('description') }}</textarea>
+@extends('layouts.template')
+@section('contenido')
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header pb-0 p-3">
+                        <div class="row">
+                            <div class="col-6 d-flex align-items-center">
+                                <h4 class="mb-0">Crear documento</h4>
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary">Registrar documento</button>
-                    <a href="{{ url('/admin/docs/') }}" class="btn btn-default">Cancelar</a>
-                </form>
-
+                    <br>
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <div class="col-md-12 mb-lg-0 mb-4">
+                                <div class="card mt-4">
+                                    <div class="card-body p-3">
+                                        <form method="post" action="{{ url('/admin/docs/') }}">
+                                            {{ csrf_field() }}
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group label-floating">
+                                                        <select class="form-control" name="type_process_id">
+                                                            <option value="">Selecciona un trámite</option>
+                                                            <!-- Opción vacía -->
+                                                            @foreach ($type_processes as $type_process)
+                                                                <option value="{{ $type_process->id }}">
+                                                                    {{ $type_process->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Nombre</label>
+                                                        <input type="text" class="form-control" name="name"
+                                                            value="{{ old('name') }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Descripción</label>
+                                                        <textarea class="form-control" rows="3" name="Description">{{ old('Description') }}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="btn bg-gradient-primary mt-3">Registrar documento</button>
+                                            <a href="{{ url('/admin/docs/') }}" class="btn bg-default mt-3">Cancelar</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
-
-    @include('includes.footer')
 @endsection

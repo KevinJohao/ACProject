@@ -138,6 +138,10 @@ class DocsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $document = TypeDocs::find($id);
+        $document->status = false;
+        $document->save();
+
+        return redirect('/admin/type_processes/' . $document->typeProcess->id . '/show');
     }
 }

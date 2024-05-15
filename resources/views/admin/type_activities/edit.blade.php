@@ -7,7 +7,7 @@
                     <div class="card-header pb-0 p-3">
                         <div class="row">
                             <div class="col-6 d-flex align-items-center">
-                                <h4 class="mb-0">Crear trámite</h4>
+                                <h4 class="mb-0">Editar actividad "{{ $type_activity->name }}"</h4>
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
                                         <ul>
@@ -26,26 +26,29 @@
                             <div class="col-md-12 mb-lg-0 mb-4">
                                 <div class="card mt-4">
                                     <div class="card-body p-3">
-                                        <form method="post" action="{{ url('/admin/processes/') }}">
+                                        <form method="post"
+                                            action="{{ url('/admin/type_activities/' . $type_activity->id . '/edit') }}">
+                                            @method('put')
                                             {{ csrf_field() }}
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        <label>Nombre</label>
+                                                        <label>Nombres</label>
                                                         <input type="text" class="form-control" name="name"
-                                                            value="{{ old('name') }}">
+                                                            value="{{ old('name', $type_activity->name) }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label>Descripción</label>
-                                                        <input type="text" class="form-control" name="description"
-                                                            value="{{ old('description') }}">
+                                                        <textarea type="text" class="form-control" name="description">
+                                                            {{ old('description', $type_activity->description) }}
+                                                        </textarea>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="btn bg-gradient-primary mt-3">Registrar trámite</button>
-                                            <a href="{{ url('/admin/processes/') }}"
+                                            <button class="btn bg-gradient-primary mt-3">Guardar cambios</button>
+                                            <a href="{{ url('/admin/type_activities/') }}"
                                                 class="btn bg-default mt-3">Cancelar</a>
                                         </form>
                                     </div>

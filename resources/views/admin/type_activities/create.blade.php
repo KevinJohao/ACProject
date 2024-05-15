@@ -7,7 +7,7 @@
                     <div class="card-header pb-0 p-3">
                         <div class="row">
                             <div class="col-6 d-flex align-items-center">
-                                <h4 class="mb-0">Crear trámite</h4>
+                                <h4 class="mb-0">Crear actividad</h4>
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
                                         <ul>
@@ -26,7 +26,7 @@
                             <div class="col-md-12 mb-lg-0 mb-4">
                                 <div class="card mt-4">
                                     <div class="card-body p-3">
-                                        <form method="post" action="{{ url('/admin/processes/') }}">
+                                        <form method="post" action="{{ url('/admin/type_activities/') }}">
                                             {{ csrf_field() }}
                                             <div class="row">
                                                 <div class="col-sm-6">
@@ -39,13 +39,12 @@
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label>Descripción</label>
-                                                        <input type="text" class="form-control" name="description"
-                                                            value="{{ old('description') }}">
+                                                        <textarea type="text" class="form-control" name="description">{{ old('description') }}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="btn bg-gradient-primary mt-3">Registrar trámite</button>
-                                            <a href="{{ url('/admin/processes/') }}"
+                                            <button class="btn bg-gradient-primary mt-3">Registrar actividad</button>
+                                            <a href="{{ url('/admin/type_activities/') }}"
                                                 class="btn bg-default mt-3">Cancelar</a>
                                         </form>
                                     </div>
