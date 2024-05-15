@@ -57,7 +57,8 @@
                     {{-- Rol admin --}}
                     @if (auth()->user()->rol_id == 1)
                         <li class="nav-item">
-                            <a class="nav-link  active" href="{{ url('/admin/projects') }}">
+                            <a class="nav-link {{ Request::is('admin/projects*') ? 'active' : '' }}"
+                                href="{{ url('/admin/projects') }}">
                                 <div
                                     class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1"
@@ -84,7 +85,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  " href="{{ url('/admin/clients') }}">
+                            <a class="nav-link {{ Request::is('admin/clients*') ? 'active' : '' }}"
+                                href="{{ url('/admin/clients') }}">
                                 <div
                                     class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
@@ -111,7 +113,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  " href="{{ url('/admin/employees') }}">
+                            <a class="nav-link {{ Request::is('admin/employees*') ? 'active' : '' }}"
+                                href="{{ url('/admin/employees') }}">
                                 <div
                                     class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
@@ -138,7 +141,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  " href="{{ url('/admin/type_processes') }}">
+                            <a class="nav-link {{ Request::is('admin/type_processes*') ? 'active' : '' }}"
+                                href="{{ url('/admin/type_processes') }}">
                                 <div
                                     class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
@@ -168,7 +172,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  " href="{{ url('/admin/type_activities') }}">
+                            <a class="nav-link {{ Request::is('admin/type_activities*') ? 'active' : '' }}"
+                                href="{{ url('/admin/type_activities') }}">
                                 <div
                                     class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1"
@@ -200,7 +205,8 @@
                     @endif
                     @if (auth()->user()->rol_id == 2)
                         <li class="nav-item">
-                            <a class="nav-link  active" href="{{ url('/admin/projects') }}">
+                            <a class="nav-link {{ Request::is('client/projects*') ? 'active' : '' }}"
+                                href="{{ url('/client/projects') }}">
                                 <div
                                     class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1"
@@ -227,9 +233,11 @@
                             </a>
                         </li>
                     @endif
+                    {{-- Rol empleado --}}
                     @if (auth()->user()->rol_id == 3)
                         <li class="nav-item">
-                            <a class="nav-link  active" href="{{ url('/admin/projects') }}">
+                            <a class="nav-link {{ Request::is('empleado/projects*') ? 'active' : '' }}"
+                                href="{{ url('/empleado/projects') }}">
                                 <div
                                     class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1"
@@ -256,7 +264,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  " href="{{ url('/admin/activities') }}">
+                            <a class="nav-link {{ Request::is('empleado/activities*') ? 'active' : '' }}"
+                                href="{{ url('/empleado/activities') }}">
                                 <div
                                     class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1"
@@ -286,7 +295,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  " href="{{ url('/admin/activities') }}">
+                            <a class="nav-link {{ Request::is('empleado/trackings*') ? 'active' : '' }}"
+                                href="{{ url('/empleado/trackings') }}">
                                 <div
                                     class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1"
