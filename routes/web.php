@@ -81,5 +81,9 @@ Route::middleware(['auth'])->group(function () {
         // SEGUIMIENTOS
         Route::get('/trackings', [App\Http\Controllers\TrackingController::class, 'indexEmployee']);
         Route::get('/activities/{id}/show', [App\Http\Controllers\ActivityController::class, 'showTrackingsEmployee']);
+        Route::put('/trackings/{id}/edit/observation', [App\Http\Controllers\TrackingController::class, 'updateObservation']); //Actualizar observación al seguimiento
+        Route::put('/trackings/{id}/edit/status', [App\Http\Controllers\TrackingController::class, 'updateStatus']); // Actualizar el estado del seguimiento
+
+        
     });
 });

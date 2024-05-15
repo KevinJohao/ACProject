@@ -1,85 +1,115 @@
-@extends('layouts.app')
+@extends('layouts.template')
 
 @section('title', 'Proyecto')
 
 @section('body-class', 'product -page')
 
-@section('content')
-    <div class="header header-filter"
-        style="background-image: url('https://images.unsplash.com/photo-1423655156442-ccc11daa4e99?crop=entropy&dpr=2&fit=crop&fm=jpg&h=750&ixjsv=2.1.0&ixlib=rb-0.3.5&q=50&w=1450');">
-    </div>
-
-    <div class="main main-raised">
-        <div class="container">
-            <div class="section text-center">
-
-                    <h4 class="title text-left">ACTIVIDADES DEL TRÁMITE</h4>
-
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-6 text-left">
-                                    <h6 class="card-title">Proyecto: {{$process->project->name}}</h6>
-                                    <p class="card-text mb-2">Cliente: {{$process->project->client->user->name}}</p>
-                                    <p class="card-text">Encargado: {{$process->project->employee->user->name}}</p>
-                                </div>
-                                <div class="col-lg-6 text-left">
-                                    <h6 class="card-title">Trámite: {{$process->typeProcess->name}}</h6>
-                                    <p class="card-text">Próxima revisión: {{$process->next_review}}</p>
+@section('contenido')
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-md-12 mb-lg-0 mb-4">
+                        <div class="card">
+                            <div class="card-header pb-0 p-3">
+                                <div class="row">
+                                    <div class="col-6 d-flex align-items-center">
+                                        <h6 class="mb-0">Trámite: {{ $process->typeProcess->name }} </h6>
+                                    </div>
+                                    <!--
+                              <div class="col-6 text-end">
+                                <a class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add New Card</a>
+                              </div>
+                              -->
                                 </div>
                             </div>
+                            <div class="card-body pt-4 p-3">
+                                <div class="row">
+                                    <div class="col-md-12 mb-md-0 mb-4">
+                                        <div class="card card-body border-0 card-plain border-radius-lg d-flex align-items-center flex-row flex-wrap bg-gray-100">
+                                            <div class="col-md-12 d-flex flex-column mb-3">
+                                                <h6 class="mb-0 text-sm">Proyecto: {{ $process->project->name }} </h6>
+                                            </div>
+                                            <div class="col-md-6 d-flex flex-column">
+                                                <span class="mb-2 text-xs">Cliente: <span class="text-dark font-weight-bold ms-sm-2">{{ $process->project->client->user->name }}</span></span>
+                                                <span class="text-xs">Encargado: <span class="text-dark ms-sm-2 font-weight-bold">{{ $process->project->employee->user->name }}</span></span>
+                                            </div>
+                                            <div class="col-md-6 d-flex flex-column">
+                                                <span class="mb-2 text-xs">Próxima Revisión: <span class="text-dark font-weight-bold ms-sm-2">{{ $process->next_review }}</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
-                    
-                    
-                <div class="team">
-                    <div class="row">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">#</th>
-                                    <th>Actividad</th>
-                                    <th class="text-left">Encargado</th>
-                                    <th class="col-xs-2 text-center">Estado</th>
-                                    <th class="text-center">Opciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if ($activities->isNotEmpty())
-                                @foreach ($activities as $activity)
-                                    <tr>
-                                        <td class="text-center">{{ $activity->id }}</td>
-                                        <td class="text-left">{{ $activity->typeActivity->name }}</td>
-                                        <td class="text-left">{{ $activity->employee->user->name }}</td>
-                                        <td class="text-center">{{ $activity->taskStatus->name }}</td>
-                                        <td class="td-actions text-center">
-                                            <form method="post" action="{{ url('/employee/processes/' . $activity->id) }}">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
-
-                                                <a href="{{ url('/empleado/activities/' . $activity->id . '/show') }}"
-                                                    type="button" rel="tooltip" title="Ver trámite"
-                                                    class="btn btn-info btn-simple btn-xs">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                @else
-                                    <tr>
-                                        <td colspan="6" class="text-center"> No hay actividades asignadas para el trámite</td>
-                                    </tr>
-                                @endif
-                            </tbody>
-                        </table>
-                        {{ $activities->links() }}
-                    </div>
                 </div>
-
             </div>
         </div>
-    </div>
+        <div class="row">
 
-    @include('includes.footer')
+            <div class="col-12 mt-4">
+                <div class="card mb-4">
+                    <div class="card-header pb-0">
+                        <h6>Actividades</h6>
+                    </div>
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Actividad</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                            Encargado</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                            Estado</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                            Seguimiento</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if ($activities->isNotEmpty())
+                                        @foreach ($activities as $activity)
+                                            <tr>
+                                                <td>
+                                                    <div class="px-3">
+                                                        <h6 class="mb-0 text-xs">{{ $activity->typeActivity->name }}</h6>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center text-xs font-weight-bold text-secondary">{{ $activity->employee->user->name }}</td>
+                                                <td class="text-center text-xs font-weight-bold text-secondary">{{ $activity->taskStatus->name }}</td>
+                                                
+                                                
+                                                <td class="text-center td-actions text-md">
+                                                    <form method="post"
+                                                        action="{{ url('/employee/processes/' . $activity->id) }}">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('DELETE') }}
+                                                        <a href="{{ url('/empleado/activities/' . $activity->id . '/show') }}"
+                                                            title="Ver trámite" class="btn btn-link pe-3 ps-0 mb-0 ms-auto">
+                                                            <i class="fa fa-arrow-right fa-lg"></i>
+                                                        </a>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="9" class="text-center">No hay actividades asignadas para el trámite</td>
+                                        </tr>
+                                    @endif
+                                </tbody>
+                            </table>
+                            {{ $activities->links() }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 @endsection

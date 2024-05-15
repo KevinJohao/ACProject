@@ -93,10 +93,10 @@ class ActivityController extends Controller
 
             //Obtener los seguimientos asociados a la actividad y al empleado logeado
             $trackings = $activity->trackings()
-                ->where('employee_id', $user->employee->id)
-                ->where('status', true)
-                ->where('task_status_id', 1)
-                ->paginate(10);
+                                    ->where('employee_id', $user->employee->id)
+                                    ->where('status', true)
+                                    //->where('task_status_id', 1)
+                                    ->paginate(10);
 
             return view('employee.trackings.show')->with(compact('activity', 'trackings'));
         }

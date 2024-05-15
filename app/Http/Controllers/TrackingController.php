@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
+use App\Models\TaskStatus;
+use App\Models\Tracking;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -72,15 +74,41 @@ class TrackingController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function updateObservation(Request $request, string $id)
     {
-        //
+        $tracking = Tracking::find($id);
+        $tracking->observation = $request->input('observation');
+        $tracking->save();
+
+        return redirect()->back()->with('success', 'La observación se ha actualizado correctamente.');
+    }
+
+    public function updateStatus(Request $request, string $id)
+    {
+        // Encuentra el registro de seguimiento por ID
+        $tracking = Tracking::find($id);
+
+        // Encuentra el estado por nombre
+        $status = TaskStatus::where('name', $request->input('status'))->first();
+
+        // Si el estado no existe, redirige con un mensaje de error
+        if (!$status) {
+            return redirect()->back()->with('error', 'El estado proporcionado no existe.');
+        }
+
+        // Actualiza el task_status_id con el ID del estado encontrado
+        $tracking->task_status_id = $status->id;
+
+        // Guarda los cambios en la base de datos
+        $tracking->save();
+
+        return redirect()->back()->with('success', 'El estado se ha actualizado correctamente.');
     }
 
     /**
