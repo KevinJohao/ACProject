@@ -13,18 +13,6 @@
             </div>
         @endif
         
-        <script>
-            window.onload = function() {
-            var alert = document.getElementById('success-alert');
-            alert.style.opacity = '1';
-            }
-
-            window.setTimeout(function() {
-                var alert = document.getElementById('success-alert');
-                alert.style.opacity = '0';
-            }, 4000);
-        </script>
-        
         <!-- End Notificación-->
 
         <div class="row">
@@ -79,7 +67,7 @@
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
+                            <table class="table align-items-center mb-4">
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -139,6 +127,7 @@
                                                             </li>
                                                         </ul>
                                                         
+                                                    
                                                     </div>
                                                 </td>
                                                 <td class="text-left text-xs font-weight-bold">{{ $tracking->observation }}
@@ -161,7 +150,7 @@
                                     @endif
                                 </tbody>
                             </table>
-                            {{ $trackings->links() }}
+                            {{ $trackings->links('layouts.custom-pagination') }}
                         </div>
                     </div>
                 </div>
@@ -172,3 +161,16 @@
 
 @endsection
 
+<!-- Manejo de la notificación -->
+<script>
+    window.onload = function() {
+    var alert = document.getElementById('success-alert');
+    alert.style.opacity = '1';
+    }
+
+    window.setTimeout(function() {
+        var alert = document.getElementById('success-alert');
+        alert.style.opacity = '0';
+    }, 4000);
+</script>
+<!-- End notification -->

@@ -38,7 +38,7 @@ class ProjectController extends Controller
                 $projects = $user->employee->projects()
                     ->where('status', true)
                     ->orderBy('created_at', 'desc')
-                    ->paginate(10);
+                    ->paginate(8);
 
                 //return view('employee.projects.index')->with(compact('projects'));
                 return view('employee.dashboard')->with(compact('projects'));

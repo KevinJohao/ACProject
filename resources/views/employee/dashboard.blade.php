@@ -35,7 +35,7 @@
                                             Estado</th>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
-                                            Opciones</th>
+                                            Gestión</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -63,8 +63,8 @@
                                                         {{ csrf_field() }}
                                                         {{ method_field('DELETE') }}
                                                         <a href="{{ url('/empleado/projects/' . $project->id . '/show') }}"
-                                                            title="Ver proyecto" class="text-info">
-                                                            <i class="fa fa-eye"></i>
+                                                            title="Ver proyecto" class="btn btn-link pe-3 ps-0 mb-0 ms-auto">
+                                                            <i class="fa fa-arrow-right fa-lg"></i>
                                                         </a>
                                                     </form>
                                                 </td>
@@ -77,7 +77,7 @@
                                     @endif
                                 </tbody>
                             </table>
-                            {{ $projects->links() }}
+                            {{ $projects->links('layouts.custom-pagination') }}
                         </div>
                     </div>
                 </div>

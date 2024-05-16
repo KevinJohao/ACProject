@@ -1,70 +1,81 @@
-@extends('layouts.app')
+@extends('layouts.template')
 
-@section('title', 'Proyecto')
+@section('title', 'Seguimiento')
 
-@section('body-class', 'product -page')
+@section('contenido')
 
-@section('content')
-    <div class="header header-filter"
-        style="background-image: url('https://images.unsplash.com/photo-1423655156442-ccc11daa4e99?crop=entropy&dpr=2&fit=crop&fm=jpg&h=750&ixjsv=2.1.0&ixlib=rb-0.3.5&q=50&w=1450');">
-    </div>
-
-    <div class="main main-raised">
-        <div class="container">
-            <div class="section text-center">
-
-                <h2 class="title">Seguimientos Pendientes v2</h2>
-
-                <div class="team">
-                    <div class="row">
-                        <table class="table">
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <h6>Seguimientos Pendientes</h6>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th>Proyecto</th>
-                                    <th>Trámite</th>
-                                    <th>Actividad</th>
-                                    <th class="text-center">N° Seguimientos Pendientes</th>
-                                    <th class="text-center">Estado Trámite</th>
-                                    <th class="text-center">Opciones</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Proyecto</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                        Trámite
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                        Actividad 
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                        N° Seguimientos Pendientes 
+                                    </th>
+                                    <!---
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                        Estado Trámite</th>
+                                    -->
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                        Gestión</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($activities as $activity)
+                                @if ($activities->isNotEmpty())
+                                    @foreach ($activities as $activity)
+                                        <tr>
+                                            <td>
+                                                <div class="px-3">
+                                                    <h6 class="mb-0 text-xs">{{ $activity->process->project->name}}</h6>
+                                                </div>
+                                            </td>
+                                            <td class="text-left text-xs font-weight-bold text-secondary">
+                                                {{ $activity->process->TypeProcess->name }}</td>
+                                            <td class="text-left text-xs font-weight-bold text-secondary">
+                                                {{ $activity->TypeActivity->name }}</td>
+                                            <td class="text-center text-xs font-weight-bold text-dark">
+                                                <strong>{{ $activity->trackings_count }}</strong></td>
+                                            <!---
+                                            <td class="text-center text-xs">{{ $activity->process->TaskStatus->name}}</td>
+                                            -->
+                                            <td class="text-center td-actions text-md">
+                                                    <a href="{{ url('/empleado/trackings/activities/' . $activity->id . '/show') }}"
+                                                        title="Ver proyecto" class="btn btn-link pe-3 ps-0 mb-0 ms-auto">
+                                                        <i class="fa fa-arrow-right fa-lg"></i>
+                                                    </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
                                     <tr>
-                                        <td class="text-left">{{ $activity->process->project->name }}</td>
-                                        <td class="text-left">{{ $activity->process->TypeProcess->name }}</td>
-                                        <td class="text-left">{{ $activity->TypeActivity->name }}</td>
-                                        <td class="text-center">{{ $activity->trackings_count }}</td>
-                                        <td class="text-center">{{ $activity->process->TaskStatus->name }}</td>
-                                        <td class="td-actions text-center">
-                                            <form method="post"
-                                                action="{{ url('/employee/processes/' . $activity->process->id) }}">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
-
-                                                <a href="{{ url('/empleado/activities/' . $activity->id . '/show') }}"
-                                                    type="button" rel="tooltip" title="Ver trámite"
-                                                    class="btn btn-info btn-simple btn-xs">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                            </form>
-                                        </td>
+                                        <td colspan="9" class="text-center">No hay seguimientos pendientes</td>
                                     </tr>
-                                @endforeach
-
-
+                                @endif
                             </tbody>
                         </table>
-                        {{$activities->links()}}
+                        {{  $activities->links('layouts.custom-pagination') }}
                     </div>
                 </div>
-
-
-
-
             </div>
         </div>
     </div>
+</div>
 
-    @include('includes.footer')
 @endsection

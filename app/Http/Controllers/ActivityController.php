@@ -31,7 +31,7 @@ class ActivityController extends Controller
                     $query->where('employee_id', $user->employee->id)
                         ->where('status', true)
                         ->where('task_status_id', 1);
-                }])->paginate(10);
+                }])->paginate(8);
 
             return view('employee.activities.index')->with(compact('processes'));
         } elseif ($user->isAdmin()) {
@@ -96,7 +96,7 @@ class ActivityController extends Controller
                                     ->where('employee_id', $user->employee->id)
                                     ->where('status', true)
                                     //->where('task_status_id', 1)
-                                    ->paginate(10);
+                                    ->paginate(5);
 
             return view('employee.trackings.show')->with(compact('activity', 'trackings'));
         }

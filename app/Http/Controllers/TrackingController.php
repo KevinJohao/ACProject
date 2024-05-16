@@ -38,7 +38,7 @@ class TrackingController extends Controller
                       ->where('status', true)
                       ->where('task_status_id', 1);
             }])
-            ->paginate(10);
+            ->paginate(8);
 
          return view('employee.trackings.index')->with(compact('activities'));
         }
