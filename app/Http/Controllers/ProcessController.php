@@ -42,6 +42,21 @@ class ProcessController extends Controller
 
             return view('employee.projects.show')->with(compact('project', 'processes'));
         }
+        
+        // Cliente
+        if ($user->isClient()) {
+            
+            $project = Project::where('id', $id)
+                ->where('status', true)
+                ->firstOrFail();
+
+            $processes = $project->processes()
+                ->where('status', true)
+                ->paginate(8);
+            
+            return view('clients.processes.show')->with(compact('project', 'processes'));
+        }
+
     }
 
     /**

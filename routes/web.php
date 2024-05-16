@@ -67,10 +67,10 @@ Route::middleware(['auth'])->group(function () {
 
     // ROL: EMPLEADO
     Route::middleware(['check.rol:3'])->prefix('empleado')->group(function () {
-        Route::get('/dashboard', [App\Http\Controllers\ProjectController::class, 'index']); // dashboard - lista de projyectos
+        Route::get('/dashboard', [App\Http\Controllers\ProjectController::class, 'index']); // dashboard - lista de proyectos
 
         Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index']); //listado
-        
+
         Route::get('/projects/{id}/show', [App\Http\Controllers\ProcessController::class, 'index']); //Lista de tramites del proyecto seleccionado
 
         // ACTIVIDADES
@@ -85,4 +85,15 @@ Route::middleware(['auth'])->group(function () {
 
         
     });
+
+    // ROL: CLIENTE
+    Route::middleware(['check.rol:2'])->prefix('cliente')->group(function () {
+        Route::get('/dashboard', [App\Http\Controllers\ProjectController::class, 'index']); // dashboard - lista de proyectos
+
+        Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index']); //listado
+        
+        Route::get('/projects/{id}/show', [App\Http\Controllers\ProcessController::class, 'index']); //Lista de tramites del proyecto seleccionado
+
+    });
+
 });

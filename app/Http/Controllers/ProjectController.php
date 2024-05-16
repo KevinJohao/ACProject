@@ -40,8 +40,19 @@ class ProjectController extends Controller
                     ->orderBy('created_at', 'desc')
                     ->paginate(8);
 
-                //return view('employee.projects.index')->with(compact('projects'));
                 return view('employee.dashboard')->with(compact('projects'));
+            }
+
+            //Cliente
+
+            if ($user->isClient()){
+                //Filtrar los proyectos por el cliente logeado
+                $projects = $user->client->projects()
+                ->where('status', true)
+                ->orderBy('created_at', 'desc')
+                ->paginate(8);
+
+                return view('clients.dashboard')->with(compact('projects'));
             }
         }
     }
