@@ -85,15 +85,10 @@
                                                 
                                                 
                                                 <td class="text-center td-actions text-md">
-                                                    <form method="post"
-                                                        action="{{ url('/employee/processes/' . $activity->id) }}">
-                                                        {{ csrf_field() }}
-                                                        {{ method_field('DELETE') }}
-                                                        <a href="{{ url('/empleado/activities/' . $activity->id . '/show') }}"
+                                                        <a href="{{ url('/empleado/trackings/activities/' . $activity->id . '/show') }}"
                                                             title="Ver trámite" class="btn btn-link pe-3 ps-0 mb-0 ms-auto">
                                                             <i class="fa fa-arrow-right fa-lg"></i>
                                                         </a>
-                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach

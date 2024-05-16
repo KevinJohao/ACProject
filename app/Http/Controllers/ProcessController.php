@@ -38,10 +38,25 @@ class ProcessController extends Controller
 
             $processes = $project->processes()
                 ->where('status', true)
-                ->paginate(10);
+                ->paginate(8);
 
             return view('employee.projects.show')->with(compact('project', 'processes'));
         }
+        
+        // Cliente
+        if ($user->isClient()) {
+            
+            $project = Project::where('id', $id)
+                ->where('status', true)
+                ->firstOrFail();
+
+            $processes = $project->processes()
+                ->where('status', true)
+                ->paginate(8);
+            
+            return view('clients.processes.show')->with(compact('project', 'processes'));
+        }
+
     }
 
     /**
@@ -80,7 +95,7 @@ class ProcessController extends Controller
         return redirect('/admin/processes');
     }
 
-    public function showActivities(string $id)
+    public function showActivitiesEmployee(string $id)
     {
         // Obtener el ID del usuario logeado
         /** @var \App\Models\User $user **/
@@ -97,7 +112,7 @@ class ProcessController extends Controller
                 ->where('employee_id', $user->employee->id)
                 ->where('status', true)
                 ->where('task_status_id', 1)
-                ->paginate(10);
+                ->paginate(5);
 
             return view('employee.activities.show')->with(compact('process', 'activities'));
         }

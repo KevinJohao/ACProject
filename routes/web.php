@@ -70,23 +70,33 @@ Route::middleware(['auth'])->group(function () {
 
     // ROL: EMPLEADO
     Route::middleware(['check.rol:3'])->prefix('empleado')->group(function () {
-        Route::get('/dashboard', [App\Http\Controllers\ProjectController::class, 'index']);
+        Route::get('/dashboard', [App\Http\Controllers\ProjectController::class, 'index']); // dashboard - lista de proyectos
 
+        Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index']); //listado
 
-        // Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index']); //dashboard
-        Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index']); // listado
-        Route::get('/projects/{id}/show', [App\Http\Controllers\ProcessController::class, 'index']); //show
+        Route::get('/projects/{id}/show', [App\Http\Controllers\ProcessController::class, 'index']); //Lista de tramites del proyecto seleccionado
 
         // ACTIVIDADES
-        Route::get('/activities', [App\Http\Controllers\ActivityController::class, 'index']);
-        Route::get('/processes/{id}/show', [App\Http\Controllers\ProcessController::class, 'showActivities']);
+        Route::get('/activities', [App\Http\Controllers\ActivityController::class, 'index']); // Lista de actividades asignadas
+        Route::get('/activities/processes/{id}/show', [App\Http\Controllers\ProcessController::class, 'showActivitiesEmployee']); // Actividades del trámite seleccionado
 
         // SEGUIMIENTOS
-        Route::get('/trackings', [App\Http\Controllers\TrackingController::class, 'indexEmployee']);
-        Route::get('/activities/{id}/show', [App\Http\Controllers\ActivityController::class, 'showTrackingsEmployee']);
+        Route::get('/trackings', [App\Http\Controllers\TrackingController::class, 'indexEmployee']); // Lista de seguimientos asignados
+        Route::get('/trackings/activities/{id}/show', [App\Http\Controllers\ActivityController::class, 'showTrackingsEmployee']); // Seguimiento de la actividad seleccionada
         Route::put('/trackings/{id}/edit/observation', [App\Http\Controllers\TrackingController::class, 'updateObservation']); //Actualizar observación al seguimiento
         Route::put('/trackings/{id}/edit/status', [App\Http\Controllers\TrackingController::class, 'updateStatus']); // Actualizar el estado del seguimiento
 
 
     });
+
+    // ROL: CLIENTE
+    Route::middleware(['check.rol:2'])->prefix('cliente')->group(function () {
+        Route::get('/dashboard', [App\Http\Controllers\ProjectController::class, 'index']); // dashboard - lista de proyectos
+
+        Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index']); //listado
+        
+        Route::get('/projects/{id}/show', [App\Http\Controllers\ProcessController::class, 'index']); //Lista de tramites del proyecto seleccionado
+
+    });
+
 });

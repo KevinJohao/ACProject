@@ -2666,6 +2666,7 @@ progress {
 
 .table-responsive {
   overflow-x: auto;
+  overflow-y: hidden; /* Asegúrate de que no haya scroll vertical */
   -webkit-overflow-scrolling: touch;
 }
 
@@ -4167,6 +4168,8 @@ fieldset:disabled .btn {
   background-clip: padding-box;
   border: var(--bs-dropdown-border-width) solid var(--bs-dropdown-border-color);
   border-radius: var(--bs-dropdown-border-radius);
+  max-height: 200px; /* Limitar la altura del dropdown */
+  overflow-y: auto;  /* Habilitar scroll solo para el dropdown si es necesario */
 }
 
 .dropdown-menu[data-bs-popper] {
@@ -5615,6 +5618,7 @@ fieldset:disabled .btn {
   display: block;
   padding: var(--bs-pagination-padding-y) var(--bs-pagination-padding-x);
   font-size: var(--bs-pagination-font-size);
+  color: #fff;
   color: var(--bs-pagination-color);
   background-color: var(--bs-pagination-bg);
   border: var(--bs-pagination-border-width) solid var(--bs-pagination-border-color);
@@ -5645,7 +5649,7 @@ fieldset:disabled .btn {
 .page-link.active,
 .active>.page-link {
   z-index: 3;
-  color: var(--bs-pagination-active-color);
+  color: var(--bs-pagination-active-color) !important; /* se agregó important*/
   background-color: var(--bs-pagination-active-bg);
   border-color: var(--bs-pagination-active-border-color);
 }
@@ -5714,13 +5718,13 @@ fieldset:disabled .btn {
   top: -1px;
 }
 
-
+/* alert nuevo*/
 .alert {
   --bs-alert-bg: transparent;
   --bs-alert-padding-x: 1rem;
   --bs-alert-padding-y: 1rem;
   --bs-alert-margin-bottom: 1rem;
-  --bs-alert-color: inherit;
+  --bs-alert-color: #fff !important; /* se agregó important*/
   --bs-alert-border-color: transparent;
   --bs-alert-border: 1px solid var(--bs-alert-border-color);
   --bs-alert-border-radius: 0.5rem;
