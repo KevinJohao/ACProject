@@ -34,7 +34,8 @@ class TypeProcessController extends Controller
      */
     public function create()
     {
-        //
+        $type_processes = TypeProcess::all();
+        return view('admin.type_processes.create')->with(compact('type_processes'));
     }
 
     /**
@@ -42,6 +43,25 @@ class TypeProcessController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'name.required' => 'Es necesario ingresar el nombre',
+            'name.min' => 'El nombre debe tener un mínimo de 3 caracteres',
+            'description.required' => 'Es necesario ingresar una descripción',
+            'description.min' => 'La descripción debe ser más extensa'
+        ];
+        $rules = [
+            'name' => 'required|min:3',
+            'description' => 'required|min:10'
+        ];
+
+        $this->validate($request, $rules, $messages);
+        $document = new TypeProcess();
+        $document->name = $request->input('name');
+        $document->description = $request->input('description');
+        $document->status = true;
+        $document->save();
+
+        return redirect('/admin/type_processes');
     }
 
     /**
@@ -109,6 +129,10 @@ class TypeProcessController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $type_process = TypeProcess::find($id);
+        $type_process->status = false;
+        $type_process->save();
+
+        return redirect('/admin/type_processes');
     }
 }

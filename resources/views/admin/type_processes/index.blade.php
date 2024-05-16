@@ -10,7 +10,7 @@
                                 <h4 class="mb-0">Trámites</h4>
                             </div>
                             <div class="col-6 text-end">
-                                <a class="btn bg-gradient-primary mt-3" href="{{ url('/admin/processes/create') }}"><i
+                                <a class="btn bg-gradient-primary mt-3" href="{{ url('/admin/type_processes/create') }}"><i
                                         class="fas fa-plus"></i>&nbsp;&nbsp;Nuevo Trámite</a>
                             </div>
                         </div>
