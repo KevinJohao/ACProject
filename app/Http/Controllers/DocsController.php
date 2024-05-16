@@ -69,7 +69,7 @@ class DocsController extends Controller
         $document->type_process_id = $request->input('type_process_id');
         $document->save();
 
-        return redirect()->back();
+        return redirect('/admin/type_processes/' . $document->typeProcess->id . '/show');
     }
 
     /**

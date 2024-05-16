@@ -81,6 +81,7 @@ class TypeProcessController extends Controller
             $type_documents = $type_process->typeDocs()
                 ->where('type_process_id', $id)
                 ->where('status', true)
+                ->orderBy('created_at', 'desc')
                 ->paginate(10);
 
             return view('admin.type_processes.show')->with(compact('type_process', 'type_documents'));
