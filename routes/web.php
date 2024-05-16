@@ -53,11 +53,11 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/employees/{id}/edit', [App\Http\Controllers\EmployeeController::class, 'update']); //actualizar
         Route::delete('/employees/{id}', [App\Http\Controllers\EmployeeController::class, 'destroy']); //form eliminar
         //Docs
-        // Route::get('/docs/{id}/show', [\App\Http\Controllers\DocsController::class, 'index']); //listado
-        Route::get('docs/create', [App\Http\Controllers\DocsController::class, 'create']); //formulario
-        Route::post('/docs', [App\Http\Controllers\DocsController::class, 'store']); //registrar
+        Route::get('/docs/{id}/create', [App\Http\Controllers\DocsController::class, 'createOnProcess']); //formulario
+        Route::post('/docs', [App\Http\Controllers\DocsController::class, 'storeOnProcess']); //registrar
         Route::get('/docs/{id}/edit', [App\Http\Controllers\DocsController::class, 'edit']); //form de edicion
         Route::put('/docs/{id}/edit', [App\Http\Controllers\DocsController::class, 'update']); //actualizar
+        Route::delete('/docs/{id}', [App\Http\Controllers\DocsController::class, 'destroy']); //form eliminar
         //Type Activities
         Route::get('/type_activities', [\App\Http\Controllers\ActivityController::class, 'index']); //listado
         Route::get('type_activities/create', [App\Http\Controllers\ActivityController::class, 'create']); //formulario

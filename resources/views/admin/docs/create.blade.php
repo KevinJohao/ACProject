@@ -7,7 +7,7 @@
                     <div class="card-header pb-0 p-3">
                         <div class="row">
                             <div class="col-6 d-flex align-items-center">
-                                <h4 class="mb-0">Crear documento</h4>
+                                <h4 class="mb-0">Crear documento para "{{ $type_process->name }}"</h4>
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
                                         <ul>
@@ -30,18 +30,6 @@
                                             {{ csrf_field() }}
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <div class="form-group label-floating">
-                                                        <select class="form-control" name="type_process_id">
-                                                            <option value="">Selecciona un trámite</option>
-                                                            <!-- Opción vacía -->
-                                                            @foreach ($type_processes as $type_process)
-                                                                <option value="{{ $type_process->id }}">
-                                                                    {{ $type_process->name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label>Nombre</label>
                                                         <input type="text" class="form-control" name="name"
@@ -51,12 +39,19 @@
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label>Descripción</label>
-                                                        <textarea class="form-control" rows="3" name="Description">{{ old('Description') }}</textarea>
+                                                        <textarea class="form-control" rows="3" name="description">{{ old('description') }}</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <input type="hidden" class="form-control" name="type_process_id"
+                                                            value="{{ $type_process->id }}">
                                                     </div>
                                                 </div>
                                             </div>
                                             <button class="btn bg-gradient-primary mt-3">Registrar documento</button>
-                                            <a href="{{ url('/admin/docs/') }}" class="btn bg-default mt-3">Cancelar</a>
+                                            <a href="{{ url('/admin/type_processes/' . $type_process->id . '/show') }}"
+                                                class="btn bg-default mt-3">Cancelar</a>
                                         </form>
                                     </div>
                                 </div>

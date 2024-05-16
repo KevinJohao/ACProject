@@ -38,7 +38,8 @@
                                                 </div>
                                             </div>
                                             <button class="btn bg-gradient-primary mt-3">Guardar cambios</button>
-                                            <a href="{{ url('/admin/docs/') }}" class="btn bg-default mt-3">Cancelar</a>
+                                            <a href="{{ url('/admin/type_processes/' . $document->TypeProcess->id . '/show') }}"
+                                                class="btn bg-default mt-3">Cancelar</a>
                                         </form>
                                     </div>
                                 </div>

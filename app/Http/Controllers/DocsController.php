@@ -36,18 +36,19 @@ class DocsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function createOnProcess($id)
     {
         //Formulario de registro
         $documents = TypeDocs::all();
+        $type_process = TypeProcess::find($id);
         $type_processes = TypeProcess::all();
-        return view('admin.docs.create')->with(compact('documents', 'type_processes'));
+        return view('admin.docs.create')->with(compact('documents', 'type_process', 'type_processes'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function storeOnProcess(Request $request)
     {
         //Validar
         $messages = [
@@ -65,11 +66,10 @@ class DocsController extends Controller
         $document = new TypeDocs();
         $document->name = $request->input('name');
         $document->description = $request->input('description');
-        $document->status = true;
         $document->type_process_id = $request->input('type_process_id');
         $document->save();
 
-        return redirect('/admin/docs');
+        return redirect()->back();
     }
 
     /**

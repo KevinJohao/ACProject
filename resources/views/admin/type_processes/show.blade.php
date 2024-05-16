@@ -7,10 +7,11 @@
                     <div class="card-header pb-0 p-3">
                         <div class="row">
                             <div class="col-6 d-flex align-items-center">
-                                <h4 class="mb-0">Información del trámite</h4>
+                                <h4 class="mb-0">Información del trámite "{{ $type_process->name }}"</h4>
                             </div>
                             <div class="col-6 text-end">
-                                <a class="btn bg-gradient-primary mt-3" href="{{ url('/admin/docs/create') }}"><i
+                                <a class="btn bg-gradient-primary mt-3"
+                                    href="{{ url('/admin/docs/' . $type_process->id . '/create') }}"><i
                                         class="fas fa-plus"></i>&nbsp;&nbsp;Nuevo documento</a>
                             </div>
                         </div>
