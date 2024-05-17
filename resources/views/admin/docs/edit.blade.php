@@ -7,7 +7,8 @@
                     <div class="card-header pb-0 p-3">
                         <div class="row">
                             <div class="col-6 d-flex align-items-center">
-                                <h4 class="mb-0">Editar documento "{{ $document->name }}"</h4>
+                                <h4 class="mb-0">Editar documento del trámite
+                                    "{{ $document->TypeProcess->name }}"</h4>
                             </div>
                         </div>
                     </div>

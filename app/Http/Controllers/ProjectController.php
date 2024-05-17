@@ -45,12 +45,12 @@ class ProjectController extends Controller
 
             //Cliente
 
-            if ($user->isClient()){
+            if ($user->isClient()) {
                 //Filtrar los proyectos por el cliente logeado
                 $projects = $user->client->projects()
-                ->where('status', true)
-                ->orderBy('created_at', 'desc')
-                ->paginate(8);
+                    ->where('status', true)
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(8);
 
                 return view('clients.dashboard')->with(compact('projects'));
             }
@@ -170,16 +170,9 @@ class ProjectController extends Controller
      */
     public function destroy(string $id)
     {
-        //
         $project = Project::find($id);
-
-        // Eliminar los tramites del proyecto primero
-        foreach ($project->tramite as $tramite) {
-            $tramite->delete();
-        }
-
-        // Ahora puedes eliminar el proyecto
-        $project->delete();
+        $project->status = false;
+        $project->save();
 
         return back();
     }
