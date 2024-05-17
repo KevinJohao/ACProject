@@ -22,7 +22,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/projects/create', [App\Http\Controllers\ProjectController::class, 'create']); //formulario
         Route::post('/projects', [App\Http\Controllers\ProjectController::class, 'store']); //registrar
         Route::get('/projects/{id}/edit', [App\Http\Controllers\ProjectController::class, 'edit']); //form de edicion
-        Route::post('/projects/{id}/edit', [App\Http\Controllers\ProjectController::class, 'update']); //actualizar
+        Route::put('/projects/{id}/edit', [App\Http\Controllers\ProjectController::class, 'update']); //actualizar
         Route::delete('/projects/{id}', [App\Http\Controllers\ProjectController::class, 'destroy']); //form eliminar
         //Processes
         Route::get('/processes/create', [App\Http\Controllers\ProcessController::class, 'create']); //formulario
@@ -94,9 +94,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\ProjectController::class, 'index']); // dashboard - lista de proyectos
 
         Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'index']); //listado
-        
+
         Route::get('/projects/{id}/show', [App\Http\Controllers\ProcessController::class, 'index']); //Lista de tramites del proyecto seleccionado
 
     });
-
 });

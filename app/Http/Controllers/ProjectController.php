@@ -162,7 +162,7 @@ class ProjectController extends Controller
         $project->save();
         // $project->status = $request->input('status');
 
-        return redirect('/admin/projects');
+        return redirect('/admin/dashboard');
     }
 
     /**
