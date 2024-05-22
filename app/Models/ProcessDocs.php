@@ -15,8 +15,8 @@ class ProcessDocs extends Model
     }
 
     //$processDocs -> $typeDocs
-    public function typeDocs()
+    public function typeProcessDocument()
     {
-        return $this->belongsTo(TypeDocs::class);
+        return $this->belongsTo(typeProcessDocument::class);
     }
 }

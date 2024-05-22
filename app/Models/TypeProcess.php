@@ -9,9 +9,9 @@ class TypeProcess extends Model
 {
     use HasFactory;
     //$typeProcess -> $typeDocs
-    public function typeDocs()
+    public function typeProcessDocument()
     {
-        return $this->hasMany(TypeDocs::class);
+        return $this->hasMany(typeProcessDocument::class);
     }
 
     //$typeProcess -> $processes

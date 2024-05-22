@@ -19,4 +19,10 @@ class Client extends Model
         //$user->$projects
         return $this->hasMany(Project::class);
     }
+
+    public function generalDocuments()
+    {
+        //$user->$projects
+        return $this->hasMany(generalDocument::class);
+    }
 }

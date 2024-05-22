@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('type_docs', function (Blueprint $table) {
+        Schema::create('general_documents', function (Blueprint $table) {
             $table->id();
-           //Eliminar nombre
             $table->string('name');
             $table->string('description');
+            $table->string('url');
             $table->boolean('status')->default(true);
+
+            $table->unsignedBigInteger('client_id')->unsigned()->nullable();
+            $table->foreign('client_id')->references('id')->on('clients');
 
             $table->timestamps();
         });
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('type_docs');
+        Schema::dropIfExists('general_documents');
     }
 };
