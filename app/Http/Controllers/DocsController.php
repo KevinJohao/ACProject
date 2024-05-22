@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Process;
+use App\Models\ProcessDocs;
 use App\Models\TypeDocs;
 use App\Models\TypeProcess;
 use Illuminate\Http\Request;
@@ -31,6 +32,12 @@ class DocsController extends Controller
 
             return view('admin.docs.index')->with(compact('documents', 'type_process'));
         }
+    }
+
+    public function clientIndex(){
+
+        $process_docs = ProcessDocs::paginate(10);
+        return view('clients.docs.index')->with(compact('process_docs'));
     }
 
     /**
@@ -92,6 +99,25 @@ class DocsController extends Controller
                 ->paginate(10);
 
             return view('admin.type_processes.show')->with(compact('type_process', 'type_documents'));
+        }
+    }
+
+    public function showProcessDocs($id) {
+
+        // Obtener el ID del usuario logeado
+        /** @var \App\Models\User $user **/
+        $user = auth()->user();
+
+        if ($user->isClient()) {
+            $process = Process::where('id', $id)
+                ->where('status', true)
+                ->firstOrFail();
+            
+            $process_docs = $process->processDocs()
+                ->where('status', true)
+                ->paginate(10);
+
+            return view('clients.docs.show')->with(compact('process', 'process_docs'));
         }
     }
 

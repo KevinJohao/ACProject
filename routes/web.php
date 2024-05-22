@@ -97,5 +97,9 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/projects/{id}/show', [App\Http\Controllers\ProcessController::class, 'index']); //Lista de tramites del proyecto seleccionado
 
+        // DOCUMENTOS
+        Route::get('/docs', [App\Http\Controllers\DocsController::class, 'clientIndex']); //show
+        Route::get('/type_processes/{id}/show', [App\Http\Controllers\DocsController::class, 'showProcessDocs']); //show
+
     });
 });

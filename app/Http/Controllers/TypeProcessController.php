@@ -86,6 +86,20 @@ class TypeProcessController extends Controller
 
             return view('admin.type_processes.show')->with(compact('type_process', 'type_documents'));
         }
+
+        if ($user->isClient()) {
+            $type_process = TypeProcess::where('id', $id)
+                ->where('status', true)
+                ->firstOrFail();
+
+            $type_documents = $type_process->typeDocs()
+                ->where('type_process_id', $id)
+                ->where('status', true)
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+
+            //return view('clients.docs.show')->with(compact('type_process', 'type_documents'));
+        }
     }
 
     /**

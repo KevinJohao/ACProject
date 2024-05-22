@@ -2487,6 +2487,16 @@ progress {
   color: var(--bs-table-color);
   vertical-align: top;
   border-color: var(--bs-table-border-color);
+  table-layout: fixed; /*personalizado*/
+}
+
+/* estilo nuevo personalizado para el desbordamiento del texto largo */
+.table td {
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+  white-space: normal !important; 
+  
+  overflow-wrap: break-word !important;
 }
 
 .table> :not(caption)>*>* {
@@ -2704,6 +2714,24 @@ progress {
     -webkit-overflow-scrolling: touch;
   }
 }
+
+/* media query nuevo para el responsive de la tabla en el desbordamiento de textos largos */
+@media (max-width: 767.98px) {
+  .table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .table td,
+  .table th {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/*  */
 
 .form-label {
   margin-bottom: 0.5rem;
