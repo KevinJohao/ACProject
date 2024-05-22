@@ -62,9 +62,12 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        $employees = Employee::where('status', true)->get();
+        //dd($employees);
+        $clients = Client::where('status', true)->get();
         $users = User::all();
         //Formulario de registro
-        return view('admin.projects.create')->with(compact('users'));;
+        return view('admin.projects.create')->with(compact('users', 'employees', 'clients'));;
     }
 
     /**
@@ -121,9 +124,9 @@ class ProjectController extends Controller
     public function edit(string $id)
     {
         $users = User::all();
-        $clients = Client::all();
-        $employees = Employee::all();
-        $project = Project::find($id);
+        $employees = Employee::where('status', true)->get();
+        $project = Project::findOrFail($id);
+        $clients = Client::where('status', true)->get();
         $task_statuses = TaskStatus::all();
         return view('admin.projects.edit')->with(compact('task_statuses', 'project', 'users', 'employees', 'clients'));
     }

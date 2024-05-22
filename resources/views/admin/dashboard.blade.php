@@ -70,7 +70,7 @@
                                             <td class="text-center text-xs font-weight-bold text-secondary">
                                                 {{ $project->due_date }}</td>
                                             <td class="text-center text-xs">&dollar; {{ $project->total_value }}</td>
-                                            <td class="text-center text-xs">{{ $project->TaskStatus->name }}</td>
+                                            <td class="text-center text-xs">{{ $project->taskStatus->name }}</td>
                                             <td class="text-center td-actions text-md">
                                                 <form method="post" action="{{ url('/admin/projects/' . $project->id) }}">
                                                     {{ csrf_field() }}
