@@ -49,7 +49,7 @@
                                             <td class="text-center text-xs  font-weight-bold">&dollar; {{ $process->process_value }}</td>
                                             <td class="text-center text-xs"><strong>{{ $process->taskStatus->name }}</strong></td>
                                             <td class="text-center td-actions text-md">
-                                                    <a href="{{ url('/empleado/activities/processes/' . $process->id . '/show') }}"
+                                                    <a href="{{ url('/cliente/type_processes/' . $process->typeProcess->id . '/show') }}"
                                                         title="Ver trámite" class="btn btn-link pe-3 ps-0 mb-0 ms-auto">
                                                         <i class="fa fa-arrow-right fa-lg"></i>
                                                     </a>
