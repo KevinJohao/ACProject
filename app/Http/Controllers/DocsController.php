@@ -7,6 +7,7 @@ use App\Models\ProcessDocs;
 use App\Models\TypeDocs;
 use App\Models\TypeProcess;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class DocsController extends Controller
 {

@@ -22,12 +22,19 @@
                   </div>
               </div>
           </div>
-            <form role="form text-left" method="POST" action="#">
-                @method('put')
+            <form role="form text-left" method="POST" action="{{ route('files.store') }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
-              <label>Seleccione un archivo</label>
+                <div class="input-group mb-3 mt-3">
+                  <input type="text" class="form-control" placeholder="Eliga un arhivo" name="file_name">
+                  @error('file_name')
+                      <span class="text-danger">{{$message}}</span>
+                  @enderror
+                </div>
               <div class="input-group mb-3">
-                <textarea class="form-control" name="observation" placeholder="Observaciones" aria-label="Observaciones"></textarea>
+                <input type="file" class="form-control" placeholder="Eliga un arhivo" name="file">
+                @error('file')
+                <span class="text-danger">{{$message}}</span>
+                @enderror
               </div>
               <div class="text-center">
                 <button type="submit" class="btn btn-round bg-gradient-info btn-lg w-100 mt-4 mb-0">Guardar</button>

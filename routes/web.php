@@ -101,6 +101,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/docs', [App\Http\Controllers\DocsController::class, 'clientIndex']); //show
         Route::get('/type_processes/{id}/show', [App\Http\Controllers\DocsController::class, 'showProcessDocs']); //show
 
+        //Route::resource('files', App\Http\Controllers\FileController::class);
+        Route::resource('files', App\Http\Controllers\FileController::class);
+
     });
 
 });
