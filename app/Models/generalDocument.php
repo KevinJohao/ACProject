@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TypeDocs extends Model
+class generalDocument extends Model
 {
     use HasFactory;
 
-    //$typeDocs -> $processDocs
-    public function typeProcessDocument()
+    public function client()
     {
-        return $this->hasMany(typeProcessDocument::class);
+        return $this->belongsTo(Client::class);
     }
 }
