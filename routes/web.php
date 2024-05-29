@@ -99,10 +99,13 @@ Route::middleware(['auth'])->group(function () {
 
         // DOCUMENTOS
         Route::get('/docs', [App\Http\Controllers\DocsController::class, 'clientIndex']); //show
-        Route::get('/type_processes/{id}/show', [App\Http\Controllers\DocsController::class, 'showProcessDocs']); //show
+        //Route::get('/type_processes/{id}/show', [App\Http\Controllers\DocsController::class, 'showProcessDocs']); //show
 
         //Route::resource('files', App\Http\Controllers\FileController::class);
-        Route::resource('files', App\Http\Controllers\FileController::class);
+        Route::post('/files/upload', [App\Http\Controllers\DocsController::class, 'clientDocUpload']); // Cargar documento general del cliente
+        Route::get('/files/{fileId}/download', [App\Http\Controllers\DocsController::class, 'clientDocDownload']);
+
+        Route::get('/files/{fileId}/delete', [App\Http\Controllers\DocsController::class, 'clientDocDelete']);
 
     });
 });

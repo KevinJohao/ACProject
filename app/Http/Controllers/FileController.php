@@ -85,12 +85,12 @@ class FileController extends Controller
     }
     */
 
-    public function store(Request $request){
+    public function upload(Request $request){
 
         $file=$request->file('file');
 
         $name = $file->getClientOriginalName();
-        $path = $file->getRealpath();
+        
         Storage::disk('google')->put($name, file_get_contents($file));
         
         return redirect()->back();

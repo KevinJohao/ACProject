@@ -96,7 +96,7 @@ class ActivityController extends Controller
                                     ->where('employee_id', $user->employee->id)
                                     ->where('status', true)
                                     //->where('task_status_id', 1)
-                                    ->paginate(5);
+                                    ->paginate(4);
 
             return view('employee.trackings.show')->with(compact('activity', 'trackings'));
         }

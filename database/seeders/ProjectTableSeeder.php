@@ -47,6 +47,16 @@ class ProjectTableSeeder extends Seeder
             ]);
         }
 
+        // Crear seguimientos aleatorias
+        foreach (range(1, 10) as $index) {
+            \App\Models\TypeTracking::create([
+                'name' => fake()->words($nb = 2, $asText = true),
+                'description' => fake()->sentence(10),
+                'status' => true
+
+            ]);
+        }
+
         // Crear tipos de trámites aleatorios
         foreach (range(1, 10) as $index) {
             \App\Models\TypeProcess::create([
@@ -61,7 +71,7 @@ class ProjectTableSeeder extends Seeder
             \App\Models\TypeDocs::create([
                 'name' => fake()->name(),
                 'description' => fake()->sentence(10),
-                'type_process_id' => \App\Models\TypeProcess::all()->random()->id,
+                //'type_process_id' => \App\Models\TypeProcess::all()->random()->id,
                 'status' => true
             ]);
         }
@@ -96,6 +106,7 @@ class ProjectTableSeeder extends Seeder
                 'activity_id' => \App\Models\Activity::all()->random()->id,
                 'task_status_id' => \App\Models\TaskStatus::all()->random()->id,
                 'employee_id' => \App\Models\Employee::all()->random()->id,
+                'type_tracking_id'=> \App\Models\TypeTracking::all()->random()->id,
                 'date' => fake()->dateTimeBetween($startDate = 'now', $endDate = '+1 week')->format('Y-m-d'),
                 'observation' => fake()->sentence(10),
                 'status' => true
@@ -103,6 +114,7 @@ class ProjectTableSeeder extends Seeder
         }
 
         // Crear documentos de trámites aleatorios
+        /*
         foreach (range(1, 50) as $index) {
             \App\Models\ProcessDocs::create([
                 'process_id' => \App\Models\Process::all()->random()->id,
@@ -112,5 +124,6 @@ class ProjectTableSeeder extends Seeder
                 'status' => true
             ]);
         }
+        */
     }
 }

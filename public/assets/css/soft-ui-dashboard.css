@@ -2675,9 +2675,11 @@ progress {
 }
 
 .table-responsive {
+  /*position: relative;*/
   overflow-x: auto;
   overflow-y: hidden; /* Asegúrate de que no haya scroll vertical */
   -webkit-overflow-scrolling: touch;
+  /*z-index: 1;  Asegúrate de que el contenedor tenga un z-index base */
 }
 
 @media (max-width: 575.98px) {
@@ -5761,6 +5763,7 @@ fieldset:disabled .btn {
   right: 20px;
   z-index: 9999;
   opacity: 0;
+  pointer-events: none; /* Añadido */
   transition: opacity 1s;
   padding: var(--bs-alert-padding-y) var(--bs-alert-padding-x);
   margin-bottom: var(--bs-alert-margin-bottom);
@@ -5770,6 +5773,11 @@ fieldset:disabled .btn {
   border-radius: var(--bs-alert-border-radius);
 }
 
+/* nueva clase*/
+.alert.show {
+  opacity: 1;
+  pointer-events: auto; /* Permite la interacción cuando está visible */
+}
 
 /*
 .alert {

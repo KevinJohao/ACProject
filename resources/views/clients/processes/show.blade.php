@@ -30,9 +30,6 @@
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
                                         Estado</th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
-                                        Documentos</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -48,12 +45,6 @@
                                             <td class="text-center text-xs font-weight-bold text-secondary">{{ $process->next_review }}</td>
                                             <td class="text-center text-xs  font-weight-bold">&dollar; {{ $process->process_value }}</td>
                                             <td class="text-center text-xs"><strong>{{ $process->taskStatus->name }}</strong></td>
-                                            <td class="text-center td-actions text-md">
-                                                    <a href="{{ url('/cliente/type_processes/' . $process->typeProcess->id . '/show') }}"
-                                                        title="Ver trámite" class="btn btn-link pe-3 ps-0 mb-0 ms-auto">
-                                                        <i class="fa fa-arrow-right fa-lg"></i>
-                                                    </a>
-                                            </td>
                                         </tr>
                                     @endforeach
                                 @else

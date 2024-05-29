@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
-            $table->string('url');
+            $table->string('fileId');
             $table->boolean('status')->default(true);
 
             $table->unsignedBigInteger('client_id')->unsigned()->nullable();

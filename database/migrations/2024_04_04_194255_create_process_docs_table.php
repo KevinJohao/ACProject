@@ -20,7 +20,7 @@ return new class extends Migration
             //FK
             $table->unsignedBigInteger('process_id')->unsigned()->nullable();
             $table->foreign('process_id')->references('id')->on('processes');
-
+            
             $table->unsignedBigInteger('type_process_document_id')->unsigned()->nullable();
             $table->foreign('type_process_document_id')->references('id')->on('type_process_documents');
 

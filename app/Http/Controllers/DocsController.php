@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\generalDocument;
 use App\Models\Process;
 use App\Models\ProcessDocs;
 use App\Models\TypeDocs;
 use App\Models\TypeProcess;
+use Google\Service\Drive;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
+use Masbug\Storage\GoogleDrive;
+use Google\Service\Drive\DriveFile;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\HttpKernel\EventListener\StreamedResponseListener;
 
 class DocsController extends Controller
 {
@@ -37,8 +44,14 @@ class DocsController extends Controller
 
     public function clientIndex(){
 
-        $process_docs = ProcessDocs::paginate(10);
-        return view('clients.docs.index')->with(compact('process_docs'));
+        // Obtener el ID del usuario logeado
+        /** @var \App\Models\User $user **/
+        $user = auth()->user();
+
+        $general_docs = $user->client->generalDocuments()
+            ->orderBy('id', 'desc') // Ordenar por ID de forma descendente
+            ->paginate(5);
+        return view('clients.docs.index')->with(compact('general_docs'));
     }
 
     /**
@@ -170,5 +183,94 @@ class DocsController extends Controller
         $document->save();
 
         return redirect('/admin/type_processes/' . $document->typeProcess->id . '/show');
+    }
+
+    /**      ********************************      */
+    /** CARGA DE ARCHIVOS POR EL CLIENTE */
+    /**                                            */
+    public function clientDocUpload(Request $request){
+
+        // Obtener el ID del usuario logeado
+        /** @var \App\Models\User $user **/
+        $user = auth()->user();
+        
+        // Obtener el archivo del formulario
+        $file=$request->file('file');
+        // Obtener el nombre original del documento
+        $name = $file->getClientOriginalName();
+
+        // Guardar archivo en Google Drive
+        //$filePath = Storage::disk('google')->putFileAs('/', $file, $name);
+        $uploaded = Storage::disk('google')->put($name, file_get_contents($file));
+
+        // Obtener el cliente de Google Drive del contenedor de servicios
+        $service = app('googleDriveService');
+        
+        // Buscar el archivo subido para obtener su ID
+        $response = $service->files->listFiles([
+            'q' => "name='{$name}' and trashed=false",
+            'fields' => 'files(id, name)'
+        ]);
+
+        if (count($response->files) == 0) {
+            return back()->with('error', 'Error al subir el archivo.');
+        }
+    
+        // Obtener el ID del archivo
+        $fileId = $response->files[0]->id;
+
+        // Guardar en la base de datos
+        if($uploaded){
+        $document = new generalDocument();
+        $document->name = $name;
+        $document->description = $request->input('description');
+        $document->fileId = $fileId;
+        $document->client_id = $user->client->id;
+        $document->save();
+        
+        return redirect()->back()->with('success', 'El archivo se ha registrado correctamente.');
+        }else{
+            return response('Fallo al cargar el archivo');
+        }
+        
+    }
+
+    public function clientDocDownload($fileId){
+
+        // Obtener el cliente de Google Drive desde el contenedor de servicios
+        $service = app('googleDriveService');
+        
+        // Obtener los metadatos del archivo
+        $metadata = $service->files->get($fileId);
+
+        // Obtener el nombre del archivo de los metadatos
+        $fileName = $metadata->getName();
+
+        // Descargar el archivo usando su ID
+        $file = $service->files->get($fileId, ['alt' => 'media']);
+
+        // Obtener el contenido del archivo
+        $fileContents = $file->getBody()->getContents();
+
+        // Respuesta HTTP
+         return response($fileContents, 200)
+        ->header('Content-Type', 'application/octet-stream')
+        ->header('Content-Disposition', 'attachment; filename="' . $fileName . '"');
+
+    }
+
+    public function clientDocDelete($fileId){
+
+        // Obtener el cliente de Google Drive desde el contenedor de servicios
+        $service = app('googleDriveService');
+
+        // Eliminar el archivo por su ID
+        $service->files->delete($fileId);
+
+        // Eliminar el registro en la base de datos
+        GeneralDocument::where('fileId', $fileId)->delete();
+
+        return redirect()->back()->with('success', 'El archivo se ha eliminado correctamente.');
+        
     }
 }
